@@ -13,5 +13,8 @@ startdropbox () { env DBUS_SESSION_BUS_ADDRESS='' ~/.dropbox-dist/dropboxd ; }
 un () { unison "$@" ; }
 ung () { unison-gtk "$@" ; }
 
-
+# Wrappers for DS:
+gll () { v && [[ $PWD = *workspace ]] && grlpv ; }
+gpp () { v && [[ $PWD = *workspace ]] && grppv ; }
+gsp () { v && [[ $PWD = *workspace ]] && grspv ; }
 
