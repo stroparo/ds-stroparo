@@ -1,5 +1,11 @@
 # Author: Cristian Stroparo
 
+alias vvvi='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
+alias ydl='youtube-dl'
+alias ydlaudio='youtube-dl -f 140'
+alias ydlaudiobest='youtube-dl -f bestaudio'
+alias ydlx='youtube-dl -x'
+
 # Change dir:
 dl () { d "${HOME}"/Downloads -Ah ; }
 h () { d "${HOME}" -Ah ; }
