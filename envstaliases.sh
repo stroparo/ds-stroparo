@@ -1,6 +1,6 @@
 # Author: Cristian Stroparo
 
-alias vvvi='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
+alias stbash='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
 alias ydl='youtube-dl'
 alias ydlaudio='youtube-dl -f 140'
 alias ydlaudiobest='youtube-dl -f bestaudio'
