@@ -1,6 +1,10 @@
 # Author: Cristian Stroparo
 
-alias stbash='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
+alias czbash='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
+alias scb='sudo systemctl start'
+alias sce='sudo systemctl stop'
+alias scs='sudo systemctl status'
+alias sct='sudo systemctl'
 alias ydl='youtube-dl'
 alias ydlaudio='youtube-dl -f 140'
 alias ydlaudiobest='youtube-dl -f bestaudio'
