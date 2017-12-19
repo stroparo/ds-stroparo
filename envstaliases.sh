@@ -1,6 +1,5 @@
 # Author: Cristian Stroparo
 
-alias czbash='[[ $0 = *bash* ]] && set -b; set -o vi;export EDITOR=vim'
 alias scb='sudo systemctl start'
 alias sce='sudo systemctl stop'
 alias scs='sudo systemctl status'
