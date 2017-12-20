@@ -1,9 +1,17 @@
+# Custom environment
+
 czshelloptions
 
+export EDITOR=vim
+
 # ##############################################################################
-# Path
+# Sublime
 
 if [ -e /c/opt/subl ] ; then pathmunge -x /c/opt/subl ; fi
+if which subl >/dev/null 2>&1 ; then
+  export GIT_EDITOR="subl --wait --new-window"
+  export VISUAL=subl
+fi
 
 # ##############################################################################
 # Post calls
