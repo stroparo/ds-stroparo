@@ -4,7 +4,7 @@ czshelloptions
 
 export EDITOR=vim
 
-# ##############################################################################
+# #############################################################################
 # Sublime
 
 if [ -e ~/opt/subl ] ; then pathmunge -x ~/opt/subl ; fi
@@ -14,13 +14,13 @@ if ! which subl >/dev/null 2>&1 && which sublime_text >/dev/null 2>&1 ; then
   sudo ln "$(which sublime_text)" /usr/local/bin/subl
 fi
 
-# ##############################################################################
+# #############################################################################
 # VSCode
 
 if [ -e ~/opt/vscode ] ; then pathmunge -x ~/opt/vscode ; fi
 if [ -e /cygdrive/c/opt/vscode ] ; then pathmunge -x /c/opt/vscode ; fi
 
-# ##############################################################################
+# #############################################################################
 # Default GUI editor
 
 if which subl >/dev/null 2>&1 ; then
@@ -31,7 +31,7 @@ elif which Code >/dev/null 2>&1 ; then
   export VISUAL=Code
 fi
 
-# ##############################################################################
+# #############################################################################
 # Post calls
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
