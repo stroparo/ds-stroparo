@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+
+# Author: Cristian Stroparo
+# Licensed by the author's discretion.
+
+PROGNAME=${0##*/}
+
+. "$DS_HOME"/functions/gitfunctions.sh
+
+_deploy_apps () {
+  installdropbox.sh
+  installexa.sh
+  installohmyzsh.sh
+  installpowerfonts.sh
+}
+
+_deploy_git () {
+
+  which git >/dev/null 2>&1 || return 1
+
+  deploygit "\
+    'color.ui auto' \
+    'core.autocrlf false' \
+    'diff.submodule log' \
+    'push.default simple' \
+    'push.recurseSubmodules check' \
+    'sendpack.sideband false' \
+    'status.submodulesummary 1'\
+    " \
+    || return 1
+
+  git config --global --replace-all core.pager "less -F -X" \
+    || return 1
+}
+
+_deploy_python () {
+
+  addpystartup
+
+  install-python-ubuntu1604.sh "$DS_CONF/pip"{2,3}"tools.lst"
+
+  cat <<EOF
+Commands to install Python 3.6.0 packages:
+pyenv activate 3.6.0
+pipinstall "${DS_CONF}/pip36.lst"
+pyenv deactivate
+EOF
+}
+
+_deploy_ruby () {
+  install-ruby-ubuntu1604.sh "$DS_CONF/gem.lst" \
+    || return 1
+}
+
+_custom_deploy () {
+
+  typeset all=false
+
+  if [ "$1" = '-a' ] ; then
+    all=true
+  fi
+
+  if [ "$1" = '-h' ] || [ $# -eq 0 ] ; then
+cat <<EOF
+${PROGNAME} -a
+${PROGNAME} [arguments]
+
+First usage with -a option installs everything
+Second usage installs only the items in the arguments:
+
+apps
+git
+python
+ruby
+
+Example:
+${PROGNAME} apps git python
+EOF
+    return
+  fi
+
+  for item in "$@" ; do
+
+    if [ "${item}" = "apps" ] || $all ; then
+      if ! _deploy_apps ; then
+        echo "WARN: There were failures during the custom applications deployment" 1>&2
+      fi
+    fi
+
+    if [ "${item}" = "git" ] || $all ; then
+      if ! _deploy_git ; then
+        echo "WARN: There were failures during the custom Git deployment" 1>&2
+      fi
+    fi
+
+    if [ "${item}" = "python" ] || $all ; then
+      if ! _deploy_python ; then
+        echo "WARN: There were failures during the custom Python deployment" 1>&2
+      fi
+    fi
+
+    if [ "${item}" = "ruby" ] || $all ; then
+      if ! _deploy_ruby ; then
+        echo "WARN: There were failures during the custom Ruby deployment" 1>&2
+      fi
+    fi
+  done
+
+  echo 'INFO: Deploy complete ... restart the shell.' 1>&2
+}
+
+_custom_deploy "$@"
