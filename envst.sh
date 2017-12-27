@@ -2,9 +2,7 @@
 
 czshelloptions
 
-export APTREMOVELIST="oxygen-icon-theme"
 export EDITOR=vim
-export GGIGNORE='csmega|rpas|ud-|x-cod'
 
 : ${DEV:=${HOME}/workspace} ; export DEV
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
