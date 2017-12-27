@@ -8,10 +8,15 @@ PROGNAME=${0##*/}
 . "$DS_HOME"/functions/gitfunctions.sh
 
 _deploy_apps () {
+  installanki.sh
+  installdocker.sh
   installdropbox.sh
   installexa.sh
   installohmyzsh.sh
   installpowerfonts.sh
+
+  # Home office:
+  installcitrix.sh
 }
 
 _deploy_git () {
