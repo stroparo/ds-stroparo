@@ -26,7 +26,6 @@ _deploy_git () {
   deploygit "\
     'color.ui auto' \
     'core.autocrlf false' \
-    'credential.helper \"cache --timeout=36000\"' \
     'diff.submodule log' \
     'push.default simple' \
     'push.recurseSubmodules check' \
@@ -36,6 +35,8 @@ _deploy_git () {
     || return 1
 
   git config --global --replace-all core.pager "less -F -X" \
+    || return 1
+  git config --global --replace-all credential.helper "cache --timeout=36000" \
     || return 1
 }
 
