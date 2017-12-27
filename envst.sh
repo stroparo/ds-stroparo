@@ -2,7 +2,31 @@
 
 czshelloptions
 
+export APTREMOVELIST="oxygen-icon-theme"
 export EDITOR=vim
+export GGIGNORE='csmega|rpas|ud-|x-cod'
+
+: ${DEV:=${HOME}/workspace} ; export DEV
+: ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
+: ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
+: ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
+
+# Cygwin
+if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
+    export CYGWIN="$CYGWIN winsymlinks:nativestrict"
+
+    export DEV="${HOME}/workspace"
+    export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
+    export MYOPT="$(cygpath "${MYOPT:-C:\\opt}")"
+    export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
+fi
+
+# #############################################################################
+# General PATH
+
+pathmunge -x "${HOME}/bin"
+mungeglobalopt
+mungelocalopt
 
 # #############################################################################
 # Sublime
@@ -32,7 +56,7 @@ elif which Code >/dev/null 2>&1 ; then
 fi
 
 # #############################################################################
-# Post calls
+# DS post calls
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
   appendto DS_POST_CALLS '[[ $- = *i* ]] && echo 1>&2 && d "${DEV:-$HOME/workspace}"; true'

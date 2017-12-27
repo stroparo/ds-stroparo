@@ -8,19 +8,19 @@ alias ydlx='youtube-dl -x'
 # Change dir:
 dl () { d "${HOME}"/Downloads -Ah ; }
 h () { d "${HOME}" -Ah ; }
+myopt () { d "${MYOPT}" -Ah ; }
+mysw () { d "${MYSW}" -Ah ; }
 up () { d "$(cygpath "${USERPROFILE}")" -Ah ; }
 
 # Wrappers:
 py () { python3 "$@"; }
 py2 () { python2 "$@"; }
 py3 () { python3 "$@"; }
-scb () { sudo systemctl start "$@" ; }
-sce () { sudo systemctl stop "$@" ; }
-scs () { sudo systemctl status "$@" ; }
-sct () { sudo systemctl "$@" ; }
+ctl () { sudo systemctl "$@" ; }
+ctlstart () { sudo systemctl start "$@" ; }
+ctlstop () { sudo systemctl stop "$@" ; }
+ctlstat () { sudo systemctl status "$@" ; }
 startdropbox () { env DBUS_SESSION_BUS_ADDRESS='' ~/.dropbox-dist/dropboxd ; }
-un () { unison "$@" ; }
-ung () { unison-gtk "$@" ; }
 
 # Wrappers for DS git functions:
 bvc () { gtrbvc "$@" ; }
