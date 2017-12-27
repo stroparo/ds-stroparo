@@ -26,6 +26,7 @@ _deploy_git () {
   deploygit "\
     'color.ui auto' \
     'core.autocrlf false' \
+    'credential.helper "cache --timeout=36000"' \
     'diff.submodule log' \
     'push.default simple' \
     'push.recurseSubmodules check' \
@@ -67,12 +68,9 @@ _custom_deploy () {
 
   if [ "$1" = '-h' ] || [ $# -eq 0 ] ; then
 cat <<EOF
-${PROGNAME} -a
 ${PROGNAME} [arguments]
 
-First usage with -a option installs everything
-Second usage installs only the items in the arguments:
-
+Items:
 apps
 git
 python
@@ -85,29 +83,8 @@ EOF
   fi
 
   for item in "$@" ; do
-
-    if [ "${item}" = "apps" ] || $all ; then
-      if ! _deploy_apps ; then
-        echo "WARN: There were failures during the custom applications deployment" 1>&2
-      fi
-    fi
-
-    if [ "${item}" = "git" ] || $all ; then
-      if ! _deploy_git ; then
-        echo "WARN: There were failures during the custom Git deployment" 1>&2
-      fi
-    fi
-
-    if [ "${item}" = "python" ] || $all ; then
-      if ! _deploy_python ; then
-        echo "WARN: There were failures during the custom Python deployment" 1>&2
-      fi
-    fi
-
-    if [ "${item}" = "ruby" ] || $all ; then
-      if ! _deploy_ruby ; then
-        echo "WARN: There were failures during the custom Ruby deployment" 1>&2
-      fi
+    if ! eval "_deploy_${item}" ; then
+      echo "WARN: There were failures deploying '$item'" 1>&2
     fi
   done
 
