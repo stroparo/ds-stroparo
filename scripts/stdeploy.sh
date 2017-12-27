@@ -26,7 +26,7 @@ _deploy_git () {
   deploygit "\
     'color.ui auto' \
     'core.autocrlf false' \
-    'credential.helper "cache --timeout=36000"' \
+    'credential.helper \"cache --timeout=36000\"' \
     'diff.submodule log' \
     'push.default simple' \
     'push.recurseSubmodules check' \
