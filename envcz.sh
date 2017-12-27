@@ -25,8 +25,8 @@ fi
 # General PATH
 
 pathmunge -x "${HOME}/bin"
-mungeglobalopt
-mungelocalopt
+mungerootopt
+mungehomeopt
 
 # #############################################################################
 # Sublime
