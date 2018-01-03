@@ -2,12 +2,9 @@
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
 
-stshopt () {
-
-  set -o vi
-
-  if [ -n "$BASH_VERSION" ]; then
-    set -b
-    export PS1='[\u@\h \W $?]\$ '
-  fi
+myums () {
+  nohup "${MYOPT:-$HOME/opt}/ums/UMS.sh" \
+    > "${DS_ENV_LOG:-$HOME/log}/ums.log" \
+    2>&1 \
+    &
 }

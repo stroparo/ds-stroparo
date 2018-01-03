@@ -1,6 +1,10 @@
+# Daily Shells Stroparo extensions
+# More instructions and licensing at:
+# https://github.com/stroparo/ds-stroparo
+
 # Custom environment
 
-czshelloptions
+stshopt # routine defined in ds-stroparo
 
 export EDITOR=vim
 

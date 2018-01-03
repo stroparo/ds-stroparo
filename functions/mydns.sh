@@ -2,12 +2,8 @@
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
 
-stshopt () {
+# Purpose: inadyn wrapper
 
-  set -o vi
-
-  if [ -n "$BASH_VERSION" ]; then
-    set -b
-    export PS1='[\u@\h \W $?]\$ '
-  fi
+mydns () {
+  sudo nohup inadyn > "${DS_ENV_LOG:-$HOME/log}"/inadyn.log 2>&1 &
 }

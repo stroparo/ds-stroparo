@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Author: Cristian Stroparo
-# Licensed by the author's discretion.
+# Daily Shells Stroparo extensions
+# More instructions and licensing at:
+# https://github.com/stroparo/ds-stroparo
 
 PROGNAME=${0##*/}
 
