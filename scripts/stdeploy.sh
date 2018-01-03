@@ -24,15 +24,14 @@ _deploy_git () {
 
   which git >/dev/null 2>&1 || return 1
 
-  deploygit "\
+  deploygit \
     'color.ui auto' \
     'core.autocrlf false' \
     'diff.submodule log' \
     'push.default simple' \
     'push.recurseSubmodules check' \
     'sendpack.sideband false' \
-    'status.submodulesummary 1'\
-    " \
+    'status.submodulesummary 1' \
     || return 1
 
   git config --global --replace-all core.pager "less -F -X" \
@@ -60,7 +59,7 @@ _deploy_ruby () {
     || return 1
 }
 
-_custom_deploy () {
+_deploy () {
 
   typeset all=false
 
@@ -93,4 +92,4 @@ EOF
   echo 'INFO: Deploy complete ... restart the shell.' 1>&2
 }
 
-_custom_deploy "$@"
+_deploy "$@"
