@@ -18,12 +18,4 @@ bootdesktop () {
   if type flux >/dev/null 2>&1 && ! pgrep -fl flux; then
     flux -l -25 -g -49 -k 4700 & disown
   fi
-
-  # Mount custom partitions and start Dropbox if mount ok:
-  if type czmount >/dev/null 2>&1 ; then
-    czmount
-  fi
-  if [ -d ~/Dropbox/doc ] ; then
-    startdropbox & disown
-  fi
 }
