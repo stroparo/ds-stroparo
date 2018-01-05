@@ -6,7 +6,10 @@
 
 PROGNAME=${0##*/}
 
-. "$DS_HOME"/functions/gitfunctions.sh
+. "$DS_HOME"/functions/gitfunctions.sh || exit 1
+
+# #############################################################################
+# Functions
 
 _deploy_apps () {
   installanki.sh
@@ -22,7 +25,8 @@ _deploy_apps () {
 
 _deploy_git () {
 
-  which git >/dev/null 2>&1 || return 1
+  which git >/dev/null 2>&1 \
+    || return 1
 
   deploygit \
     'color.ui auto' \
@@ -59,7 +63,10 @@ _deploy_ruby () {
     || return 1
 }
 
-_deploy () {
+# #############################################################################
+# Main function
+
+_main () {
 
   typeset all=false
 
@@ -92,4 +99,7 @@ EOF
   echo 'INFO: Deploy complete ... restart the shell.' 1>&2
 }
 
-_deploy "$@"
+# #############################################################################
+# Main
+
+_main "$@"
