@@ -61,6 +61,8 @@ fi
 # DS post calls
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
-  appendto DS_POST_CALLS '[[ $- = *i* ]] && echo 1>&2 && d "${DEV:-$HOME/workspace}"; true'
-  appendto DS_POST_CALLS '[[ $- = *i* ]] && echo 1>&2 && [ -d ds ] && gitr.sh ss; true'
+  appendto DS_POST_CALLS \
+    'if [[ $- = *i* ]] && [[ $PWD != $HOME ]]; then cd "${DEV}"; fi'
+  appendto DS_POST_CALLS \
+    'if [ -d ds ]; then gitr.sh ss; fi'
 fi
