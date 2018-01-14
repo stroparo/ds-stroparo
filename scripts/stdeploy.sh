@@ -15,15 +15,15 @@ fi
 # Functions
 
 _deploy_apps () {
-  installanki.sh
-  installdocker.sh
-  installdropbox.sh
-  installexa.sh
-  installohmyzsh.sh
-  installpowerfonts.sh
+  setup-anki.sh
+  setup-docker.sh
+  setup-dropbox.sh
+  setup-exa.sh
+  setup-ohmyzsh.sh
+  setup-powerfonts.sh
 
   # Home office:
-  installcitrix.sh
+  setup-citrix.sh
 }
 
 _deploy_git () {
