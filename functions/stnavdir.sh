@@ -7,3 +7,4 @@ h     () { d "${HOME}" -Ah ; }
 myopt () { d "${MYOPT}" -Ah ; }
 mysw  () { d "${MYSW}" -Ah ; }
 up    () { d "$(cygpath "${USERPROFILE}")" -Ah ; }
+ups   () { d "${UPS:-$HOME/upstream}" ; }
