@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Daily Shells Stroparo extensions
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
@@ -10,3 +12,5 @@ myserviio () {
   sleep 8
   "${MYOPT:-$HOME/opt}/serviio/bin/serviio-console.sh"
 }
+
+myserviio "$@"

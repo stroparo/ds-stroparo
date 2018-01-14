@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Daily Shells Stroparo extensions
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
@@ -10,3 +12,5 @@ myjdisk () {
     2>&1 \
     &)
 }
+
+myjdisk "$@"

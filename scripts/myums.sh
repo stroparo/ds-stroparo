@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Daily Shells Stroparo extensions
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
@@ -8,3 +10,5 @@ myums () {
     2>&1 \
     &
 }
+
+myums "$@"
