@@ -7,7 +7,7 @@
 # #############################################################################
 # Checks
 
-if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
+if ! (uname -a | grep -i -q linux) ; then
   echo "SKIP: Not on Linux." 1>&2
   exit
 fi
