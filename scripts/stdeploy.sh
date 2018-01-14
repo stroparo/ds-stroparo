@@ -6,7 +6,10 @@
 
 PROGNAME=${0##*/}
 
-. "$DS_HOME"/functions/gitfunctions.sh || exit 1
+if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
+  echo "FATAL: Could not source dependencies." 1>&2
+  exit 1
+fi
 
 # #############################################################################
 # Functions
@@ -66,23 +69,14 @@ _deploy_ruby () {
 # #############################################################################
 # Main function
 
-_main () {
-
-  typeset all=false
-
-  if [ "$1" = '-a' ] ; then
-    all=true
-  fi
+stdeploy () {
 
   if [ "$1" = '-h' ] || [ $# -eq 0 ] ; then
 cat <<EOF
-${PROGNAME} [arguments]
+${PROGNAME} [item [item ...]]
 
-Items:
-apps
-git
-python
-ruby
+Available items:
+$(grep "_deploy_[a-z]* " "$PROGNAME" | sed -e 's/_deploy_// -e 's/ *$//')
 
 Example:
 ${PROGNAME} apps git python
@@ -91,8 +85,11 @@ EOF
   fi
 
   for item in "$@" ; do
+
+    echo ${BASH_VERSION:+-e} "\n==> Deploying '${item}'..."
+
     if ! eval "_deploy_${item}" ; then
-      echo "WARN: There were failures deploying '$item'" 1>&2
+      echo "WARN: There were failures deploying '${item}'" 1>&2
     fi
   done
 
@@ -102,4 +99,4 @@ EOF
 # #############################################################################
 # Main
 
-_main "$@"
+stdeploy "$@"
