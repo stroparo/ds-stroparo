@@ -76,7 +76,8 @@ cat <<EOF
 ${PROGNAME} [item [item ...]]
 
 Available items:
-$(grep "_deploy_[a-z]* " "$PROGNAME" | sed -e 's/_deploy_// -e 's/ *$//')
+$(grep "_deploy_[a-z]* " "$(which "$PROGNAME")" \
+  | sed -e 's/_deploy_//' -e 's/ .*$//')
 
 Example:
 ${PROGNAME} apps git python
