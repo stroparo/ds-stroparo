@@ -62,15 +62,13 @@ fi
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
 
-  if ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}" ; then
-    appendto DS_POST_CALLS \
-      'if [[ $- = *i* ]] && [[ \$PWD = \$HOME ]]; then cd \"\${DEV}\"; fi'
+  if [[ $- = *i* ]] && ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}" ; then
+    appendto DS_POST_CALLS '[[ \$PWD = \$HOME ]] && cd \"\${DEV}\" || true'
   fi
 
   # Keep interactivity check (test on $- variable) as gitr.sh
   #  itself loads DS and thus this can cause an infinite recursion:
-  if ! echogrep -q 'gitr.sh ss' "${DS_POST_CALLS}" ; then
-    appendto DS_POST_CALLS \
-      'if [[ $- = *i* ]] && [ -d ds ]; then gitr.sh ss; fi'
+  if [[ $- = *i* ]] && ! echogrep -q 'gitr.sh ss' "${DS_POST_CALLS}" ; then
+    appendto DS_POST_CALLS '[ -d ds ] && gitr.sh ss || true'
   fi
 fi
