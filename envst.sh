@@ -15,12 +15,14 @@ export EDITOR=vim
 
 # Cygwin
 if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
-    export CYGWIN="$CYGWIN winsymlinks:nativestrict"
+  export CYGWIN="$CYGWIN winsymlinks:nativestrict"
 
-    export DEV="${HOME}/workspace"
-    export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
-    export MYOPT="$(cygpath "${MYOPT:-C:\\opt}")"
-    export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
+  export DEV="${HOME}/workspace"
+  export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
+  export MYOPT="$(cygpath "${MYOPT:-C:\\opt}")"
+  export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
+
+  alias explorerhere='explorer "$(cygpath -w "$PWD")"'
 fi
 
 # #############################################################################
