@@ -10,4 +10,6 @@ stshopt () {
     set -b
     export PS1='[\u@\h \W $?]\$ '
   fi
+
+  export DISABLE_AUTO_TITLE=true
 }
