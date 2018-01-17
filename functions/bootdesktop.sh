@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Daily Shells Stroparo extensions
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
@@ -21,5 +19,3 @@ bootdesktop () {
     flux -l -25 -g -49 -k 4700 & disown
   fi
 }
-
-bootdesktop "$@"
