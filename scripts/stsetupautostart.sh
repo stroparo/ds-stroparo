@@ -15,7 +15,7 @@ fi
 # #############################################################################
 # Main
 
-echo "==> Started '$0'"
+echo ${BASH_VERSION:+-e} "\n\n==> Started '$0'"
 
 if [ ! -d "${HOME}"/.config/autostart ] ; then
   mkdir -p "${HOME}"/.config/autostart 2>/dev/null

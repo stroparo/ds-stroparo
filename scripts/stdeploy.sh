@@ -17,6 +17,7 @@ fi
 _deploy_apps () {
   setup-anki.sh
   setup-docker.sh
+  setup-docker-compose.sh
   setup-dropbox.sh
   setup-exa.sh
   setup-ohmyzsh.sh

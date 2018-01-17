@@ -21,7 +21,7 @@ K380_PATH=/srv/k380-function-keys-conf
 # #############################################################################
 # Main
 
-echo "==> Started '$0'"
+echo ${BASH_VERSION:+-e} "\n\n==> Started '$0'"
 
 sudo git clone "$K380_GIT" "$K380_PATH" \
   && cd "$K380_PATH" \
