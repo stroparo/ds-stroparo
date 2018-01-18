@@ -63,8 +63,7 @@ EOF
 }
 
 _deploy_ruby () {
-  install-ruby-ubuntu1604.sh "$DS_CONF/gem.lst" \
-    || return 1
+  install-ruby-ubuntu1604.sh "$DS_CONF/gem.lst"
 }
 
 # #############################################################################
