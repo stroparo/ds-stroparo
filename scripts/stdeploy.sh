@@ -14,17 +14,34 @@ fi
 # #############################################################################
 # Functions
 
-_deploy_apps () {
-  setup-anki.sh
-  setup-docker.sh
-  setup-docker-compose.sh
-  setup-dropbox.sh
-  setup-exa.sh
-  setup-ohmyzsh.sh
-  setup-powerfonts.sh
+# Oneliners:
+_deploy_citrix () { setupcitrix-ubuntu.sh ; }
+_deploy_nextcloud () { aptinstallpackages.sh -r nextcloud-devs/client nextcloud-client ; }
 
-  # Home office:
-  setup-citrix.sh
+_deploy_apps () {
+  setupanki.sh
+  setupdocker.sh
+  setupdocker-compose.sh
+  setupdropbox.sh
+  setupexa.sh
+  setupohmyzsh.sh
+  setuppowerfonts.sh
+
+  # APT
+  aptinstallpackages.sh -r hsoft/ppa \
+    dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
+
+  aptinstallpackages.sh -r font-manager/staging \
+    font-manager
+
+  aptinstallpackages.sh -r nathan-renniewaldock/qdirstat \
+    qdirstat
+
+  aptinstallpackages.sh -r remmina-ppa-team/remmina-next \
+    remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
+
+  aptinstallpackages.sh -r webupd8team/y-ppa-manager \
+    y-ppa-manager
 }
 
 _deploy_git () {
@@ -50,9 +67,7 @@ _deploy_git () {
 
 _deploy_python () {
 
-  addpystartup
-
-  install-python-ubuntu1604.sh "$DS_CONF/pip"{2,3}"tools.lst"
+  setuppython-ubuntu.sh "$DS_CONF/pip"{2,3}"tools.lst"
 
   cat <<EOF
 Commands to install Python 3.6.0 packages:
@@ -63,7 +78,7 @@ EOF
 }
 
 _deploy_ruby () {
-  install-ruby-ubuntu1604.sh "$DS_CONF/gem.lst"
+  setupruby-ubuntu.sh "$DS_CONF/gem.lst"
 }
 
 # #############################################################################

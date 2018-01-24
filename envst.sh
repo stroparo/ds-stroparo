@@ -12,6 +12,7 @@ export EDITOR=vim
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
 : ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 : ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
+: ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Cygwin
 if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
