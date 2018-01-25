@@ -44,22 +44,42 @@ _deploy_apps () {
 _deploy_git () {
 
   which git >/dev/null 2>&1 \
-    || return 1
+    || (sudo apt update && sudo apt install -y 'git-core') \
+    || (sudo yum install -y git) \
+  which git >/dev/null 2>&1 || return 1
 
-  deploygit \
-    'color.ui auto' \
-    'core.autocrlf false' \
-    'diff.submodule log' \
-    'push.default simple' \
-    'push.recurseSubmodules check' \
-    'sendpack.sideband false' \
-    'status.submodulesummary 1' \
-    || return 1
+  typeset gitcygwinfile
+  if (uname -a | grep -i -q cygwin) ; then
 
-  git config --global --replace-all core.pager "less -F -X" \
-    || return 1
-  git config --global --replace-all credential.helper "cache --timeout=36000" \
-    || return 1
+    gitcygwinfile="$(cygpath "$USERPROFILE")/.gitconfig"
+    touch "$gitcygwinfile"
+
+    [ -n "$MYEMAIL" ] && gitset -f "$gitcygwinfile" -e "$MYEMAIL"
+    [ -n "$MYSIGN" ] && gitset -f "$gitcygwifile" -n "$MYSIGN"
+  fi
+
+  [ -n "$MYEMAIL" ] && gitset -e "$MYEMAIL"
+  [ -n "$MYSIGN" ] && gitset -n "$MYSIGN"
+
+  while read key value ; do
+
+    gitset -r "$key" "$value"
+
+    if (uname -a | grep -i -q cygwin) ; then
+      gitset -r -f "$gitcygwinfile" "$key" "$value"
+    fi
+
+  done <<EOF
+core.pager        less -F -X
+credential.helper cache --timeout=36000
+color.ui          auto
+core.autocrlf     false
+diff.submodule    log
+push.default      simple
+push.recurseSubmodules  check
+sendpack.sideband false
+status.submodulesummary 1
+EOF
 }
 
 _deploy_python () {
