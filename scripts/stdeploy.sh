@@ -37,9 +37,6 @@ _deploy_apps () {
   aptinstallpackages.sh -r nathan-renniewaldock/qdirstat \
     qdirstat
 
-  aptinstallpackages.sh -r remmina-ppa-team/remmina-next \
-    remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
-
   aptinstallpackages.sh -r webupd8team/y-ppa-manager \
     y-ppa-manager
 }
@@ -75,6 +72,11 @@ pyenv activate 3.6.0
 pipinstall "${DS_CONF}/pip36.lst"
 pyenv deactivate
 EOF
+}
+
+_deploy_rdp () {
+  aptinstallpackages.sh -r remmina-ppa-team/remmina-next \
+    remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
 }
 
 _deploy_ruby () {
