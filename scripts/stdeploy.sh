@@ -24,8 +24,8 @@ _deploy_apps () {
   setupdocker-compose.sh
   setupdropbox.sh
   setupexa.sh
+  setupnerdfonts.sh
   setupohmyzsh.sh
-  setuppowerfonts.sh
 
   # APT
   aptinstallpackages.sh -r hsoft/ppa \
