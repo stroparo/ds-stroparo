@@ -63,12 +63,14 @@ fi
 # #############################################################################
 # DS post calls
 
+if [[ $- = *i* ]] \
+  && [ -d "$DEV" ] \
+  && ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}"
+then
+  appendto DS_POST_CALLS '[[ \$PWD = \$HOME ]] && cd \"\${DEV}\" || true'
+fi
+
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
-
-  if [[ $- = *i* ]] && ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}" ; then
-    appendto DS_POST_CALLS '[[ \$PWD = \$HOME ]] && cd \"\${DEV}\" || true'
-  fi
-
   # Keep interactivity check (test on $- variable) as gitr.sh
   #  itself loads DS and thus this can cause an infinite recursion:
   if [[ $- = *i* ]] && ! echogrep -q 'gitr.sh ss' "${DS_POST_CALLS}" ; then
