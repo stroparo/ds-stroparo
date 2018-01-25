@@ -45,7 +45,7 @@ _deploy_git () {
 
   which git >/dev/null 2>&1 \
     || (sudo apt update && sudo apt install -y 'git-core') \
-    || (sudo yum install -y git) \
+    || (sudo yum install -y git)
   which git >/dev/null 2>&1 || return 1
 
   typeset gitcygwinfile
