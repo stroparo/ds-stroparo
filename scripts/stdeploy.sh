@@ -84,12 +84,17 @@ EOF
 
 _deploy_python () {
 
-  setuppython-ubuntu.sh "$DS_CONF/pip"{2,3}"tools.lst"
+  # TODO update when they are moved to DS_CONF back again
+  typeset tools2="${DEV}/dotfiles/custom/piplist-tools2"
+  typeset tools3="${DEV}/dotfiles/custom/piplist-tools3"
+  typeset tools36="${DEV}/dotfiles/custom/piplist3.6-tools3"
+
+  setuppython-ubuntu.sh "$tools2" "$tools3"
 
   cat <<EOF
 Commands to install Python 3.6.0 packages:
 pyenv activate 3.6.0
-pipinstall "${DS_CONF}/pip36.lst"
+pipinstall "$tools36"
 pyenv deactivate
 EOF
 }
