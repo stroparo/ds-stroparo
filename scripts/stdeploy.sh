@@ -89,7 +89,7 @@ _deploy_python () {
   typeset tools3="${DEV}/dotfiles/custom/piplist-tools3"
   typeset tools36="${DEV}/dotfiles/custom/piplist3.6-tools3"
 
-  setuppython-ubuntu.sh "$tools2" "$tools3"
+  setuppython.sh "$tools2" "$tools3"
 
   cat <<EOF
 Commands to install Python 3.6.0 packages:
