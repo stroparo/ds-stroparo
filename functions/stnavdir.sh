@@ -8,7 +8,6 @@ dl    () { d "${HOME}"/Downloads -Ah ; }
 h     () { d "${HOME}" -Ah ; }
 myopt () { d "${MYOPT}" -Ah ; }
 mysw  () { d "${MYSW}" -Ah ; }
-up    () { d "$(cygpath "${USERPROFILE}/${1}")" -Ah ; }
 ups   () { d "${UPS:-$HOME/upstream}" ; }
 
 # #############################################################################
