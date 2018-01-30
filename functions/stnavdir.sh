@@ -14,6 +14,10 @@ ups   () { d "${UPS:-$HOME/upstream}" ; }
 # Cygwin
 
 if (uname -a | grep -i -q cygwin) ; then
+
   unset -f dl
-  dl () { up Downloads ; }
+  dl () { cd "$(cygpath "${USERPROFILE}/${1}")"/Downloads ; }
+
+  unset -f h
+  h () { cd "$(cygpath "${USERPROFILE}/${1}")" ; }
 fi
