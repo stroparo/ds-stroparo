@@ -95,8 +95,8 @@ _deploy_python () {
   setuppython.sh "$tools2" "$tools3"
 
   cat <<EOF
-Commands to install Python 3.6.0 packages:
-pyenv activate 3.6.0
+Commands to install Python 3.6.4 packages:
+pyenv activate 3.6.4
 pipinstall "$tools36"
 pyenv deactivate
 EOF
