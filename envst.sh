@@ -30,8 +30,8 @@ fi
 # General PATH
 
 pathmunge -x "${HOME}/bin"
-mungerootopt
-mungehomeopt
+mungemagic "$HOME"/opt
+mungemagic /opt
 
 # #############################################################################
 # Sublime
