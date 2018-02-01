@@ -4,6 +4,6 @@
 # More instructions and licensing at:
 # https://bitbucket.org/stroparo/ds-private
 
-for setup in autostart keybk380 ; do
+for setup in bootdesktop keybk380 ; do
   "$DS_HOME"/scripts/stsetup${setup}.sh
 done
