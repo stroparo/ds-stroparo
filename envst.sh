@@ -2,11 +2,13 @@
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
 
-# Custom environment
+# #############################################################################
+# Custom
 
 stshopt # routine defined in ds-stroparo
 
-export EDITOR=vim
+# #############################################################################
+# Globals
 
 : ${DEV:=${HOME}/workspace} ; export DEV
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
@@ -26,23 +28,18 @@ if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
 fi
 
-# #############################################################################
-# General PATH
-
+# PATH
 pathmunge -x "${HOME}/bin"
 mungemagic "$HOME"/opt
 mungemagic /opt
 
-# #############################################################################
-# Sublime
-
-if ! which subl >/dev/null 2>&1 && which sublime_text >/dev/null 2>&1 ; then
-  sudo ln "$(which sublime_text)" /usr/local/bin/subl
-fi
+# TMUX terminal colors
+[ -z "$TMUX" ] && export TERM=screen-256color
 
 # #############################################################################
 # Default editors
 
+export EDITOR=vim
 export GIT_EDITOR=vim
 
 if which subl >/dev/null 2>&1 ; then
