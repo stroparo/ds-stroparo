@@ -111,6 +111,10 @@ _deploy_ruby () {
   setupruby-ubuntu.sh "$DS_CONF/gem.lst"
 }
 
+_deploy_vim () {
+  setupvim.sh
+}
+
 # #############################################################################
 # Main function
 
