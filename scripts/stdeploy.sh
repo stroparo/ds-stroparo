@@ -4,7 +4,7 @@
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
 
-PROGNAME=${0##*/}
+PROGNAME="$(basename "${0:-stdeploy.sh}")"
 
 if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
   echo "FATAL: Could not source dependencies." 1>&2
