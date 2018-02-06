@@ -24,16 +24,16 @@ _deploy_apps () {
   setupohmyzsh.sh
 
   # APT
-  aptinstallpackages.sh -r hsoft/ppa \
+  aptinstall.sh -r hsoft/ppa \
     dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
 
-  aptinstallpackages.sh -r font-manager/staging \
+  aptinstall.sh -r font-manager/staging \
     font-manager
 
-  aptinstallpackages.sh -r nathan-renniewaldock/qdirstat \
+  aptinstall.sh -r nathan-renniewaldock/qdirstat \
     qdirstat
 
-  aptinstallpackages.sh -r webupd8team/y-ppa-manager \
+  aptinstall.sh -r webupd8team/y-ppa-manager \
     y-ppa-manager
 }
 
@@ -79,7 +79,7 @@ EOF
 }
 
 _deploy_nextcloud () {
-  aptinstallpackages.sh -r nextcloud-devs/client nextcloud-client
+  aptinstall.sh -r nextcloud-devs/client nextcloud-client
 }
 
 _deploy_python () {
@@ -103,7 +103,7 @@ EOF
 }
 
 _deploy_rdp () {
-  aptinstallpackages.sh -r remmina-ppa-team/remmina-next \
+  aptinstall.sh -r remmina-ppa-team/remmina-next \
     remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
 }
 
