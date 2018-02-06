@@ -14,10 +14,6 @@ fi
 # #############################################################################
 # Functions
 
-# Oneliners:
-_deploy_citrix () { setupcitrix-ubuntu.sh ; }
-_deploy_nextcloud () { aptinstallpackages.sh -r nextcloud-devs/client nextcloud-client ; }
-
 _deploy_apps () {
   setupanki.sh
   setupdocker.sh
@@ -80,6 +76,10 @@ push.recurseSubmodules  check
 sendpack.sideband false
 status.submodulesummary 1
 EOF
+}
+
+_deploy_nextcloud () {
+  aptinstallpackages.sh -r nextcloud-devs/client nextcloud-client
 }
 
 _deploy_python () {
