@@ -22,6 +22,7 @@ _deploy_apps () {
   setupexa.sh
   setupnerdfonts.sh
   setupohmyzsh.sh
+  setupvim.sh
 
   # APT
   aptinstall.sh -r hsoft/ppa \
@@ -68,10 +69,6 @@ _deploy_rdp () {
 
 _deploy_ruby () {
   setupruby-ubuntu.sh "$DS_CONF/gem.lst"
-}
-
-_deploy_vim () {
-  setupvim.sh
 }
 
 # #############################################################################
