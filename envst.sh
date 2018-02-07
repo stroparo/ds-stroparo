@@ -34,7 +34,7 @@ mungemagic "$HOME"/opt
 mungemagic /opt
 
 # TMUX terminal colors
-[ -z "$TMUX" ] && export TERM=screen-256color
+[ -z "$TMUX" ] && export TERM=xterm-256color
 
 # #############################################################################
 # Default editors
