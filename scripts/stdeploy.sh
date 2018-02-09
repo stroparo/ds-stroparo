@@ -24,18 +24,20 @@ _deploy_apps () {
   setupohmyzsh.sh
   setupvim.sh
 
-  # APT
-  aptinstall.sh -r hsoft/ppa \
-    dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
+  if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
-  aptinstall.sh -r font-manager/staging \
-    font-manager
+    setupcitrix-ubuntu.sh
 
-  aptinstall.sh -r nathan-renniewaldock/qdirstat \
-    qdirstat
+    # PPA stuff
+    aptinstall.sh -r 'hsoft/ppa' dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
+    aptinstall.sh -r 'font-manager/staging' font-manager
+    aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
+    aptinstall.sh -r 'remmina-ppa-team/remmina-next' remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
+    aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
 
-  aptinstall.sh -r webupd8team/y-ppa-manager \
-    y-ppa-manager
+    # VPN
+    aptinstall.sh network-manager-openconnect network-manager-vpnc
+  fi
 }
 
 _deploy_nextcloud () {
@@ -60,15 +62,6 @@ pyenv activate 3.6.4
 pipinstall "$tools36"
 pyenv deactivate
 EOF
-}
-
-_deploy_rdp () {
-  aptinstall.sh -r remmina-ppa-team/remmina-next \
-    remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
-}
-
-_deploy_ruby () {
-  setupruby-ubuntu.sh "$DS_CONF/gem.lst"
 }
 
 # #############################################################################
