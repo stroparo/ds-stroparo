@@ -46,9 +46,9 @@ _deploy_nextcloud () {
 
 _deploy_python () {
   # TODO update when they are moved to DS_CONF back again
-  typeset tools2="${DEV}/dotfiles/custom/piplist-tools2"
-  typeset tools3="${DEV}/dotfiles/custom/piplist-tools3"
-  typeset tools36="${DEV}/dotfiles/custom/piplist3.6-tools3"
+  typeset tools2="${DS_CONF}/packages/piplist-tools2"
+  typeset tools3="${DS_CONF}/packages/piplist-tools3"
+  typeset tools36="${DS_CONF}/packages/piplist3.6-tools3"
 
   # Speed up disabling prompt as it is going to be discontinued anyway:
   appendunique 'export PYENV_VIRTUALENV_DISABLE_PROMPT=1' \
