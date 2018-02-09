@@ -16,17 +16,10 @@ fi
 
 _deploy_apps () {
   setupanki.sh
-  setupdocker.sh
-  setupdocker-compose.sh
   setupdropbox.sh
   setupexa.sh
-  setupnerdfonts.sh
-  setupohmyzsh.sh
-  setupvim.sh
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
-
-    setupcitrix-ubuntu.sh
 
     # PPA stuff
     aptinstall.sh -r 'hsoft/ppa' dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
@@ -37,6 +30,24 @@ _deploy_apps () {
 
     # VPN
     aptinstall.sh network-manager-openconnect network-manager-vpnc
+  fi
+}
+
+_deploy_devel () {
+  setupdocker.sh
+  setupdocker-compose.sh
+  setupexa.sh
+  setupnerdfonts.sh
+  setupohmyzsh.sh
+  setupvim.sh
+
+  if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
+
+    setupcitrix-ubuntu.sh
+
+    # PPA stuff
+    aptinstall.sh -r 'font-manager/staging' font-manager
+    aptinstall.sh -r 'remmina-ppa-team/remmina-next' remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
   fi
 }
 
@@ -78,7 +89,7 @@ $(grep "_deploy_[a-z]* " "$(which "$PROGNAME")" \
   | sed -e 's/_deploy_//' -e 's/ .*$//')
 
 Example:
-${PROGNAME} apps python
+${PROGNAME} apps devel python
 EOF
     return
   fi
