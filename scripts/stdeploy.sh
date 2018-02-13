@@ -43,6 +43,7 @@ _deploy_apps () {
 }
 
 _deploy_devel () {
+  $DOTFILES_DIR/setupcitrix.sh
   $DOTFILES_DIR/setupdocker.sh
   $DOTFILES_DIR/setupdocker-compose.sh
   $DOTFILES_DIR/setupexa.sh
@@ -51,8 +52,6 @@ _deploy_devel () {
   $DOTFILES_DIR/setupvim.sh
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
-
-    $DOTFILES_DIR/setupcitrix-ubuntu.sh
 
     # PPA stuff
     aptinstall.sh -r 'font-manager/staging' font-manager
