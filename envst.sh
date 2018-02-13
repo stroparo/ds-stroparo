@@ -29,19 +29,28 @@ if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
 fi
 
 # PATH
-pathmunge -x "${HOME}/bin"
-mungemagic "$HOME"/opt
-mungemagic /opt
+pathmunge -x "$HOME/bin"
+mungemagic "$DEV/dotfiles/installers" \
+  || mungemagic "$HOME/dotfiles-master/installers"
+mungemagic "$HOME/opt"
+mungemagic '/opt'
 
 # TMUX terminal colors
-[ -z "$TMUX" ] && export TERM=xterm-256color
+[ -z "$TMUX" ] && export TERM="xterm-256color"
 
 # #############################################################################
 # Default editors
 
-export EDITOR=vim
-export GIT_EDITOR=vim
+# EDITOR:
+if which vim >/dev/null 2>&1 ; then
+  export EDITOR=vim
+  export GIT_EDITOR=vim
+else
+  export EDITOR=vi
+  export GIT_EDITOR=vi
+fi
 
+# VISUAL editor:
 if which subl >/dev/null 2>&1 ; then
   export VISUAL=subl
 elif which Code >/dev/null 2>&1 ; then
