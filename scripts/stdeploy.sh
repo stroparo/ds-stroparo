@@ -4,7 +4,16 @@
 # More instructions and licensing at:
 # https://github.com/stroparo/ds-stroparo
 
+# #############################################################################
+# Globals
+
 PROGNAME="$(basename "${0:-stdeploy.sh}")"
+
+DOTFILES_DIR="$HOME/dotfiles-master"
+[ -d "$DEV/dotfiles" ] && DOTFILES_DIR="$DEV/dotfiles"
+
+# #############################################################################
+# Dependencies
 
 if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
   echo "FATAL: Could not source dependencies." 1>&2
@@ -15,9 +24,9 @@ fi
 # Functions
 
 _deploy_apps () {
-  setupanki.sh
-  setupdropbox.sh
-  setupexa.sh
+  $DOTFILES_DIR/setupanki.sh
+  $DOTFILES_DIR/setupdropbox.sh
+  $DOTFILES_DIR/setupexa.sh
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
@@ -34,16 +43,16 @@ _deploy_apps () {
 }
 
 _deploy_devel () {
-  setupdocker.sh
-  setupdocker-compose.sh
-  setupexa.sh
-  setupnerdfonts.sh
-  setupohmyzsh.sh
-  setupvim.sh
+  $DOTFILES_DIR/setupdocker.sh
+  $DOTFILES_DIR/setupdocker-compose.sh
+  $DOTFILES_DIR/setupexa.sh
+  $DOTFILES_DIR/setupnerdfonts.sh
+  $DOTFILES_DIR/setupohmyzsh.sh
+  $DOTFILES_DIR/setupvim.sh
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
-    setupcitrix-ubuntu.sh
+    $DOTFILES_DIR/setupcitrix-ubuntu.sh
 
     # PPA stuff
     aptinstall.sh -r 'font-manager/staging' font-manager
@@ -65,7 +74,7 @@ _deploy_python () {
   appendunique 'export PYENV_VIRTUALENV_DISABLE_PROMPT=1' \
     "$HOME"/.bashrc "$HOME"/.zshrc
 
-  setuppython.sh "$tools2" "$tools3"
+  $DOTFILES_DIR/setuppython.sh "$tools2" "$tools3"
 
   cat <<EOF
 Commands to install Python 3.6.4 packages:
