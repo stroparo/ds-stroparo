@@ -12,6 +12,10 @@ PROGNAME="$(basename "${0:-stdeploy.sh}")"
 DOTFILES_DIR="$HOME/dotfiles-master"
 [ -d "$DEV/dotfiles" ] && DOTFILES_DIR="$DEV/dotfiles"
 
+PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
+PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
+  libfreerdp-plugins-standard"
+
 # #############################################################################
 # Dependencies
 
@@ -24,6 +28,7 @@ fi
 # Functions
 
 _deploy_apps () {
+
   $DOTFILES_DIR/setupanki.sh
   $DOTFILES_DIR/setupdropbox.sh
   $DOTFILES_DIR/setupexa.sh
@@ -31,10 +36,10 @@ _deploy_apps () {
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
     # PPA stuff
-    aptinstall.sh -r 'hsoft/ppa' dupeguru-se dupeguru-me dupeguru-pe moneyguru pdfmasher
+    aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
     aptinstall.sh -r 'font-manager/staging' font-manager
     aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
-    aptinstall.sh -r 'remmina-ppa-team/remmina-next' remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
+    aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
     aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
 
     # VPN
@@ -55,7 +60,7 @@ _deploy_devel () {
 
     # PPA stuff
     aptinstall.sh -r 'font-manager/staging' font-manager
-    aptinstall.sh -r 'remmina-ppa-team/remmina-next' remmina remmina-plugin-rdp remmina-plugin-vnc libfreerdp-plugins-standard
+    aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
 }
 
