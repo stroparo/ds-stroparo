@@ -30,8 +30,11 @@ fi
 
 # PATH
 pathmunge -x "$HOME/bin"
-mungemagic "$DEV/dotfiles/installers" \
-  || mungemagic "$HOME/dotfiles-master/installers"
+if [ -d "$DEV/dotfiles/installers" ] ; then
+  pathmunge -x "$DEV/dotfiles/installers"
+elif [ -d "$HOME/dotfiles-master/installers" ] ; then
+  pathmunge -x "$HOME/dotfiles-master/installers"
+fi
 mungemagic "$HOME/opt"
 mungemagic '/opt'
 
