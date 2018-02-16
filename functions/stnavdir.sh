@@ -8,6 +8,7 @@
 dl    () { d "${HOME}"/Downloads -Ah ; }
 h     () { d "${HOME}" -Ah ; }
 forks () { d "${FORKS:-$HOME/forks}" ; }
+gists () { d "${GISTS:-$HOME/gists}" ; }
 ups   () { d "${UPS:-$HOME/upstream}" ; }
 work  () { d "${WORK:-$HOME/work}" ; }
 
