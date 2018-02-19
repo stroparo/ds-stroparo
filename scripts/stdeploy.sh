@@ -28,7 +28,6 @@ fi
 # Functions
 
 _deploy_apps () {
-
   "$DOTFILES_DIR/installers/setupanki.sh"
   "$DOTFILES_DIR/installers/setupdropbox.sh"
   "$DOTFILES_DIR/installers/setupexa.sh"
@@ -47,8 +46,11 @@ _deploy_apps () {
   fi
 }
 
-_deploy_devel () {
+_deploy_citrix () {
   "$DOTFILES_DIR/installers/setupcitrix.sh"
+}
+
+_deploy_devel () {
   "$DOTFILES_DIR/installers/setupdocker.sh"
   "$DOTFILES_DIR/installers/setupdocker-compose.sh"
   "$DOTFILES_DIR/installers/setupexa.sh"
