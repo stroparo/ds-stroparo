@@ -29,9 +29,9 @@ fi
 
 _deploy_apps () {
 
-  $DOTFILES_DIR/setupanki.sh
-  $DOTFILES_DIR/setupdropbox.sh
-  $DOTFILES_DIR/setupexa.sh
+  "$DOTFILES_DIR/installers/setupanki.sh"
+  "$DOTFILES_DIR/installers/setupdropbox.sh"
+  "$DOTFILES_DIR/installers/setupexa.sh"
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
@@ -48,13 +48,13 @@ _deploy_apps () {
 }
 
 _deploy_devel () {
-  $DOTFILES_DIR/setupcitrix.sh
-  $DOTFILES_DIR/setupdocker.sh
-  $DOTFILES_DIR/setupdocker-compose.sh
-  $DOTFILES_DIR/setupexa.sh
-  $DOTFILES_DIR/setupnerdfonts.sh
-  $DOTFILES_DIR/setupohmyzsh.sh
-  $DOTFILES_DIR/setupvim.sh
+  "$DOTFILES_DIR/installers/setupcitrix.sh"
+  "$DOTFILES_DIR/installers/setupdocker.sh"
+  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
+  "$DOTFILES_DIR/installers/setupexa.sh"
+  "$DOTFILES_DIR/installers/setupnerdfonts.sh"
+  "$DOTFILES_DIR/installers/setupohmyzsh.sh"
+  "$DOTFILES_DIR/installers/setupvim.sh"
 
   if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
 
@@ -78,7 +78,7 @@ _deploy_python () {
   appendunique 'export PYENV_VIRTUALENV_DISABLE_PROMPT=1' \
     "$HOME"/.bashrc "$HOME"/.zshrc
 
-  $DOTFILES_DIR/setuppython.sh "$tools2" "$tools3"
+  "$DOTFILES_DIR/installers/setuppython.sh" "$tools2" "$tools3"
 
   cat <<EOF
 Commands to install Python 3.6.4 packages:
