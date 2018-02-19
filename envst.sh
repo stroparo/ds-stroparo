@@ -36,7 +36,6 @@ elif [ -d "$HOME/dotfiles-master/installers" ] ; then
   pathmunge -x "$HOME/dotfiles-master/installers"
 fi
 mungemagic "$HOME/opt"
-mungemagic '/opt'
 
 # TMUX terminal colors
 [ -z "$TMUX" ] && export TERM="xterm-256color"
