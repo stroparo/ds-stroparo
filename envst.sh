@@ -5,7 +5,9 @@
 # #############################################################################
 # Custom
 
-export LS_COLORS="ow=01;95:di=01;94"
+alias syncbooks='(cd ~/Downloads/books && git pull && git push)'
+alias synchandy='(cd ~/Downloads/handy && git pull && git push)'
+
 stshopt # routine defined in ds-stroparo
 
 # #############################################################################
@@ -38,7 +40,8 @@ elif [ -d "$HOME/dotfiles-master/installers" ] ; then
 fi
 mungemagic "$HOME/opt"
 
-# TMUX terminal colors
+# Terminal
+export LS_COLORS="ow=01;95:di=01;94"
 [ -z "$TMUX" ] && export TERM="xterm-256color"
 
 # #############################################################################
