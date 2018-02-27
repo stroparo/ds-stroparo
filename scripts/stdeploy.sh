@@ -44,6 +44,7 @@ _deploy_custom () {
   _deploy_desktop
   _deploy_devel
   _deploy_fonts
+  _deploy_python
 }
 
 _deploy_desktop () {
