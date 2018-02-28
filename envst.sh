@@ -59,8 +59,8 @@ fi
 # VISUAL editor:
 if which subl >/dev/null 2>&1 ; then
   export VISUAL=subl
-elif which Code >/dev/null 2>&1 ; then
-  export VISUAL=Code
+elif which code >/dev/null 2>&1 ; then
+  export VISUAL=code
 fi
 
 # #############################################################################
