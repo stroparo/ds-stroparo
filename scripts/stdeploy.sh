@@ -42,12 +42,10 @@ fi
 # Applications
 
 # Oneliners:
-_deploy_citrix () { "$DOTFILES_DIR/installers/setupcitrix.sh" ; }
 _deploy_nextcloud () { aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
-_deploy_rdp () { "$DOTFILES_DIR/installers/setuprdp.sh" ; }
 
 _deploy_fonts () {
-  "$DOTFILES_DIR/installers/setupnerdfonts.sh"
+  "setupnerdfonts.sh"
 
   if egrep -i -q 'ubuntu' /etc/*release* ; then
     aptinstall.sh -r 'font-manager/staging' font-manager
@@ -95,7 +93,7 @@ _deploy_python () {
     echo "$PYENV_PROMPT_DISABLE" >> "$HOME"/.zshrc
   fi
 
-  "$DOTFILES_DIR/installers/setuppython.sh" "$tools2" "$tools3"
+  "setuppython.sh" "$tools2" "$tools3"
 
   cat <<EOF
 Commands to install Python 3.6.4 packages:
@@ -110,7 +108,7 @@ _deploy_vim () {
   echo ${BASH_VERSION:+-e} "==> Compile Vim latest? [y/N] \c"
   read answer
   if (echo "$answer" | grep -q '^[yY]') ; then
-    "$DOTFILES_DIR/installers/setupvim.sh"
+    "setupvim.sh"
   fi
 }
 
@@ -120,14 +118,16 @@ _deploy_vim () {
 _deploy_devel () {
   _deploy_python
   _deploy_vim
-  "$DOTFILES_DIR/installers/setupdocker.sh"
-  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
-  "$DOTFILES_DIR/installers/setupexa.sh"
+  "setupdocker.sh"
+  "setupdocker-compose.sh"
+  "setupexa.sh"
 }
 
 _deploy_corpgui () {
   _deploy_fonts
   _deploy_devel
+  "setupxfce.sh"
+  "setuprdp.sh"
 }
 
 _deploy_pc () {
@@ -135,10 +135,10 @@ _deploy_pc () {
   _deploy_devel
 
   # Etcetera:
-  _deploy_citrix
   _deploy_ppa
-  "$DOTFILES_DIR/installers/setupanki.sh"
-  "$DOTFILES_DIR/installers/setupdropbox.sh"
+  "setupanki.sh"
+  "setupcitrix.sh"
+  "setupdropbox.sh"
 }
 
 # #############################################################################
