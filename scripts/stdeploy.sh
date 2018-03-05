@@ -31,51 +31,12 @@ if [ ! -d "$DOTFILES_DIR" ] ; then
 fi
 
 # #############################################################################
-# Functions
+# Applications
 
+# Oneliners:
 _deploy_citrix () { "$DOTFILES_DIR/installers/setupcitrix.sh" ; }
-
 _deploy_nextcloud () { aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
-
 _deploy_rdp () { "$DOTFILES_DIR/installers/setuprdp.sh" ; }
-
-_deploy_custom () {
-  _deploy_citrix
-  _deploy_desktop
-  _deploy_devel
-  _deploy_fonts
-  _deploy_python
-}
-
-_deploy_desktop () {
-
-  "$DOTFILES_DIR/installers/setupanki.sh"
-  "$DOTFILES_DIR/installers/setupdropbox.sh"
-  "$DOTFILES_DIR/installers/setupexa.sh"
-
-  if egrep -i -q 'ubuntu' /etc/*release* ; then
-
-    # PPA stuff
-    aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
-    aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
-
-    aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
-  fi
-}
-
-_deploy_devel () {
-
-  "$DOTFILES_DIR/installers/setupdocker.sh"
-  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
-  "$DOTFILES_DIR/installers/setupexa.sh"
-
-  typeset answer
-  echo ${BASH_VERSION:+-e} "==> Compile Vim latest? [y/N] \c"
-  read answer
-  if (echo "$answer" | grep -q '^[yY]') ; then
-    "$DOTFILES_DIR/installers/setupvim.sh"
-  fi
-}
 
 _deploy_fonts () {
   "$DOTFILES_DIR/installers/setupnerdfonts.sh"
@@ -84,6 +45,32 @@ _deploy_fonts () {
     aptinstall.sh -r 'font-manager/staging' font-manager
   fi
 }
+
+_deploy_ppa () {
+
+  if egrep -i -q 'ubuntu' /etc/*release* ; then
+
+    # PPA stuff
+    aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
+    aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
+    aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
+  fi
+}
+
+_deploy_rdpclient () {
+  if egrep -i -q 'ubuntu' /etc/*release* ; then
+    aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
+  fi
+}
+
+_deploy_vpn () {
+  if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
+    aptinstall.sh network-manager-openconnect network-manager-vpnc
+  fi
+ }
+
+# #############################################################################
+# Development
 
 _deploy_python () {
   # TODO update when they are moved to DS_CONF back again
@@ -110,17 +97,51 @@ pyenv deactivate
 EOF
 }
 
-_deploy_rdpclient () {
-  if egrep -i -q 'ubuntu' /etc/*release* ; then
-    aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
+_deploy_vim () {
+  typeset answer
+  echo ${BASH_VERSION:+-e} "==> Compile Vim latest? [y/N] \c"
+  read answer
+  if (echo "$answer" | grep -q '^[yY]') ; then
+    "$DOTFILES_DIR/installers/setupvim.sh"
   fi
 }
 
-_deploy_vpn () {
-  if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
-    aptinstall.sh network-manager-openconnect network-manager-vpnc
-  fi
- }
+# #############################################################################
+# Wrappers
+
+_deploy_corpgui () {
+
+  # Base:
+  _deploy_fonts
+
+  # Apps:
+  "$DOTFILES_DIR/installers/setupdocker.sh"
+  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
+  "$DOTFILES_DIR/installers/setupexa.sh"
+
+  # Devel:
+  _deploy_python
+  _deploy_vim
+}
+
+_deploy_pc () {
+
+  # Base:
+  _deploy_fonts
+
+  # Apps:
+  _deploy_citrix
+  _deploy_ppa
+  "$DOTFILES_DIR/installers/setupanki.sh"
+  "$DOTFILES_DIR/installers/setupdocker.sh"
+  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
+  "$DOTFILES_DIR/installers/setupdropbox.sh"
+  "$DOTFILES_DIR/installers/setupexa.sh"
+
+  # Devel:
+  _deploy_python
+  _deploy_vim
+}
 
 # #############################################################################
 # Main function
