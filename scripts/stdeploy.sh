@@ -24,10 +24,18 @@ if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
   exit 1
 fi
 
+# Dotfiles provisioning:
 if [ ! -d "$DOTFILES_DIR" ] ; then
   curl -LSfs -o "$HOME"/.dotfiles.zip \
     https://github.com/stroparo/dotfiles/archive/master.zip \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
+fi
+if ! which setupvim.sh >/dev/null 2>&1 ; then
+  pathmunge -x "$HOME/dotfiles-master/installers"
+fi
+if ! (echo "$PATH" | grep -i dotfiles) || ! which setupvim.sh >/dev/null 2>&1 ; then
+  echo "${PROGNAME:+$PROGNAME: }FATAL: dotfiles directory unreachable in PATH ($PATH)." 1>&2
+  exit 1
 fi
 
 # #############################################################################
@@ -109,38 +117,28 @@ _deploy_vim () {
 # #############################################################################
 # Wrappers
 
-_deploy_corpgui () {
-
-  # Base:
-  _deploy_fonts
-
-  # Apps:
+_deploy_devel () {
+  _deploy_python
+  _deploy_vim
   "$DOTFILES_DIR/installers/setupdocker.sh"
   "$DOTFILES_DIR/installers/setupdocker-compose.sh"
   "$DOTFILES_DIR/installers/setupexa.sh"
+}
 
-  # Devel:
-  _deploy_python
-  _deploy_vim
+_deploy_corpgui () {
+  _deploy_fonts
+  _deploy_devel
 }
 
 _deploy_pc () {
-
-  # Base:
   _deploy_fonts
+  _deploy_devel
 
-  # Apps:
+  # Etcetera:
   _deploy_citrix
   _deploy_ppa
   "$DOTFILES_DIR/installers/setupanki.sh"
-  "$DOTFILES_DIR/installers/setupdocker.sh"
-  "$DOTFILES_DIR/installers/setupdocker-compose.sh"
   "$DOTFILES_DIR/installers/setupdropbox.sh"
-  "$DOTFILES_DIR/installers/setupexa.sh"
-
-  # Devel:
-  _deploy_python
-  _deploy_vim
 }
 
 # #############################################################################
