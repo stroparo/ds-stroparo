@@ -99,6 +99,9 @@ _deploy_vpn () {
 # #############################################################################
 # Development
 
+# Oneliners:
+_deploy_vim () { userconfirm "Compile Vim latest?" && "setupvim.sh" ; }
+
 _deploy_python () {
   # TODO update when they are moved to DS_CONF back again
   typeset tools2="${DS_CONF}/packages/piplist-tools2"
@@ -124,15 +127,6 @@ pyenv deactivate
 EOF
 }
 
-_deploy_vim () {
-  typeset answer
-  echo ${BASH_VERSION:+-e} "==> Compile Vim latest? [y/N] \c"
-  read answer
-  if (echo "$answer" | grep -q '^[yY]') ; then
-    "setupvim.sh"
-  fi
-}
-
 # #############################################################################
 # Wrappers
 
@@ -146,9 +140,9 @@ _deploy_devel () {
 
 _deploy_develgui () {
   _deploy_fonts
-  userconfirm 'Setup Atom?' "setupatom.sh"
-  userconfirm 'Setup Sublime-Text?' "setupsubl.sh"
-  userconfirm 'Setup Visual Studio Code?' "setupvscode.sh"
+  userconfirm 'Setup Atom?'               && "setupatom.sh"
+  userconfirm 'Setup Sublime-Text?'       && "setupsubl.sh"
+  userconfirm 'Setup Visual Studio Code?' && "setupvscode.sh"
 
   # Etcetera:
   sudo $INSTPROG install -y guake
