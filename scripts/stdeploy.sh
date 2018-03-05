@@ -17,19 +17,10 @@ PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
   libfreerdp-plugins-standard"
 
 # System installers
-if [ -z "$APTPROG" ] ; then
-  export APTPROG=apt-get
-  which apt >/dev/null 2>&1 && export APTPROG=apt
-fi
-if [ -z "$RPMPROG" ] ; then
-  export RPMPROG=yum
-  which dnf >/dev/null 2>&1 && export RPMPROG=dnf
-fi
-if which $APTPROG >/dev/null 2>&1 ; then
-  export INSTPROG=$APTPROG
-elif which $RPMPROG >/dev/null 2>&1 ; then
-  export INSTPROG=$RPMPROG
-fi
+export APTPROG=apt-get; which apt >/dev/null 2>&1 && export APTPROG=apt
+export RPMPROG=yum; which dnf >/dev/null 2>&1 && export RPMPROG=dnf
+export RPMGROUP="yum groupinstall"; which dnf >/dev/null 2>&1 && export RPMGROUP="dnf group install"
+export INSTPROG="$APTPROG"; which "$RPMPROG" >/dev/null 2>&1 && export INSTPROG="$RPMPROG"
 
 # #############################################################################
 # Dependencies
@@ -157,6 +148,7 @@ _deploy_corpgui () {
 }
 
 _deploy_pc () {
+  "setupxfce.sh"
   _deploy_devel
   _deploy_develgui
 
