@@ -23,7 +23,22 @@ export RPMGROUP="yum groupinstall"; which dnf >/dev/null 2>&1 && export RPMGROUP
 export INSTPROG="$APTPROG"; which "$RPMPROG" >/dev/null 2>&1 && export INSTPROG="$RPMPROG"
 
 # #############################################################################
-# Dependencies
+# Helpers
+
+userconfirm () {
+  # Info: Ask a question and yield success if user responded [yY]*
+
+  typeset confirm
+  typeset result=1
+
+  echo ${BASH_VERSION:+-e} "$@" "[y/N] \c"
+  read confirm
+  if [[ $confirm = [yY]* ]] ; then return 0 ; fi
+  return 1
+}
+
+# #############################################################################
+# Prep dependencies
 
 if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
   echo "FATAL: Could not source dependencies." 1>&2
@@ -131,6 +146,9 @@ _deploy_devel () {
 
 _deploy_develgui () {
   _deploy_fonts
+  userconfirm 'Setup Atom?' "setupatom.sh"
+  userconfirm 'Setup Sublime-Text?' "setupsubl.sh"
+  userconfirm 'Setup Visual Studio Code?' "setupvscode.sh"
 
   # Etcetera:
   sudo $INSTPROG install -y guake
