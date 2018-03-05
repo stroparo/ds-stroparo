@@ -16,6 +16,21 @@ PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
 PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
   libfreerdp-plugins-standard"
 
+# System installers
+if [ -z "$APTPROG" ] ; then
+  export APTPROG=apt-get
+  which apt >/dev/null 2>&1 && export APTPROG=apt
+fi
+if [ -z "$RPMPROG" ] ; then
+  export RPMPROG=yum
+  which dnf >/dev/null 2>&1 && export RPMPROG=dnf
+fi
+if which $APTPROG >/dev/null 2>&1 ; then
+  export INSTPROG=$APTPROG
+elif which $RPMPROG >/dev/null 2>&1 ; then
+  export INSTPROG=$RPMPROG
+fi
+
 # #############################################################################
 # Dependencies
 
@@ -123,19 +138,32 @@ _deploy_devel () {
   "setupexa.sh"
 }
 
-_deploy_corpgui () {
+_deploy_develgui () {
   _deploy_fonts
+
+  # Etcetera:
+  sudo $INSTPROG install -y guake
+  sudo $INSTPROG install -y meld
+}
+
+_deploy_corp () {
   _deploy_devel
+}
+
+_deploy_corpgui () {
   "setupxfce.sh"
   "setuprdp.sh"
+  _deploy_develgui
 }
 
 _deploy_pc () {
-  _deploy_fonts
   _deploy_devel
+  _deploy_develgui
 
   # Etcetera:
   _deploy_ppa
+  "debselects-desktop.sh"
+  "rpmselects-desktop.sh"
   "setupanki.sh"
   "setupcitrix.sh"
   "setupdropbox.sh"
