@@ -5,28 +5,26 @@
 # #############################################################################
 # Basic dirs
 
-dl    () { d "${HOME}"/Downloads ; d "$@" ; }
-h     () { d "${HOME}" ; d "$@" ; }
-forks () { d "${FORKS:-$HOME/forks}" ; d "$@" ; }
-gists () { d "${GISTS:-$HOME/gists}" ; d "$@" ; }
-ups   () { d "${UPS:-$HOME/upstream}" ; d "$@" ; }
-work  () { d "${WORK:-$HOME/work}" ; d "$@" ; }
+dl    () { d "${HOME}"/Downloads ; echo ; d "$@" ; }
+h     () { d "${HOME}" ; echo ; d "$@" ; }
+forks () { d "${FORKS:-$HOME/forks}" ; echo ; d "$@" ; }
+gists () { d "${GISTS:-$HOME/gists}" ; echo ; d "$@" ; }
+ups   () { d "${UPS:-$HOME/upstream}" ; echo ; d "$@" ; }
+work  () { d "${WORK:-$HOME/work}" ; echo ; d "$@" ; }
 
 # #############################################################################
 # Specific dirs
 
-myopt () { d "${MYOPT}" ; d "$@" ; }
-mysw  () { d "${MYSW}" ; d "$@" ; }
+myopt () { d "${MYOPT}" ; echo ; d "$@" ; }
+mysw  () { d "${MYSW}" ; echo ; d "$@" ; }
 
 # #############################################################################
 # Cygwin
 
 if (uname -a | grep -i -q cygwin) ; then
-  unset -f dl   ; dl    () { d "$(cygpath "${USERPROFILE}/${1}")"/Downloads ; d "$@" ; }
-  unset -f h    ; h     () { d "$(cygpath "${USERPROFILE}/${1}")" ; d "$@" ; }
-  unset -f forks; forks () { d "${FORKS:-$HOME/forks}" ; d "$@" ; }
-  unset -f ups  ; ups   () { d "${UPS:-$HOME/upstream}" ; d "$@" ; }
-  unset -f work ; work  () { d "${WORK:-$HOME/work}" ; d "$@" ; }
+  unset -f dl h
+  dl    () { d "$(cygpath "${USERPROFILE}/${1}")"/Downloads ; echo ; d "$@" ; }
+  h     () { d "$(cygpath "${USERPROFILE}/${1}")" ; echo ; d "$@" ; }
 fi
 
 # #############################################################################
