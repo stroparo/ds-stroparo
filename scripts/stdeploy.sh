@@ -66,6 +66,7 @@ fi
 _deploy_nextcloud () { aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
 
 _deploy_fonts () {
+  "setupfonts-el.sh"
   "setupnerdfonts.sh"
 
   if egrep -i -q 'ubuntu' /etc/*release* ; then
