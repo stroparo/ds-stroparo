@@ -5,8 +5,8 @@
 # #############################################################################
 # Basic dirs
 
-dl    () { d "${HOME}"/Downloads -Ah ; d "$@" ; }
-h     () { d "${HOME}" -Ah ; d "$@" ; }
+dl    () { d "${HOME}"/Downloads ; d "$@" ; }
+h     () { d "${HOME}" ; d "$@" ; }
 forks () { d "${FORKS:-$HOME/forks}" ; d "$@" ; }
 gists () { d "${GISTS:-$HOME/gists}" ; d "$@" ; }
 ups   () { d "${UPS:-$HOME/upstream}" ; d "$@" ; }
@@ -15,8 +15,8 @@ work  () { d "${WORK:-$HOME/work}" ; d "$@" ; }
 # #############################################################################
 # Specific dirs
 
-myopt () { d "${MYOPT}" -Ah ; d "$@" ; }
-mysw  () { d "${MYSW}" -Ah ; d "$@" ; }
+myopt () { d "${MYOPT}" ; d "$@" ; }
+mysw  () { d "${MYSW}" ; d "$@" ; }
 
 # #############################################################################
 # Cygwin
