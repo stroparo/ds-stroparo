@@ -9,6 +9,10 @@ bootdesktop () {
   # Make caps an additional ctrl:
   /usr/bin/setxkbmap -option "ctrl:nocaps"
 
+  if type google-chrome >/dev/null 2>&1 && ! pgrep -fl google-chrome ; then
+    google-chrome & disown
+  fi
+
   # Quake style terminal emulator:
   if type guake >/dev/null 2>&1 && ! pgrep -fl guake ; then
     guake & disown
