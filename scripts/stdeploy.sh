@@ -69,14 +69,14 @@ _deploy_fonts () {
   "setupfonts-el.sh"
   "setupnerdfonts.sh"
 
-  if egrep -i -q 'ubuntu' /etc/*release* ; then
+  if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'font-manager/staging' font-manager
   fi
 }
 
 _deploy_ppa () {
 
-  if egrep -i -q 'ubuntu' /etc/*release* ; then
+  if egrep -i -q 'ubuntu' /etc/*release ; then
 
     # PPA stuff
     aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
@@ -86,13 +86,13 @@ _deploy_ppa () {
 }
 
 _deploy_rdpclient () {
-  if egrep -i -q 'ubuntu' /etc/*release* ; then
+  if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
 }
 
 _deploy_vpn () {
-  if egrep -i -q 'debian|ubuntu' /etc/*release* ; then
+  if egrep -i -q 'debian|ubuntu' /etc/*release ; then
     aptinstall.sh network-manager-openconnect network-manager-vpnc
   fi
  }
