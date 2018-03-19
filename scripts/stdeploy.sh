@@ -165,10 +165,13 @@ _deploy_pc () {
   _deploy_devel
   _deploy_develgui
 
-  # Etcetera:
+  # Distro specific setups:
   _deploy_ppa
   "debselects-desktop.sh"
   "rpmselects-desktop.sh"
+  "fixfedorainput.sh"
+
+  # Distro agnostic setups:
   "setupanki.sh"
   "setupcitrix.sh"
   "setupdropbox.sh"
