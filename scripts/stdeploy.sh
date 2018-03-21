@@ -132,14 +132,20 @@ EOF
 # Wrappers
 
 _deploy_basegui () {
+
   "debselects-desktop.sh"
   "rpmselects-desktop.sh"
+
+  # Etcetera
   "fixfedorainput.sh"
 }
 
 _deploy_devel () {
+
   _deploy_python
   _deploy_vim
+
+  # Etcetera
   "setupdocker.sh"
   "setupdocker-compose.sh"
   "setupexa.sh"
@@ -162,7 +168,6 @@ _deploy_corp () {
 
 _deploy_corpgui () {
 
-  # Base
   "setupxfce.sh"
   _deploy_develgui
 
@@ -172,7 +177,6 @@ _deploy_corpgui () {
 
 _deploy_pc () {
 
-  # Base
   "setupxfce.sh"
   _deploy_basegui
   _deploy_devel
