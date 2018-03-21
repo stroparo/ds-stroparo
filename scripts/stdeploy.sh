@@ -25,7 +25,7 @@ export INSTPROG="$APTPROG"; which "$RPMPROG" >/dev/null 2>&1 && export INSTPROG=
 # #############################################################################
 # Helpers
 
-userconfirm () {
+_user_confirm () {
   # Info: Ask a question and yield success if user responded [yY]*
 
   typeset confirm
@@ -101,7 +101,7 @@ _deploy_vpn () {
 # Development
 
 # Oneliners:
-_deploy_vim () { userconfirm "Compile Vim latest?" && "setupvim.sh" ; }
+_deploy_vim () { _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
 
 _deploy_python () {
   # TODO update when they are moved to DS_CONF back again
@@ -131,6 +131,12 @@ EOF
 # #############################################################################
 # Wrappers
 
+_deploy_basegui () {
+  "debselects-desktop.sh"
+  "rpmselects-desktop.sh"
+  "fixfedorainput.sh"
+}
+
 _deploy_devel () {
   _deploy_python
   _deploy_vim
@@ -140,14 +146,14 @@ _deploy_devel () {
 }
 
 _deploy_develgui () {
-  _deploy_fonts
-  userconfirm 'Setup Atom?'               && "setupatom.sh"
-  userconfirm 'Setup Sublime-Text?'       && "setupsubl.sh"
-  userconfirm 'Setup Visual Studio Code?' && "setupvscode.sh"
 
-  # Etcetera:
-  sudo $INSTPROG install -y guake
-  sudo $INSTPROG install -y meld
+  _deploy_fonts
+
+  _user_confirm 'Setup Atom?'               && "setupatom.sh"
+  _user_confirm 'Setup Sublime-Text?'       && "setupsubl.sh"
+  _user_confirm 'Setup Visual Studio Code?' && "setupvscode.sh"
+
+  sudo $INSTPROG install -y guake meld
 }
 
 _deploy_corp () {
@@ -155,21 +161,25 @@ _deploy_corp () {
 }
 
 _deploy_corpgui () {
+
+  # Base
   "setupxfce.sh"
-  "setuprdp.sh"
   _deploy_develgui
+
+  # Etcetera
+  "setuprdp.sh"
 }
 
 _deploy_pc () {
+
+  # Base
   "setupxfce.sh"
+  _deploy_basegui
   _deploy_devel
   _deploy_develgui
 
   # Distro specific setups:
   _deploy_ppa
-  "debselects-desktop.sh"
-  "rpmselects-desktop.sh"
-  "fixfedorainput.sh"
 
   # Distro agnostic setups:
   "setupanki.sh"
