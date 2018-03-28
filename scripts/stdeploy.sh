@@ -103,29 +103,15 @@ _deploy_vpn () {
 # Oneliners:
 _deploy_vim () { _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
 
-_deploy_python () {
-  # TODO update when they are moved to DS_CONF back again
+_deploy_pythontools () {
   typeset tools2="${DS_CONF}/packages/piplist-tools2"
   typeset tools3="${DS_CONF}/packages/piplist-tools3"
   typeset tools36="${DS_CONF}/packages/piplist3.6-tools3"
 
-  # Speed up disabling prompt as it is going to be discontinued anyway:
-  PYENV_PROMPT_DISABLE='export PYENV_VIRTUALENV_DISABLE_PROMPT=1'
-  if ! grep -q "$PYENV_PROMPT_DISABLE" "$HOME"/.bashrc 2>/dev/null; then
-    echo "$PYENV_PROMPT_DISABLE" >> "$HOME"/.bashrc
-  fi
-  if ! grep -q "$PYENV_PROMPT_DISABLE" "$HOME"/.zshrc 2>/dev/null; then
-    echo "$PYENV_PROMPT_DISABLE" >> "$HOME"/.zshrc
-  fi
-
-  "setuppython.sh" "$tools2" "$tools3"
-
-  cat <<EOF
-Commands to install Python 3.6.4 packages:
-pyenv activate 3.6.4
-pipinstall "$tools36"
-pyenv deactivate
-EOF
+  # Get pipinstall.sh at https://stroparo.github.io/ds
+  "pipinstall.sh" "$tools36"
+  "pipinstall.sh" -e tools3 "$tools3"
+  "pipinstall.sh" -e tools2 "$tools2"
 }
 
 # #############################################################################
@@ -142,7 +128,7 @@ _deploy_basegui () {
 
 _deploy_devel () {
 
-  _deploy_python
+  "setuppython.sh"
   _deploy_vim
 
   # Etcetera
