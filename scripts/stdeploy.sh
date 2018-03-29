@@ -126,7 +126,7 @@ _deploy_basegui () {
   "fixfedorainput.sh"
 }
 
-_deploy_baseguiel7 {
+_deploy_baseguiel7 () {
   egrep -i -q '(centos|oracle|red *hat).* 7' /etc/*release || return
   # Fonts
   sudo yum install -y cjkuni-uming-fonts dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts google-crosextra-caladea-fonts google-crosextra-carlito-fonts jomolhari-fonts khmeros-base-fonts liberation-mono-fonts liberation-sans-fonts liberation-serif-fonts lklug-fonts madan-fonts nhn-nanum-gothic-fonts open-sans-fonts overpass-fonts paktype-naskh-basic-fonts paratype-pt-sans-fonts ucs-miscfixed-fonts
