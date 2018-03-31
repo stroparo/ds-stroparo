@@ -6,8 +6,9 @@
 
 bootdesktop () {
 
+  # Commented out.. Prefer XKBOPTIONS in /etc/default/keyboard:
   # Make caps an additional ctrl:
-  /usr/bin/setxkbmap -option "ctrl:nocaps"
+  # /usr/bin/setxkbmap -option "ctrl:nocaps"
 
   if type google-chrome >/dev/null 2>&1 && ! pgrep -fl google-chrome ; then
     google-chrome & disown
