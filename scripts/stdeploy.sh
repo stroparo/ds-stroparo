@@ -124,6 +124,8 @@ _deploy_basegui () {
 
   # Etcetera
   "fixfedorainput.sh"
+  "fixguake.sh"
+  "setupchrome.sh"
 }
 
 _deploy_baseguiel7 () {
