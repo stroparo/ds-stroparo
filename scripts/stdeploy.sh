@@ -173,8 +173,8 @@ _deploy_develgui () {
 # Custom deployments
 
 _deploy_basecli () {
-  _deploy_devel
   _deploy_dotfiles
+  _deploy_devel
 }
 
 _deploy_corp () {
