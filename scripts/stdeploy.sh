@@ -38,6 +38,13 @@ _user_confirm () {
 }
 
 # #############################################################################
+# Dependencies
+
+if ! which unzip >/dev/null 2>&1 ; then
+  sudo apt update && sudo apt install -y unzip || sudo yum install -y unzip
+fi
+
+# #############################################################################
 # Provision APT install script aptinstall.sh from the Daily Shells library
 
 if ! which aptinstall.sh >/dev/null 2>&1 ; then
@@ -63,6 +70,7 @@ if [ ! -d "${DOTFILES_DIR}" ] ; then
     "https://github.com/stroparo/dotfiles/archive/master.zip" \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
 fi
+find "${DOTFILES_DIR}" -name '*.sh' -type f -exec chmod u+x {} \;
 
 # DOTFILES_DIR root intentionally omitted from PATH as these must be called with absolute path:
 export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
