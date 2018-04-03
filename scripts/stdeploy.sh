@@ -56,13 +56,13 @@ if ! which aptinstall.sh >/dev/null 2>&1 ; then
 fi
 
 # Dotfiles provisioning:
-if [ ! -d "$DOTFILES_DIR" ] ; then
+if [ ! -d "${DOTFILES_DIR}" ] ; then
   curl -LSfs -o "$HOME"/.dotfiles.zip \
     "https://github.com/stroparo/dotfiles/archive/master.zip" \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
 fi
-pathmunge -x "$DOTFILES_DIR/installers"
-if ! (echo "$PATH" | grep -i dotfiles) ; then
+export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
+if ! which "setupdotfiles.sh" >/dev/null 2>&1 ; then
   echo "${PROGNAME:+$PROGNAME: }FATAL: dotfiles directory unreachable in PATH ($PATH)." 1>&2
   exit 1
 fi
