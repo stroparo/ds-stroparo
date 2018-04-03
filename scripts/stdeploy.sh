@@ -156,7 +156,6 @@ _deploy_develgui () {
 
 _deploy_basecli () {
   _deploy_devel
-  _deploy_fixes
 }
 
 _deploy_corpgui () {
@@ -165,6 +164,7 @@ _deploy_corpgui () {
   "setupxfce.sh"
   "setuprdp.sh"
   _deploy_develgui
+  _deploy_fixes
 
   # Etcetera
   "setupchrome.sh"
@@ -175,6 +175,7 @@ _deploy_pc () {
   "setupxfce.sh" -d
   _deploy_desktop
   _deploy_develgui
+  _deploy_fixes
 
   # Distro agnostic setups:
   "setupanki.sh"
