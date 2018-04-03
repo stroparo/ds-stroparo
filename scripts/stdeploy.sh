@@ -159,7 +159,10 @@ _deploy_basecli () {
 }
 
 _deploy_corp () {
+
   _deploy_basecli
+
+  # Graphical
   _deploy_baseguiel7
   "setupxfce.sh"
   "setuprdp.sh"
@@ -171,7 +174,10 @@ _deploy_corp () {
 }
 
 _deploy_pc () {
+
   _deploy_basecli
+
+  # Graphical
   "setupxfce.sh" -d
   _deploy_desktop
   _deploy_develgui
