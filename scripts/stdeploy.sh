@@ -89,6 +89,9 @@ _deploy_vim () { _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
 
 _deploy_baseguiel7 () {
   egrep -i -q '(centos|oracle|red *hat).* 7' /etc/*release || return
+
+  echo ${BASH_VERSION:+-e} "\n==> Deploying base GUI for Enterprise Linux 7...\n"
+
   # Fonts
   sudo yum install -y dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts google-crosextra-caladea-fonts google-crosextra-carlito-fonts liberation-mono-fonts liberation-sans-fonts liberation-serif-fonts open-sans-fonts overpass-fonts ucs-miscfixed-fonts
   # GNOME
@@ -105,11 +108,15 @@ _deploy_dotfiles () {
 }
 
 _deploy_fixes () {
+  echo ${BASH_VERSION:+-e} "\n==> Deploying fixes...\n"
   fixfedorainput.sh
   fixguake.sh
 }
 
 _deploy_fonts () {
+
+  echo ${BASH_VERSION:+-e} "\n==> Deploying fonts...\n"
+
   setupfonts-el.sh
   setupnerdfonts.sh
 
@@ -120,6 +127,9 @@ _deploy_fonts () {
 
 _deploy_ppa () {
   egrep -i -q 'ubuntu' /etc/*release || return $?
+
+  echo ${BASH_VERSION:+-e} "\n==> Deploying PPAs...\n"
+
   aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
   aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
   aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
@@ -130,6 +140,8 @@ _deploy_pythontools () {
   typeset tools3="${DS_CONF}/packages/piplist-tools3"
   typeset tools36="${DS_CONF}/packages/piplist3.6-tools3"
 
+  echo ${BASH_VERSION:+-e} "\n==> Deploying Python tools...\n"
+
   # Get pipinstall.sh at https://stroparo.github.io/ds
   pipinstall.sh "$tools36"
   pipinstall.sh -e tools3 "$tools3"
@@ -137,12 +149,14 @@ _deploy_pythontools () {
 }
 
 _deploy_rdpclient () {
+  echo ${BASH_VERSION:+-e} "\n==> Deploying RDP...\n"
   if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
 }
 
 _deploy_vpn () {
+  echo ${BASH_VERSION:+-e} "\n==> Deploying VPN...\n"
   if egrep -i -q 'debian|ubuntu' /etc/*release ; then
     aptinstall.sh network-manager-openconnect network-manager-vpnc
   fi
@@ -152,22 +166,27 @@ _deploy_vpn () {
 # Composed deployments
 
 _deploy_desktop () {
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying desktop software..."
   debselects-desktop.sh
   rpmselects-desktop.sh
   _deploy_ppa
 }
 
 _deploy_devel () {
+
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying development tools..."
+
   setuppython.sh
   _deploy_vim
 
-  # Etcetera
   setupdocker.sh
   setupdocker-compose.sh
   setupexa.sh
 }
 
 _deploy_develgui () {
+
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI development tools ..."
 
   _deploy_fonts
 
@@ -182,6 +201,9 @@ _deploy_develgui () {
 # Custom deployments
 
 _deploy_basecli () {
+
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying base CLI software..."
+
   _deploy_dotfiles
   _deploy_devel
 }
@@ -190,28 +212,51 @@ _deploy_corp () {
 
   _deploy_basecli
 
-  # Graphical
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI environment..."
   _deploy_baseguiel7
   "setupxfce.sh"
   "setuprdp.sh"
   _deploy_develgui
   _deploy_fixes
 
-  # Etcetera
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI software..."
   "setupchrome.sh"
+}
+
+_deploy_cz () {
+
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying cz..."
+
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh"
+  dsplugin.sh "bitbucket.org/stroparo/ds-cz"
+  dsplugin.sh "stroparo/ds-stroparo"
+  dsload
+  clonemygits
+  stdeploy.sh pc
+  stsetup.sh  # sets up bootdesktop etc.
+
+  echo
+  echo "==> WARNING <=="
+  echo
+  echo "Review filesystem boot script in \$DS_HOME/.../cz*filesystem*.sh" 1>&2
+  echo " etcetera and after that press ENTER to continue..." 1>&2
+  echo
+  read dummy
+  czsetup.sh
 }
 
 _deploy_pc () {
 
   _deploy_basecli
 
-  # Graphical
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI environment..."
   "setupxfce.sh" -d
   _deploy_desktop
   _deploy_develgui
   _deploy_fixes
+  _deploy_cz
 
-  # Distro agnostic setups:
+  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI software..."
   "setupanki.sh"
   "setupchrome.sh"
   "setupcitrix.sh"
