@@ -51,10 +51,8 @@ if [ ! -d "$DOTFILES_DIR" ] ; then
     https://github.com/stroparo/dotfiles/archive/master.zip \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
 fi
-if ! which setupvim.sh >/dev/null 2>&1 ; then
-  pathmunge -x "$HOME/dotfiles-master/installers"
-fi
-if ! (echo "$PATH" | grep -i dotfiles) || ! which setupvim.sh >/dev/null 2>&1 ; then
+pathmunge -x "$DOTFILES_DIR/installers"
+if ! (echo "$PATH" | grep -i dotfiles) ; then
   echo "${PROGNAME:+$PROGNAME: }FATAL: dotfiles directory unreachable in PATH ($PATH)." 1>&2
   exit 1
 fi
