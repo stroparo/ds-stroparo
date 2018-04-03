@@ -158,7 +158,7 @@ _deploy_basecli () {
   _deploy_devel
 }
 
-_deploy_corpgui () {
+_deploy_corp () {
   _deploy_basecli
   _deploy_baseguiel7
   "setupxfce.sh"
