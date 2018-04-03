@@ -45,6 +45,7 @@ if ! which aptinstall.sh >/dev/null 2>&1 ; then
     curl -LSfs -o "$HOME/bin/aptinstall.sh" --create-dirs \
       "https://raw.githubusercontent.com/stroparo/ds-extras/master/debian/aptinstall.sh"
   fi
+  chmod u+x "$HOME/bin/aptinstall.sh"
   export PATH="$HOME/bin:$PATH"
 
   # Last check to be safe:
