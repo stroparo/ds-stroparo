@@ -40,15 +40,25 @@ _user_confirm () {
 # #############################################################################
 # Prep dependencies
 
-if ! . "$DS_HOME"/functions/gitfunctions.sh ; then
-  echo "FATAL: Could not source dependencies." 1>&2
-  exit 1
+# APT install script aptinstall.sh from the Daily Shells library:
+if ! which aptinstall.sh >/dev/null 2>&1 ; then
+  if [ ! -e "$HOME/bin/aptinstall.sh" ] ; then
+    curl -LSfs -o "$HOME/bin/aptinstall.sh" --create-dirs \
+      "https://raw.githubusercontent.com/stroparo/ds-extras/master/debian/aptinstall.sh"
+  fi
+  export PATH="$HOME/bin:$PATH"
+
+  # Last check to be safe:
+  if ! which aptinstall.sh >/dev/null 2>&1 ; then
+    echo "FATAL: aptinstall.sh missing. Install Daily Shells and ds-extras plugin." 1>&2
+    exit 1
+  fi
 fi
 
 # Dotfiles provisioning:
 if [ ! -d "$DOTFILES_DIR" ] ; then
   curl -LSfs -o "$HOME"/.dotfiles.zip \
-    https://github.com/stroparo/dotfiles/archive/master.zip \
+    "https://github.com/stroparo/dotfiles/archive/master.zip" \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
 fi
 pathmunge -x "$DOTFILES_DIR/installers"
