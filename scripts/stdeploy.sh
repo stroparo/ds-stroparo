@@ -87,14 +87,18 @@ _deploy_baseguiel7 () {
   # sudo yum install -y gstreamer1-plugins-bad-free gstreamer1-plugins-good gtk2-immodule-xim gtk3-immodule-xim ibus-gtk2 ibus-gtk3 imsettings-gsettings rdma-core
 }
 
+_deploy_dotfiles () {
+  "${DOTFILES_DIR}/setupdotfiles.sh" -f
+}
+
 _deploy_fixes () {
-  "fixfedorainput.sh"
-  "fixguake.sh"
+  fixfedorainput.sh
+  fixguake.sh
 }
 
 _deploy_fonts () {
-  "setupfonts-el.sh"
-  "setupnerdfonts.sh"
+  setupfonts-el.sh
+  setupnerdfonts.sh
 
   if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'font-manager/staging' font-manager
@@ -114,9 +118,9 @@ _deploy_pythontools () {
   typeset tools36="${DS_CONF}/packages/piplist3.6-tools3"
 
   # Get pipinstall.sh at https://stroparo.github.io/ds
-  "pipinstall.sh" "$tools36"
-  "pipinstall.sh" -e tools3 "$tools3"
-  "pipinstall.sh" -e tools2 "$tools2"
+  pipinstall.sh "$tools36"
+  pipinstall.sh -e tools3 "$tools3"
+  pipinstall.sh -e tools2 "$tools2"
 }
 
 _deploy_rdpclient () {
@@ -135,19 +139,19 @@ _deploy_vpn () {
 # Composed deployments
 
 _deploy_desktop () {
-  "debselects-desktop.sh"
-  "rpmselects-desktop.sh"
+  debselects-desktop.sh
+  rpmselects-desktop.sh
   _deploy_ppa
 }
 
 _deploy_devel () {
-  "setuppython.sh"
+  setuppython.sh
   _deploy_vim
 
   # Etcetera
-  "setupdocker.sh"
-  "setupdocker-compose.sh"
-  "setupexa.sh"
+  setupdocker.sh
+  setupdocker-compose.sh
+  setupexa.sh
 }
 
 _deploy_develgui () {
@@ -166,6 +170,7 @@ _deploy_develgui () {
 
 _deploy_basecli () {
   _deploy_devel
+  _deploy_dotfiles
 }
 
 _deploy_corp () {
