@@ -38,9 +38,8 @@ _user_confirm () {
 }
 
 # #############################################################################
-# Prep dependencies
+# Provision APT install script aptinstall.sh from the Daily Shells library
 
-# APT install script aptinstall.sh from the Daily Shells library:
 if ! which aptinstall.sh >/dev/null 2>&1 ; then
   if [ ! -e "$HOME/bin/aptinstall.sh" ] ; then
     curl -LSfs -o "$HOME/bin/aptinstall.sh" --create-dirs \
@@ -55,14 +54,19 @@ if ! which aptinstall.sh >/dev/null 2>&1 ; then
   fi
 fi
 
-# Dotfiles provisioning:
+# #############################################################################
+# Provision dotfiles
+
 if [ ! -d "${DOTFILES_DIR}" ] ; then
   curl -LSfs -o "$HOME"/.dotfiles.zip \
     "https://github.com/stroparo/dotfiles/archive/master.zip" \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
 fi
+
+# DOTFILES_DIR root intentionally omitted from PATH as these must be called with absolute path:
 export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
-if ! which "setupdotfiles.sh" >/dev/null 2>&1 ; then
+
+if ! (echo "$PATH" | grep -q dotfiles) ; then
   echo "${PROGNAME:+$PROGNAME: }FATAL: dotfiles directory unreachable in PATH ($PATH)." 1>&2
   exit 1
 fi
