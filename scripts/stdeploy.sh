@@ -223,7 +223,7 @@ _deploy_corp () {
   "setupchrome.sh"
 }
 
-_deploy_cz () {
+_deploy_customst () {
 
   echo ${BASH_VERSION:+-e} "\n\n==> Deploying cz..."
 
@@ -232,17 +232,14 @@ _deploy_cz () {
   dsplugin.sh "stroparo/ds-stroparo"
   dsload
   clonemygits
-  stdeploy.sh pc
   stsetup.sh  # sets up bootdesktop etc.
 
   echo
-  echo "==> WARNING <=="
+  echo "==> czsetup.sh <=="
   echo
   echo "Review filesystem boot script in \$DS_HOME/.../cz*filesystem*.sh" 1>&2
-  echo " etcetera and after that press ENTER to continue..." 1>&2
+  echo "etc. on only after that run czsetup.sh." 1>&2
   echo
-  read dummy
-  czsetup.sh
 }
 
 _deploy_pc () {
@@ -254,7 +251,7 @@ _deploy_pc () {
   _deploy_desktop
   _deploy_develgui
   _deploy_fixes
-  _deploy_cz
+  _deploy_customst
 
   echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI software..."
   "setupanki.sh"
