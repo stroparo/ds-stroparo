@@ -228,8 +228,8 @@ _deploy_customst () {
   echo ${BASH_VERSION:+-e} "\n\n==> Deploying cz..."
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh"
-  dsplugin.sh "bitbucket.org/stroparo/ds-cz"
   dsplugin.sh "stroparo/ds-stroparo"
+  dsplugin.sh "bitbucket.org/stroparo/ds-cz"
   dsload
   clonemygits
   stsetup.sh  # sets up bootdesktop etc.
