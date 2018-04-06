@@ -23,7 +23,7 @@ stshopt # routine defined in ds-stroparo
 if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
 
-  export DEV="${HOME}/workspace"
+  export DEV="$(cygpath "${DEV}")"
   export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
   export MYOPT="$(cygpath "${MYOPT:-C:\\opt}")"
   export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
