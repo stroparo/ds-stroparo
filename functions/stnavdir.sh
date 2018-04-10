@@ -10,6 +10,7 @@ h     () { d "${HOME}" "$@" ; }
 forks () { d "${FORKS:-$HOME/forks}" "$@" ; }
 gists () { d "${GISTS:-$HOME/gists}" "$@" ; }
 ups   () { d "${UPS:-$HOME/upstream}" "$@" ; }
+upsalt () { d "${UPS:-$HOME/upstream}_alt" "$@" ; }
 work  () { d "${WORK:-$HOME/work}" "$@" ; }
 
 # #############################################################################
