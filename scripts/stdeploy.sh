@@ -22,6 +22,16 @@ export INSTPROG="$APTPROG"; which "$RPMPROG" >/dev/null 2>&1 && export INSTPROG=
 # #############################################################################
 # Helpers
 
+_print_bar () {
+  echo "################################################################################"
+}
+
+_print_header () {
+  _print_bar
+  echo "$@"
+  _print_bar
+}
+
 _user_confirm () {
   # Info: Ask a question and yield success if user responded [yY]*
 
@@ -86,14 +96,12 @@ _provision_dotfiles "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 # Basic deployments
 
 # Oneliners:
-_deploy_nextcloud () { aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
-_deploy_vim () { _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
+_deploy_nextcloud () { _print_header "NextCloud" ; aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
+_deploy_vim () { _print_header "Vim" ; _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
 
 _deploy_baseguiel7 () {
   egrep -i -q '(centos|oracle|red *hat).* 7' /etc/*release || return
-
-  echo ${BASH_VERSION:+-e} "\n==> Deploying base GUI for Enterprise Linux 7...\n"
-
+  _print_header "Base GUI for Enterprise Linux 7"
   # Fonts
   sudo yum install -y dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts gnu-free-mono-fonts gnu-free-sans-fonts gnu-free-serif-fonts google-crosextra-caladea-fonts google-crosextra-carlito-fonts liberation-mono-fonts liberation-sans-fonts liberation-serif-fonts open-sans-fonts overpass-fonts ucs-miscfixed-fonts
   # GNOME
@@ -106,19 +114,18 @@ _deploy_baseguiel7 () {
 }
 
 _deploy_dotfiles () {
+  _print_header "Deploying dotfiles - calling '${DOTFILES_DIR}/setupdotfiles.sh'"
   "${DOTFILES_DIR}/setupdotfiles.sh" -f
 }
 
 _deploy_fixes () {
-  echo ${BASH_VERSION:+-e} "\n==> Deploying fixes...\n"
+  _print_header "Deploying fixes"
   fixfedorainput.sh
   fixguake.sh
 }
 
 _deploy_fonts () {
-
-  echo ${BASH_VERSION:+-e} "\n==> Deploying fonts...\n"
-
+  _print_header "Fonts"
   setupfonts-el.sh
   setupnerdfonts.sh
 
@@ -129,9 +136,7 @@ _deploy_fonts () {
 
 _deploy_ppa () {
   egrep -i -q 'ubuntu' /etc/*release || return $?
-
-  echo ${BASH_VERSION:+-e} "\n==> Deploying PPAs...\n"
-
+  _print_header "Ubuntu PPA applications"
   aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
   aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
   aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
@@ -142,7 +147,7 @@ _deploy_pythontools () {
   typeset tools3="${DS_CONF}/packages/piplist-tools3"
   typeset tools36="${DS_CONF}/packages/piplist3.6-tools3"
 
-  echo ${BASH_VERSION:+-e} "\n==> Deploying Python tools...\n"
+  _print_header "Python tools"
 
   # Get pipinstall.sh at https://stroparo.github.io/ds
   pipinstall.sh "$tools36"
@@ -151,14 +156,14 @@ _deploy_pythontools () {
 }
 
 _deploy_rdpclient () {
-  echo ${BASH_VERSION:+-e} "\n==> Deploying RDP...\n"
+  _print_header "RDP client"
   if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
 }
 
 _deploy_vpn () {
-  echo ${BASH_VERSION:+-e} "\n==> Deploying VPN...\n"
+  _print_header "VPN client"
   if egrep -i -q 'debian|ubuntu' /etc/*release ; then
     aptinstall.sh network-manager-openconnect network-manager-vpnc
   fi
@@ -168,7 +173,7 @@ _deploy_vpn () {
 # Composed deployments
 
 _deploy_desktop () {
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying desktop software..."
+  _print_header "Desktop software"
   debselects-desktop.sh
   rpmselects-desktop.sh
   _deploy_ppa
@@ -176,7 +181,7 @@ _deploy_desktop () {
 
 _deploy_devel () {
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying development tools..."
+  _print_header "Development tools"
 
   setuppython.sh
   _deploy_vim
@@ -188,7 +193,7 @@ _deploy_devel () {
 
 _deploy_develgui () {
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI development tools ..."
+  _print_header "Development tools for graphical environments"
 
   _deploy_fonts
 
@@ -204,7 +209,7 @@ _deploy_develgui () {
 
 _deploy_basecli () {
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying base CLI software..."
+  _print_header "Base CLI software"
 
   _deploy_dotfiles
   _deploy_devel
@@ -214,20 +219,20 @@ _deploy_corp () {
 
   _deploy_basecli
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI environment..."
+  _print_header "GUI environment"
   _deploy_baseguiel7
   "setupxfce.sh"
   "setuprdp.sh"
   _deploy_develgui
   _deploy_fixes
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI software..."
+  _print_header "GUI software"
   "setupchrome.sh"
 }
 
 _deploy_customst () {
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying cz..."
+  _print_header "Custom cz assets"
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh"
   dsplugin.sh "stroparo/ds-stroparo"
@@ -248,14 +253,14 @@ _deploy_pc () {
 
   _deploy_basecli
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI environment..."
+  _print_header "GUI environment"
   "setupxfce.sh" -d
   _deploy_desktop
   _deploy_develgui
   _deploy_fixes
   _deploy_customst
 
-  echo ${BASH_VERSION:+-e} "\n\n==> Deploying GUI software..."
+  _print_header "GUI software"
   "setupanki.sh"
   "setupchrome.sh"
   "setupcitrix.sh"
