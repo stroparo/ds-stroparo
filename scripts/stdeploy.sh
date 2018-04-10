@@ -9,9 +9,6 @@
 
 PROGNAME="$(basename "${0:-stdeploy.sh}")"
 
-DOTFILES_DIR="$HOME/dotfiles-master"
-[ -d "$DEV/dotfiles" ] && DOTFILES_DIR="$DEV/dotfiles"
-
 PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
 PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
   libfreerdp-plugins-standard"
@@ -65,20 +62,25 @@ fi
 # #############################################################################
 # Provision dotfiles
 
-if [ ! -d "${DOTFILES_DIR}" ] ; then
+_provision_dotfiles () {
+  if [ -d "$DEV/dotfiles" ] ; then
+    export DOTFILES_DIR="$DEV/dotfiles"
+    return
+  else
+    export DOTFILES_DIR="$1"
+  fi
+
+  rm -f "${DOTFILES_DIR}" >/dev/null 2>&1
   curl -LSfs -o "$HOME"/.dotfiles.zip \
     "https://github.com/stroparo/dotfiles/archive/master.zip" \
     && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
-fi
-find "${DOTFILES_DIR}" -name '*.sh' -type f -exec chmod u+x {} \;
+  find "${DOTFILES_DIR}" -name '*.sh' -type f -exec chmod u+x {} \;
 
-# DOTFILES_DIR root intentionally omitted from PATH as these must be called with absolute path:
-export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
+  # DOTFILES_DIR root intentionally omitted from PATH as these must be called with absolute path:
+  export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
+}
 
-if ! (echo "$PATH" | grep -q dotfiles) ; then
-  echo "${PROGNAME:+$PROGNAME: }FATAL: dotfiles directory unreachable in PATH ($PATH)." 1>&2
-  exit 1
-fi
+_provision_dotfiles "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 
 # #############################################################################
 # Basic deployments
