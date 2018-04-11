@@ -197,9 +197,9 @@ _deploy_develgui () {
 
   _deploy_fonts
 
-  _user_confirm 'Setup Atom?'               && "setupatom.sh"
-  _user_confirm 'Setup Sublime-Text?'       && "setupsubl.sh"
-  _user_confirm 'Setup Visual Studio Code?' && "setupvscode.sh"
+  "setupatom.sh"
+  "setupsubl.sh"
+  "setupvscode.sh"
 
   sudo $INSTPROG install -y guake meld
 }
@@ -222,7 +222,7 @@ _deploy_corp () {
   _print_header "GUI environment"
   _deploy_baseguiel7
   "setupxfce.sh"
-  "setuprdp.sh"
+  "setuprdp.sh" -y
   _deploy_develgui
   _deploy_fixes
 
