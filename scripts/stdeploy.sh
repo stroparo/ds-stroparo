@@ -214,9 +214,6 @@ _deploy_develgui () {
   sudo $INSTPROG install -y guake meld
 }
 
-# #############################################################################
-# Custom deployments
-
 _deploy_basecli () {
 
   _print_header "Base CLI software"
@@ -224,6 +221,9 @@ _deploy_basecli () {
   _deploy_dotfiles
   _deploy_devel
 }
+
+# #############################################################################
+# Custom deployments
 
 _deploy_corp () {
 
@@ -240,16 +240,17 @@ _deploy_corp () {
   "setupchrome.sh"
 }
 
-_deploy_customst () {
+_deploy_dscz () {
 
   _print_header "Custom cz assets"
 
-  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh"
-  dsplugin.sh "stroparo/ds-stroparo"
-  dsplugin.sh "bitbucket.org/stroparo/ds-cz"
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
+  type clonemygits || dsplugin.sh "stroparo/ds-extras"
+  type czsetup.sh || dsplugin.sh "bitbucket.org/stroparo/ds-cz"
   dsload
+
   clonemygits
-  stsetup.sh  # sets up bootdesktop etc.
+  hashall
 
   echo
   echo "==> czsetup.sh <=="
@@ -257,6 +258,17 @@ _deploy_customst () {
   echo "Review filesystem boot script in \$DS_HOME/.../cz*filesystem*.sh" 1>&2
   echo "etc. on only after that run czsetup.sh." 1>&2
   echo
+}
+
+_deploy_dsstroparo () {
+
+  _print_header "Custom cz assets"
+
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
+  type stdeploy.sh || dsplugin.sh "stroparo/ds-stroparo"
+  dsload
+
+  "stsetup.sh"  # sets up bootdesktop etc.
 }
 
 _deploy_pc () {
