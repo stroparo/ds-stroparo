@@ -95,10 +95,6 @@ _provision_dotfiles "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 # #############################################################################
 # Basic deployments
 
-# Oneliners:
-_deploy_nextcloud () { _print_header "NextCloud" ; aptinstall.sh -r nextcloud-devs/client nextcloud-client ; }
-_deploy_vim () { _print_header "Vim" ; _user_confirm "Compile Vim latest?" && "setupvim.sh" ; }
-
 _deploy_baseguiel7 () {
   egrep -i -q '(centos|oracle|red *hat).* 7' /etc/*release || return
   _print_header "Base GUI for Enterprise Linux 7"
@@ -134,6 +130,11 @@ _deploy_fonts () {
   fi
 }
 
+_deploy_nextcloud () {
+  _print_header "NextCloud"
+  aptinstall.sh -r nextcloud-devs/client nextcloud-client
+}
+
 _deploy_ppa () {
   egrep -i -q 'ubuntu' /etc/*release || return $?
   _print_header "Ubuntu PPA applications"
@@ -160,6 +161,11 @@ _deploy_rdpclient () {
   if egrep -i -q 'ubuntu' /etc/*release ; then
     aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
+}
+
+_deploy_vim () {
+  _print_header "Vim"
+  "setupvim.sh" "python3"
 }
 
 _deploy_vpn () {
