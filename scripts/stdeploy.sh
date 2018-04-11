@@ -210,6 +210,7 @@ _deploy_develgui () {
   "setupsubl.sh"
   "setupvscode.sh"
 
+  echo
   sudo $INSTPROG install -y guake meld
 }
 
