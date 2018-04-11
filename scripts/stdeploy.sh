@@ -48,7 +48,9 @@ _user_confirm () {
 # Dependencies
 
 if ! which unzip >/dev/null 2>&1 ; then
-  sudo apt update && sudo apt install -y unzip || sudo yum install -y unzip
+  sudo $APTPROG update \
+    && sudo $APTPROG install -y unzip \
+    || sudo $RPMPROG install -q -y unzip
 fi
 
 # #############################################################################
@@ -56,6 +58,7 @@ fi
 
 if ! which aptinstall.sh >/dev/null 2>&1 ; then
   if [ ! -e "$HOME/bin/aptinstall.sh" ] ; then
+    mkdir "$HOME/bin" 2>/dev/null
     curl -LSfs -o "$HOME/bin/aptinstall.sh" --create-dirs \
       "https://raw.githubusercontent.com/stroparo/ds-extras/master/debian/aptinstall.sh"
   fi
