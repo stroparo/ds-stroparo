@@ -119,8 +119,9 @@ _deploy_dotfiles () {
 
 _deploy_fixes () {
   _print_header "Deploying fixes"
-  fixfedorainput.sh
-  fixguake.sh
+  . ~/.ds/ds.sh
+  "fixfedorainput.sh"
+  "fixguake.sh"
 }
 
 _deploy_fonts () {
