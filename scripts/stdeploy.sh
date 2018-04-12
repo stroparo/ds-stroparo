@@ -226,7 +226,7 @@ _deploy_basecli () {
 # #############################################################################
 # Custom deployments
 
-_deploy_corp () {
+_deploy_leangui () {
 
   _deploy_basecli
 
@@ -240,6 +240,8 @@ _deploy_corp () {
   _print_header "GUI software"
   "setupchrome.sh"
 }
+# For backwards compatibility:
+_deploy_corp () { _deploy_leangui ; }
 
 _deploy_pc () {
 
