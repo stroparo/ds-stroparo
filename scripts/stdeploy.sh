@@ -241,9 +241,36 @@ _deploy_corp () {
   "setupchrome.sh"
 }
 
-_deploy_dscz () {
+_deploy_pc () {
+
+  _deploy_basecli
+
+  _print_header "PC GUI base: desktop, devel, fixes"
+  "setupxfce.sh" -d
+  _deploy_desktop
+  _deploy_develgui
+  _deploy_fixes
+
+  _print_header "PC GUI etcetera: Dropbox, google-chrome etc."
+  "setupanki.sh"
+  "setupchrome.sh"
+  "setupdropbox.sh"
+}
+
+_deploy_stroparo () {
 
   _print_header "Custom cz assets"
+
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
+  type stdeploy.sh || dsplugin.sh "stroparo/ds-stroparo"
+  dsload
+
+  "stsetup.sh"  # sets up bootdesktop etc.
+}
+
+_deploy_z () {
+
+  _print_header "Custom assets"
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
   type clonemygits || dsplugin.sh "stroparo/ds-extras"
@@ -259,33 +286,6 @@ _deploy_dscz () {
   echo "Review filesystem boot script in \$DS_HOME/.../cz*filesystem*.sh" 1>&2
   echo "etc. on only after that run czsetup.sh." 1>&2
   echo
-}
-
-_deploy_dsstroparo () {
-
-  _print_header "Custom cz assets"
-
-  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  type stdeploy.sh || dsplugin.sh "stroparo/ds-stroparo"
-  dsload
-
-  "stsetup.sh"  # sets up bootdesktop etc.
-}
-
-_deploy_pc () {
-
-  _deploy_basecli
-
-  _print_header "PC GUI base: desktop, devel, fixes"
-  "setupxfce.sh" -d
-  _deploy_desktop
-  _deploy_develgui
-  _deploy_fixes
-
-  _print_header "PC GUI etcetera: Dropbox, google-chrome etc."
-  "setupanki.sh"
-  "setupchrome.sh"
-  "setupdropbox.sh"
 }
 
 # #############################################################################
