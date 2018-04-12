@@ -14,6 +14,8 @@ stshopt # routine defined in ds-stroparo
 # Globals
 
 : ${DEV:=${HOME}/workspace} ; export DEV
+: ${DOTFILES_DIR:=$HOME/dotfiles-master} ; export DEV
+if [ -d "$DEV/dotfiles" ] ; then export DOTFILES_DIR="$DEV/dotfiles" ; fi
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
 : ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 : ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
@@ -32,13 +34,9 @@ if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
 fi
 
 # PATH
-pathmunge -x "$HOME/bin"
-if [ -d "$DEV/dotfiles/installers" ] ; then
-  pathmunge -x "$DEV/dotfiles/installers"
-elif [ -d "$HOME/dotfiles-master/installers" ] ; then
-  pathmunge -x "$HOME/dotfiles-master/installers"
-fi
 mungemagic "$HOME/opt"
+pathmunge -x "$HOME/bin"
+pathmunge -x "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
