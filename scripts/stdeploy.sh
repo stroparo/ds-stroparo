@@ -276,17 +276,15 @@ _deploy_pc () {
 
   _deploy_basecli
 
-  _print_header "GUI environment"
+  _print_header "PC GUI base: desktop, devel, fixes"
   "setupxfce.sh" -d
   _deploy_desktop
   _deploy_develgui
   _deploy_fixes
-  _deploy_customst
 
-  _print_header "GUI software"
+  _print_header "PC GUI etcetera: Dropbox, google-chrome etc."
   "setupanki.sh"
   "setupchrome.sh"
-  "setupcitrix.sh"
   "setupdropbox.sh"
 }
 
