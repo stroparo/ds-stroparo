@@ -144,6 +144,7 @@ _deploy_ppa () {
   _print_header "Ubuntu PPA applications"
   aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
   aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
+  aptinstall.sh -r 'nilarimogard/webupd8' woeusb
   aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
 }
 
