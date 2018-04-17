@@ -73,27 +73,29 @@ if ! which aptinstall.sh >/dev/null 2>&1 ; then
 fi
 
 # #############################################################################
-# Provision dotfiles
-
 _provision_dotfiles () {
-  if [ -d "$DEV/dotfiles" ] ; then
-    export DOTFILES_DIR="$DEV/dotfiles"
+  export DOTFILES_AT_GITHUB="https://github.com/stroparo/dotfiles/archive/master.zip"
+  export DOTFILES_AT_GITLAB="https://gitlab.com/stroparo/dotfiles/repository/master/archive.zip"
+  if [ -d "${HOME}/dotfiles-master" ] ; then
+    echo "${PROGNAME:+$PROGNAME: }SKIP: '$HOME/dotfiles-master' already in place." 1>&2
     return
-  else
-    export DOTFILES_DIR="$1"
   fi
-
-  rm -f "${DOTFILES_DIR}" >/dev/null 2>&1
-  curl -LSfs -o "$HOME"/.dotfiles.zip \
-    "https://github.com/stroparo/dotfiles/archive/master.zip" \
-    && unzip -o "$HOME"/.dotfiles.zip -d "$HOME"
-  find "${DOTFILES_DIR}" -name '*.sh' -type f -exec chmod u+x {} \;
-
-  # DOTFILES_DIR root intentionally omitted from PATH as these must be called with absolute path:
-  export PATH="${DOTFILES_DIR}/installers:${DOTFILES_DIR}/scripts:$PATH"
+  curl -LSfs -o "${HOME}"/.dotfiles.zip "$DOTFILES_AT_GITLAB" \
+    || curl -LSfs -o "${HOME}"/.dotfiles.zip "$DOTFILES_AT_GITHUB"
+  unzip -o "${HOME}"/.dotfiles.zip -d "${HOME}" \
+    || return $?
+  zip_dir=$(unzip -l "${HOME}"/.dotfiles.zip | head -5 | tail -1 | awk '{print $NF;}')
+  echo "Zip dir: '$zip_dir'" 1>&2
+  if [[ ${zip_dir%/} = *dotfiles-master*[a-z0-9]* ]] ; then
+    (cd "${HOME}"; mv -f -v "${zip_dir}" "${HOME}/dotfiles-master" 1>&2)
+  fi
+  find "${HOME}/dotfiles-master" -name '*.sh' -type f -exec chmod u+x {} \;
+  if ! (echo "$PATH" | grep -q dotfiles) ; then
+    # Root intentionally omitted from PATH as these must be called with absolute path:
+    export PATH="${HOME}/dotfiles-master/installers:${HOME}/dotfiles-master/scripts:$PATH"
+  fi
 }
-
-_provision_dotfiles "${DOTFILES_DIR:-$HOME/dotfiles-master}"
+_provision_dotfiles
 
 # #############################################################################
 # Basic deployments
