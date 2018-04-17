@@ -11,6 +11,11 @@ PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
 PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
   libfreerdp-plugins-standard"
 
+# Local repositories
+: ${DEV:=${HOME}/workspace} ; export DEV
+: ${DOTFILES_DIR:=$HOME/dotfiles-master} ; export DEV
+if [ -d "$DEV/dotfiles" ] ; then export DOTFILES_DIR="$DEV/dotfiles" ; fi
+
 # System installers
 export APTPROG=apt-get; which apt >/dev/null 2>&1 && export APTPROG=apt
 export RPMPROG=yum; which dnf >/dev/null 2>&1 && export RPMPROG=dnf
