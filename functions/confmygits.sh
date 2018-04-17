@@ -1,6 +1,4 @@
 # Daily Shells Stroparo extensions
-# More instructions and licensing at:
-# https://github.com/stroparo/ds-stroparo
 
 confmygits () {
   # gitset is defined in the stroparo.github.io/ds project in the gitfunctions.sh

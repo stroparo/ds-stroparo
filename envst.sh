@@ -1,14 +1,9 @@
 # Daily Shells Stroparo extensions
-# More instructions and licensing at:
-# https://github.com/stroparo/ds-stroparo
 
 # #############################################################################
 # Custom
 
-alias syncbooks='(cd ~/Downloads/books && git pull && git push)'
-alias synchandy='(cd ~/Downloads/handy && git pull && git push)'
-
-stshopt # routine defined in ds-stroparo
+stshopt # routine defined in ds-stroparo/functions
 
 # #############################################################################
 # Globals
