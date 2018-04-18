@@ -135,22 +135,24 @@ _deploy_fonts () {
   setupnerdfonts.sh
 
   if egrep -i -q 'ubuntu' /etc/*release ; then
-    aptinstall.sh -r 'font-manager/staging' font-manager
+    dpkg -s font-manager \
+      || aptinstall.sh -r 'font-manager/staging' font-manager
   fi
 }
 
 _deploy_nextcloud () {
   _print_header "NextCloud"
-  aptinstall.sh -r nextcloud-devs/client nextcloud-client
+  dpkg -s nextcloud-client \
+    || aptinstall.sh -r nextcloud-devs/client nextcloud-client
 }
 
 _deploy_ppa () {
   egrep -i -q 'ubuntu' /etc/*release || return $?
   _print_header "Ubuntu PPA applications"
-  aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
-  aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
-  aptinstall.sh -r 'nilarimogard/webupd8' woeusb
-  aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
+  dpkg -s moneyguru || aptinstall.sh -r 'hsoft/ppa' $PKGS_GURU
+  dpkg -s qdirstat  || aptinstall.sh -r 'nathan-renniewaldock/qdirstat' qdirstat
+  dpkg -s woeusb    || aptinstall.sh -r 'nilarimogard/webupd8' woeusb
+  dpkg -s y-ppa-manager || aptinstall.sh -r 'webupd8team/y-ppa-manager' y-ppa-manager
 }
 
 _deploy_pythontools () {
@@ -169,7 +171,7 @@ _deploy_pythontools () {
 _deploy_rdpclient () {
   _print_header "RDP client"
   if egrep -i -q 'ubuntu' /etc/*release ; then
-    aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
+    dpkg -s remmina || aptinstall.sh -r 'remmina-ppa-team/remmina-next' $PKGS_REMMINA
   fi
 }
 
@@ -181,7 +183,8 @@ _deploy_vim () {
 _deploy_vpn () {
   _print_header "VPN client"
   if egrep -i -q 'debian|ubuntu' /etc/*release ; then
-    aptinstall.sh network-manager-openconnect network-manager-vpnc
+    dpkg -s network-manager-openconnect \
+      || aptinstall.sh network-manager-openconnect network-manager-vpnc
   fi
  }
 
