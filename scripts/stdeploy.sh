@@ -280,37 +280,6 @@ _deploy_pc () {
   "setupdropbox.sh"
 }
 
-_deploy_stroparo () {
-
-  _print_header "Custom cz assets"
-
-  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  dsplugin.sh "stroparo/ds-stroparo"
-  dsload
-
-  "stsetup.sh"  # sets up bootdesktop etc.
-}
-
-_deploy_z () {
-
-  _print_header "Custom assets"
-
-  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  dsplugin.sh "stroparo/ds-extras" # for clonemygits and hashall functions
-  dsplugin.sh "gitlab.com/stroparo/ds-cz" # for czsetup.sh etc.
-  dsload
-
-  clonemygits
-  hashall
-
-  echo
-  echo "==> czsetup.sh <=="
-  echo
-  echo "Review script \$DS_HOME/.../cz*filesystem*.sh" 1>&2
-  echo "... and only then run czsetup.sh." 1>&2
-  echo
-}
-
 # #############################################################################
 # Main function
 
