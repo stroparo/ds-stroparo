@@ -294,8 +294,8 @@ _deploy_z () {
   echo
   echo "==> czsetup.sh <=="
   echo
-  echo "Review filesystem boot script in \$DS_HOME/.../cz*filesystem*.sh" 1>&2
-  echo "etc. on only after that run czsetup.sh." 1>&2
+  echo "Review script \$DS_HOME/.../cz*filesystem*.sh" 1>&2
+  echo "... and only then run czsetup.sh." 1>&2
   echo
 }
 
