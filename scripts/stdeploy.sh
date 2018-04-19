@@ -273,7 +273,7 @@ _deploy_stroparo () {
   _print_header "Custom cz assets"
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  type stdeploy.sh || dsplugin.sh "stroparo/ds-stroparo"
+  dsplugin.sh "stroparo/ds-stroparo"
   dsload
 
   "stsetup.sh"  # sets up bootdesktop etc.
@@ -284,8 +284,8 @@ _deploy_z () {
   _print_header "Custom assets"
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  type clonemygits || dsplugin.sh "stroparo/ds-extras"
-  type czsetup.sh || dsplugin.sh "gitlab.com/stroparo/ds-cz"
+  dsplugin.sh "stroparo/ds-extras"
+  dsplugin.sh "gitlab.com/stroparo/ds-cz"
   dsload
 
   clonemygits
