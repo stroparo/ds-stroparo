@@ -296,8 +296,8 @@ _deploy_z () {
   _print_header "Custom assets"
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
-  dsplugin.sh "stroparo/ds-extras"
-  dsplugin.sh "gitlab.com/stroparo/ds-cz"
+  dsplugin.sh "stroparo/ds-extras" # for clonemygits and hashall functions
+  dsplugin.sh "gitlab.com/stroparo/ds-cz" # for czsetup.sh etc.
   dsload
 
   clonemygits
