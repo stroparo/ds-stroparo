@@ -6,10 +6,17 @@
 # Globals
 
 PROGNAME="$(basename "${0:-stdeploy.sh}")"
+USAGE="${PROGNAME} - Custom deployments
 
-PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
-PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
-  libfreerdp-plugins-standard"
+${PROGNAME} [item [item ...]]
+
+Example:
+${PROGNAME} leangui
+
+Available items:
+$(grep "_deploy_[a-z]* " "$(which "$PROGNAME")" \
+  | sed -e 's/_deploy_//' -e 's/ .*$//')
+"
 
 # Local repositories
 : ${DEV:=${HOME}/workspace} ; export DEV
@@ -21,6 +28,11 @@ export APTPROG=apt-get; which apt >/dev/null 2>&1 && export APTPROG=apt
 export RPMPROG=yum; which dnf >/dev/null 2>&1 && export RPMPROG=dnf
 export RPMGROUP="yum groupinstall"; which dnf >/dev/null 2>&1 && export RPMGROUP="dnf group install"
 export INSTPROG="$APTPROG"; which "$RPMPROG" >/dev/null 2>&1 && export INSTPROG="$RPMPROG"
+
+# Packages
+PKGS_GURU="dupeguru-se dupeguru-me dupeguru-pe moneyguru"
+PKGS_REMMINA="remmina remmina-plugin-rdp remmina-plugin-vnc \
+  libfreerdp-plugins-standard"
 
 # #############################################################################
 # Helpers
@@ -303,23 +315,12 @@ _deploy_z () {
 # Main function
 
 stdeploy () {
-
   if [ "$1" = '-h' ] || [ $# -eq 0 ] ; then
-cat <<EOF
-${PROGNAME} [item [item ...]]
-
-Available items:
-$(grep "_deploy_[a-z]* " "$(which "$PROGNAME")" \
-  | sed -e 's/_deploy_//' -e 's/ .*$//')
-
-Example:
-${PROGNAME} apps devel python
-EOF
+    echo "$USAGE"
     return
   fi
 
   for item in "$@" ; do
-
     echo ${BASH_VERSION:+-e} "\n==> Deploying '${item}'..."
 
     if ! eval "_deploy_${item}" ; then
