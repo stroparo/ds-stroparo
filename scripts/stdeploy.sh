@@ -285,7 +285,7 @@ _deploy_z () {
 
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || return $?
   type clonemygits || dsplugin.sh "stroparo/ds-extras"
-  type czsetup.sh || dsplugin.sh "bitbucket.org/stroparo/ds-cz"
+  type czsetup.sh || dsplugin.sh "gitlab.com/stroparo/ds-cz"
   dsload
 
   clonemygits
