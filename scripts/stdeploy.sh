@@ -105,10 +105,8 @@ _provision_dotfiles () {
     fi
   fi
   find "${HOME}/dotfiles-master" -name '*.sh' -type f -exec chmod u+x {} \;
-  if ! (echo "$PATH" | grep -q dotfiles) ; then
-    # Root intentionally omitted from PATH as these must be called with absolute path:
-    export PATH="${HOME}/dotfiles-master/installers:${HOME}/dotfiles-master/scripts:$PATH"
-  fi
+  # Root intentionally omitted from PATH as these must be called with absolute path:
+  export PATH="${HOME}/dotfiles-master/installers:${HOME}/dotfiles-master/scripts:$PATH"
 }
 _provision_dotfiles
 
