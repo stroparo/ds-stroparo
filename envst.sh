@@ -40,21 +40,9 @@ export LS_COLORS="ow=01;95:di=01;94"
 # #############################################################################
 # Default editors
 
-# EDITOR:
-if which vim >/dev/null 2>&1 ; then
-  export EDITOR=vim
-  export GIT_EDITOR=vim
-else
-  export EDITOR=vi
-  export GIT_EDITOR=vi
-fi
-
-# VISUAL editor:
-if which subl >/dev/null 2>&1 ; then
-  export VISUAL=subl
-elif which code >/dev/null 2>&1 ; then
-  export VISUAL=code
-fi
+export EDITOR=vim
+export GIT_EDITOR=vim
+export VISUAL=code
 
 # #############################################################################
 # DS post calls
