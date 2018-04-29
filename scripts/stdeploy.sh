@@ -234,13 +234,15 @@ _deploy_develgui () {
   sudo $INSTPROG install -y guake meld
 }
 
-_deploy_basecli () {
+_deploy_cli () {
 
   _print_header "Base CLI software"
 
   _deploy_dotfiles
   _deploy_devel
 }
+# For backwards compatibility:
+_deploy_basecli () { _deploy_cli ; }
 
 # #############################################################################
 # Custom deployments
