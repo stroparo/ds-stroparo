@@ -13,7 +13,7 @@ fi
 # #############################################################################
 # Globals
 
-K380_GIT=https://github.com/stroparo/k380-function-keys-conf.git
+K380_GIT=https://gitlab.com/stroparo/k380-function-keys-conf.git
 K380_PATH=/srv/k380-function-keys-conf
 
 # #############################################################################
