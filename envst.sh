@@ -17,7 +17,7 @@ if [ -d "$DEV/dotfiles" ] ; then export DOTFILES_DIR="$DEV/dotfiles" ; fi
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Cygwin
-if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
+if uname -a | egrep -i -q 'cygwin|mingw|msys' ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
 
   export DEV="$(cygpath "${DEV}")"
@@ -26,6 +26,8 @@ if [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
   export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
 
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
+
+  mungemagic "/c/opt"
 fi
 
 # PATH
