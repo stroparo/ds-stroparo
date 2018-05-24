@@ -1,5 +1,5 @@
 # Daily Shells Stroparo extensions
 
-confgitsdotfiles () {
+confgitsdots () {
   (cd "$DEV" ; confgits dotfiles ds-extras ds-stroparo sublime-snippets)
 }
