@@ -28,6 +28,7 @@ if uname -a | egrep -i -q 'cygwin|mingw|msys' ; then
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
 
   mungemagic "/c/opt"
+  pathmunge -x "/c/Program Files (x86)/Google/Chrome/Application"
 fi
 
 # PATH
