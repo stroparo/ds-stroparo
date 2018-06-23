@@ -128,8 +128,8 @@ _deploy_baseguiel7 () {
 }
 
 _deploy_dotfiles () {
-  _print_header "Deploying dotfiles - calling '${DOTFILES_DIR}/setupdotfiles.sh'"
-  "${DOTFILES_DIR}/setupdotfiles.sh" -f
+  _print_header "Deploying dotfiles - calling '${DOTFILES_DIR}/entry.sh'"
+  "${DOTFILES_DIR}/entry.sh" -f
 }
 
 _deploy_fixes () {
