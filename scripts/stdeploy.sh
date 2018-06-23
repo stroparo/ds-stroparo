@@ -110,7 +110,9 @@ _provision_dotfiles () {
     export PATH="${HOME}/dotfiles-master/installers:${HOME}/dotfiles-master/scripts:$PATH"
   fi
 }
-_provision_dotfiles
+if [ ! -e ./entry.sh ] && [ ! -d ./dotfiles ] ; then
+  _provision_dotfiles && cd "$HOME/dotfiles-master"
+fi
 
 # #############################################################################
 # Basic deployments
