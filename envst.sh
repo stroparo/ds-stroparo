@@ -17,7 +17,7 @@ if [ -d "$DEV/dotfiles" ] ; then export DOTFILES_DIR="$DEV/dotfiles" ; fi
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Cygwin
-if uname -a | egrep -i -q 'cygwin|mingw|msys' ; then
+if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
 
   export DEV="$(cygpath "${DEV}")"

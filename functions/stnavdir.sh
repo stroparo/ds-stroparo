@@ -1,7 +1,7 @@
 if (uname -a | grep -i -q linux) ; then
   dl    () { d "${HOME}"/Downloads "$@" ; }
   h     () { d "${HOME}" "$@" ; }
-elif (uname -a | grep -i -q "cygwin|mingw|msys|win32|windows") ; then
+elif (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   dl    () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
   h     () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 fi
