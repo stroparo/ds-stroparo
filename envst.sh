@@ -27,12 +27,12 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
 
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
 
-  mungemagic "/c/opt"
+  mungemagic -a "/c/opt"
   pathmunge -x "/c/Program Files (x86)/Google/Chrome/Application"
 fi
 
 # PATH
-mungemagic "$HOME/opt"
+mungemagic -a "$HOME/opt"
 pathmunge -x "$HOME/bin"
 pathmunge -x "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 
