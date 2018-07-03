@@ -9,8 +9,6 @@ stshopt # routine defined in ds-stroparo/functions
 # Globals
 
 : ${DEV:=${HOME}/workspace} ; export DEV
-: ${DOTFILES_DIR:=$HOME/dotfiles-master} ; export DEV
-if [ -d "$DEV/dotfiles" ] ; then export DOTFILES_DIR="$DEV/dotfiles" ; fi
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
 : ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 : ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
@@ -34,7 +32,6 @@ fi
 # PATH
 mungemagic -a "$HOME/opt"
 pathmunge -x "$HOME/bin"
-pathmunge -x "${DOTFILES_DIR:-$HOME/dotfiles-master}"
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
