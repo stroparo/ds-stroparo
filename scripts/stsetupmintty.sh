@@ -17,7 +17,7 @@ export THEME_FILE=hybrid
 cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
 cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
 
-cat > $(cygpath "$USERPROFILE")/.minttyrc <<EOF
+cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
 BoldAsFont=-1
 ThemeFile=${THEME_FILE}
 CursorType=block
@@ -35,4 +35,5 @@ Transparency=off
 ScrollbackLines=100000
 Font=Ubuntu Mono derivative Powerlin
 EOF
-ls -l $(cygpath "$USERPROFILE")/.minttyrc
+ls -l "$(cygpath "$USERPROFILE")"/.minttyrc
+grep "ThemeFile=" "$(cygpath "$USERPROFILE")"/.minttyrc
