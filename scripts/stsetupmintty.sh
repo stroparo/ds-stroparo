@@ -15,7 +15,6 @@ fi
 
 export THEME_FILE=hybrid
 cp "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
-cp "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/ocean.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/oceandark
 cp "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
 
 cat > $(cygpath "$USERPROFILE")/.minttyrc <<EOF
