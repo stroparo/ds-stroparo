@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-PROGNAME=czsetupmintty.sh
+PROGNAME=stsetupmintty.sh
 
-. "${DS_HOME:-$HOME/.ds}/ds.sh"
+. "${DS_HOME:-$HOME/.ds}/ds.sh" >/dev/null 2>&1
 if ! ${DS_LOADED:-false} ; then
   echo "${PROGNAME:+$PROGNAME: }FATAL: No Daily Shells loaded." 1>&2
   exit 1
@@ -14,8 +14,8 @@ if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
 fi
 
 export THEME_FILE=hybrid
-cp "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
-cp "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
+cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
+cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
 
 cat > $(cygpath "$USERPROFILE")/.minttyrc <<EOF
 BoldAsFont=-1
@@ -35,3 +35,4 @@ Transparency=off
 ScrollbackLines=100000
 Font=Ubuntu Mono derivative Powerlin
 EOF
+ls -l $(cygpath "$USERPROFILE")/.minttyrc
