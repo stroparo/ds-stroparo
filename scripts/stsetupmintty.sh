@@ -2,18 +2,46 @@
 
 PROGNAME=stsetupmintty.sh
 
+# #############################################################################
+# Globals
+
+: ${GIT_ROOT:=$(cygpath "C:")/opt/git} ; export GIT_ROOT
+: ${THEME_FILE:=base16modlt} ; export THEME_FILE
+
+# #############################################################################
+# Checks
+
 if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: No Daily Shells loaded." 1>&2
   exit
 fi
 
-export THEME_FILE=base16modlt
-cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16defmodlt-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
-cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
+# GIT_ROOT fallback
+if [ ! -d "${GIT_ROOT}/bin" ] ; then
+  export GIT_ROOT="$(cygpath "$USERPROFILE")"/opt/git
 
-cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
+  if [ ! -d "${GIT_ROOT}/bin" ] ; then
+    echo "${PROGNAME:+$PROGNAME: }SKIP: No (GIT_ROOT=$GIT_ROOT)/bin dir." 1>&2
+    exit
+  fi
+fi
+
+# #############################################################################
+# Routines
+
+_setup_mintty_at_git_root () {
+  typeset git_root="${1:-$(cygpath "C:")/opt/git}"
+  [ -d "${git_root}/bin" ] || return
+
+  cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16defmodlt-minttyrc.txt "${git_root}"/usr/share/mintty/themes/base16modlt
+  cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-minttyrc.txt "${git_root}"/usr/share/mintty/themes/hybrid
+}
+
+_setup_minttyrc () {
+
+  cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
 BoldAsFont=-1
-ThemeFile=${THEME_FILE}
+ThemeFile=${THEME_FILE:-base16modlt}
 CursorType=block
 FontHeight=12
 FontSmoothing=default
@@ -29,5 +57,19 @@ Transparency=off
 ScrollbackLines=100000
 Font=Ubuntu Mono derivative Powerlin
 EOF
-ls -l "$(cygpath "$USERPROFILE")"/.minttyrc
-grep "ThemeFile=" "$(cygpath "$USERPROFILE")"/.minttyrc
+
+  # Output results:
+  ls -l "$(cygpath "$USERPROFILE")"/.minttyrc
+  grep "ThemeFile=" "$(cygpath "$USERPROFILE")"/.minttyrc
+
+}
+
+_main () {
+  _setup_mintty_at_git_root "$GIT_ROOT"
+  _setup_minttyrc
+}
+
+# #############################################################################
+# Main
+
+_main
