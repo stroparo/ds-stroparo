@@ -8,9 +8,8 @@ if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
 fi
 
 export THEME_FILE=base16modlt
-cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16-default-mod-lighten.mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
-cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
-cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16defmodlt-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
 
 cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
 BoldAsFont=-1
