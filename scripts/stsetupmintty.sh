@@ -7,8 +7,9 @@ if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   exit
 fi
 
-export THEME_FILE=base16modlt
+export THEME_FILE=cs
 cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16defmodlt-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/cs-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/cs
 cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-minttyrc.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
 
 cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
