@@ -2,21 +2,15 @@
 
 PROGNAME=stsetupmintty.sh
 
-. "${DS_HOME:-$HOME/.ds}/ds.sh" >/dev/null 2>&1
-if ! ${DS_LOADED:-false} ; then
-  echo "${PROGNAME:+$PROGNAME: }FATAL: No Daily Shells loaded." 1>&2
-  exit 1
-fi
-
 if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: No Daily Shells loaded." 1>&2
   exit
 fi
 
 export THEME_FILE=base16modlt
-cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/base16-default-mod-lighten.mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
-cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
-cp -f -v "$(cygpath "$DEV")"/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16-default-mod-lighten.mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/base16modlt
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/hybrid
+cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/tomorrow.dark-mintty.txt "$(cygpath "C:")"/opt/git/usr/share/mintty/themes/tomorrowdark
 
 cat > "$(cygpath "$USERPROFILE")"/.minttyrc <<EOF
 BoldAsFont=-1
