@@ -8,6 +8,13 @@ stshopt # routine defined in ds-stroparo/functions
 # #############################################################################
 # Globals
 
+export STGITS="
+https://stroparo@bitbucket.org/stroparo/dotfiles.git
+https://stroparo@bitbucket.org/stroparo/ds.git
+https://stroparo@bitbucket.org/stroparo/ds-extras.git
+https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
+"
+
 : ${DEV:=${HOME}/workspace} ; export DEV
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
 : ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
