@@ -68,3 +68,7 @@ if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
     appendto DS_POST_CALLS '[ -d ds ] && gitr.sh ss || true'
   fi
 fi
+
+# #############################################################################
+
+true # avoid failure while sourcing this file
