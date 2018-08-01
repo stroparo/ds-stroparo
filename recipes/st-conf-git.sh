@@ -3,14 +3,10 @@
 PROGNAME="${0##*/}"
 
 . "${DS_HOME:-$HOME/.ds}/ds.sh"
-if ! ${DS_LOADED:-false} ; then
-  echo "${PROGNAME:+$PROGNAME: }FATAL: No Daily Shells loaded." 1>&2
-  exit 1
-fi
 
 clonemygits "$STGITS"
 
-(cd "$DEV" ; MYEMAIL="cstropz@gmail.com" confgits dotfiles ds ds-extras ds-stroparo)
+(cd "$DEV" ; MYEMAIL="stroparo@outlook.com" confgits dotfiles ds ds-extras ds-stroparo)
 
 # Mirrors:
 for repo in dotfiles ds{,-extras,-stroparo}; do (cd "$DEV"/$repo && git remote remove mirror 2>/dev/null) ; done

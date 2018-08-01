@@ -44,9 +44,8 @@ _step_self_provision () {
 
 
 _step_own_stuff () {
-  if [ -e "${DS_HOME}/envst.sh" ] ; then
-    st-conf-git.sh
-  fi
+  [ -e "${DS_HOME}/envst.sh" ] || return $?
+  st-conf-git.sh
 }
 
 
