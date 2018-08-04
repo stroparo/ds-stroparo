@@ -21,14 +21,14 @@ if [ ! -d "${HOME}"/.config/autostart ] ; then
   mkdir -p "${HOME}"/.config/autostart 2>/dev/null
 fi
 
-cat > "${HOME}"/.config/autostart/bootdesktop.desktop <<EOF
+cat > "${HOME}"/.config/autostart/stbootdesktop.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
 Name=bootdesktop
 Comment=
-Exec=$HOME/.ds/scripts/bootdesktop.sh
+Exec=$HOME/.ds/scripts/stbootdesktop.sh
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
