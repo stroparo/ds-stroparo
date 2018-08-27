@@ -13,6 +13,7 @@ https://stroparo@bitbucket.org/stroparo/dotfiles.git
 https://stroparo@bitbucket.org/stroparo/ds.git
 https://stroparo@bitbucket.org/stroparo/ds-extras.git
 https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
+https://stroparo@bitbucket.org/stroparo/runr.git
 "
 
 : ${DEV:=${HOME}/workspace} ; export DEV

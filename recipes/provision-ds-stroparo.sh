@@ -6,8 +6,8 @@ PROGNAME="provision-ds-stroparo.sh"
 _step_reset () {
   if ! ${SELF_PROVISION:-false} ; then return ; fi
 
-  mv -f ~/dotfiles-master ~/dotfiles-master.$(date '+%Y%m%d-%OH%OM%OS')
-  [ -d ~/dotfiles-master ] && echo "FATAL: Could not archive working ~/dotfiles-master" && exit 1
+  mv -f ~/runr-master ~/runr-master.$(date '+%Y%m%d-%OH%OM%OS')
+  [ -d ~/runr-master ] && echo "FATAL: Could not archive working ~/runr-master" && exit 1
 
   mv -f ~/.ds ~/.ds.$(date '+%Y%m%d-%OH%OM%OS')
   [ -d ~/.ds ] && echo "FATAL: Could not archive working Daily Shells at ~/.ds" && exit 1
@@ -23,9 +23,9 @@ _step_base_system () {
 
   mkdir ~/workspace >/dev/null 2>&1 ; ls -d -l ~/workspace || exit $?
 
-  bash -c "$(curl -LSf "https://bitbucket.org/stroparo/dotfiles/raw/master/entry.sh" \
-    || curl -LSf "https://raw.githubusercontent.com/stroparo/dotfiles/master/entry.sh")" \
-    entry.sh -b -s
+  bash -c "$(curl -LSf "https://bitbucket.org/stroparo/runr/raw/master/entry.sh" \
+    || curl -LSf "https://raw.githubusercontent.com/stroparo/runr/master/entry.sh")" \
+    entry.sh apps shell
 
   if type dsload > /dev/null 2>&1 ; then
     dsload || exit $?
