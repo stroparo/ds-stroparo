@@ -4,6 +4,6 @@
 # More instructions and licensing at:
 # https://bitbucket.org/stroparo/ds-private
 
-for setup in bootdesktop keybk380 ; do
-  "$DS_HOME"/scripts/stsetup${setup}.sh
+for stsetup_script in "$DS_HOME"/scripts/stsetup[a-z]*.sh ; do
+  "${stsetup_script}"
 done
