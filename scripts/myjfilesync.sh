@@ -14,7 +14,7 @@ myjfilesync () {
       > "${DS_ENV_LOG:-$HOME/log}/JFileSync.log" \
       2>&1 \
       &)
-  elif [[ "$(uname -a)" = *[Cc]ygwin* ]] ; then
+  elif (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
     nohup "${MYOPT:-$HOME/opt}"/jfilesync/JFileSync.bat \
       "$(cygpath -w "$1")" \
       > "${DS_ENV_LOG:-$HOME/log}/JFileSync.log" \

@@ -30,7 +30,7 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
 
   export DEV="$(cygpath "${DEV}")"
   export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
-  export MYOPT="$(cygpath "${MYOPT:-C:\\opt}")"
+  export MYOPT="${MOUNTS_PREFIX}/c/opt"
   export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
 
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
