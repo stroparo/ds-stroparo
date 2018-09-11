@@ -26,7 +26,7 @@ hashds () {
   typeset dssrc
   typeset errors=false
   typeset loadcmd=:
-  typeset timestamp=$(date '+%y%m%d-%OH%OM%OS')
+  typeset timestamp=$(date '+%Y%m%d-%OH%OM%OS')
 
   # Arg parsing
   [ "$1" = '-r' ] && loadcmd=dsload && shift
