@@ -31,17 +31,21 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   export DEV="$(cygpath "${DEV}")"
   export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
   export MYOPT="${MOUNTS_PREFIX}/c/opt"
+  export MYOPTATHOME="${HOME}/opt"
   export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
 
   alias explorerhere='explorer "$(cygpath -w "$PWD")"'
 
-  mungemagic -a "/c/opt"
+  mungemagic -a "${MYOPT}"
+  if [ -d "${MYOPTATHOME}" ] ; then
+    mungemagic -a "${MYOPTATHOME}"
+  fi
   pathmunge -x "/c/Program Files (x86)/Google/Chrome/Application"
 fi
 
 # PATH
-mungemagic -a "$HOME/opt"
-pathmunge -x "$HOME/bin"
+mungemagic -a "${HOME}/opt"
+pathmunge -x "${HOME}/bin"
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
@@ -53,6 +57,21 @@ export LS_COLORS="ow=01;95:di=01;94"
 export EDITOR=vim
 export GIT_EDITOR=vim
 export VISUAL=code
+
+# Custom DIFFPROG global:
+if which meld >/dev/null 2>&1 ; then
+  export DIFFPROG="meld"
+elif which kdiff3 >/dev/null 2>&1 ; then
+  export DIFFPROG="kdiff3"
+elif (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
+  if [ -x "${MYOPT}/meld/meld" ] ; then
+    export DIFFPROG="${MYOPT}/meld/meld"
+  elif [ -x "${MYOPT}/kdiff3/kdiff3" ] ; then
+    export DIFFPROG="${MYOPT}/kdiff3/kdiff3"
+  elif [ -f "${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ] ; then
+    export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
+  fi
+fi
 
 # #############################################################################
 # DS post calls
