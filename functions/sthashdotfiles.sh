@@ -45,6 +45,7 @@ hashds () {
   echo
   echo "==> Daily Shells rehash started..."
   rm -f -r "${dshome}" \
+    && > "${DS_PLUGINS_INSTALLED_FILE}" \
     && mkdir "${dshome}" \
     && cp -a "${dssrc}"/* "${dshome}"/ \
     || errors=true
