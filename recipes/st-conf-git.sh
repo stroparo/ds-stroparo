@@ -2,6 +2,10 @@
 
 PROGNAME="${0##*/}"
 
+echo
+echo "################################################################################"
+echo "Git config (ds-stroparo) \$0='$0'"
+
 . "${DS_HOME:-$HOME/.ds}/ds.sh"
 
 clonemygits "$STGITS"
