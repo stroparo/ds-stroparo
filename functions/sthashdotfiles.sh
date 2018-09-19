@@ -25,7 +25,7 @@ hashds () {
 
   # Simple option parsing must come first:
   typeset loadcmd=:
-  [ "$1" = '-r' ] && loadcmd=dsload && shift
+  [ "$1" = '-r' ] && loadcmd="echo DS loading... ; dsload" && shift
 
   typeset dshome="${DS_HOME:-${HOME}/.ds}"
   typeset dssrc="${1:-${DEV}/ds}"
@@ -52,7 +52,7 @@ hashds () {
   if ! ${errors:-false} ; then
     echo
     echo "==> Daily Shells rehash complete"
-    dshashplugins "${DEV}"
+    dshashplugins.sh "${DEV}"
     eval "$loadcmd"
   else
     echo "${progname}: ERROR: Daily Shells rehash failure" 1>&2
