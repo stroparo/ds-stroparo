@@ -3,19 +3,8 @@
 PROGNAME="provision-ds-stroparo.sh"
 
 
-_step_reset () {
-  if ! ${SELF_PROVISION:-false} ; then return ; fi
-
-  mv -f ~/runr-master ~/runr-master.$(date '+%Y%m%d-%OH%OM%OS')
-  [ -d ~/runr-master ] && echo "FATAL: Could not archive working ~/runr-master" && exit 1
-
-  mv -f ~/.ds ~/.ds.$(date '+%Y%m%d-%OH%OM%OS')
-  [ -d ~/.ds ] && echo "FATAL: Could not archive working Daily Shells at ~/.ds" && exit 1
-
-}
-
-
 _step_base_system () {
+  ${STEP_BASE_SYSTEM_DONE:-false} && return
 
   if which sudo >/dev/null 2>&1 && ! sudo grep -q "$USER" /etc/sudoers; then
     echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
@@ -27,19 +16,15 @@ _step_base_system () {
     || curl -LSf "https://raw.githubusercontent.com/stroparo/runr/master/entry.sh")" \
     entry.sh apps shell
 
-  if type dsload > /dev/null 2>&1 ; then
-    dsload || exit $?
-  else
-    . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
-  fi
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
+  export STEP_BASE_SYSTEM_DONE=true
 }
 
 
 _step_self_provision () {
-  if ! ${SELF_PROVISION:-false} ; then return ; fi
   dsplugin.sh "stroparo@bitbucket.org/stroparo/ds-stroparo" \
     || dsplugin.sh "stroparo@github.com/stroparo/ds-stroparo"
-  dsload >/dev/null 2>&1
+  dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
 }
 
 
@@ -50,7 +35,6 @@ _step_own_stuff () {
 
 
 _main () {
-  _step_reset
   _step_base_system
   _step_self_provision
   _step_own_stuff
