@@ -3,18 +3,24 @@
 hashall () {
   hashdotfiles alias && . ~/.aliases-cs
   hashdotfiles dotfiles
-  hashds -r # Hash DS and reload it
+  dshash -r # Hash DS and reload it
 }
 
 hashdotfiles () {
   typeset runr_dir="$DEV"/runr
-  if [ -d "$DEV"/runr ] ; then
-    (cd "$DEV"/runr \
-      && [[ $PWD = *runr ]] \
-      && ./entry.sh "$@" \
+  if [ ! -d ~/.runr ] && [ -d "$DEV"/runr ] ; then
+    cp -a "$DEV"/runr ~/.runr
+    chmod 755 ~/.runr/entry.sh
+  fi
+  if [ -d ~/.runr ] ; then
+    (cd ~/.runr \
+      && [[ $PWD = *.runr ]] \
+      && ./entry.sh -p "$@" \
     )
-  elif type getdotfiles >/dev/null 2>&1 ; then
-    getdotfiles shell alias apps dotfiles
+  else
+    bash -c "$(curl -LSf "https://bitbucket.org/stroparo/runr/raw/master/entry.sh" \
+      || curl -LSf "https://raw.githubusercontent.com/stroparo/runr/master/entry.sh")" \
+      entry.sh shell alias apps dotfiles
   fi
 }
 
