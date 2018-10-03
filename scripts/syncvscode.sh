@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
+PROGNAME="syncvscode.sh"
+
 # Requirements:
 # * ds (Daily Shells) at https://stroparo.github.io/ds - MOUNTS_PREFIX global etc.
 # * ds-stroparo plugin
-
-# Globals
-
-PROGNAME="syncvscode.sh"
 
 _sync_vscode () {
   typeset diffprog="${DIFFPROG:-meld}"
