@@ -24,7 +24,7 @@ _sync_vscode () {
 
 _sync_vscode_etc () {
   for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvscode*sh ; do
-    if [ "${script}" = "${PROGNAME}" ] ; then continue ; fi
+    if [[ ${script} = *${PROGNAME} ]] ; then continue ; fi
     "${script}"
   done
 }
