@@ -22,4 +22,12 @@ _sync_vscode () {
   "${diffprog}" "${vscode_dotfiles_dir}" "${vscode_user_dir}"
 }
 
+_sync_vscode_etc () {
+  for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvscode*sh ; do
+    if [ "${script}" = "${PROGNAME}" ] ; then continue ; fi
+    "${script}"
+  done
+}
+
 _sync_vscode "$@"
+_sync_vscode_etc
