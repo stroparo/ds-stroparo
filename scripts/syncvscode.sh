@@ -19,7 +19,8 @@ _sync_vscode () {
     typeset vscode_dotfiles_dir="$(cygpath -w "${DEV}/dotfiles/code" | sed -e 's#\\#\\\\#g')"
     typeset vscode_user_dir="/Users/`whoami`/AppData/Roaming/Code/User"
   fi
-  "${diffprog}" "${vscode_dotfiles_dir}" "${vscode_user_dir}"
+  "${diffprog}" "${vscode_dotfiles_dir}" "${vscode_user_dir}" &
+  disown
 }
 
 _sync_vscode_etc () {
