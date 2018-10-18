@@ -9,7 +9,7 @@ PROGNAME="syncvscode.sh"
 _sync_vscode () {
   typeset diffprog="${DIFFPROG:-meld}"
   typeset vscode_dotfiles_dir="${DEV}/dotfiles/code"
-  typeset vscode_user_dir="${HOME}/.code/user" # TODO check and fix
+  typeset vscode_user_dir="${HOME}/.vscode/user" # TODO check and fix
 
   if (uname -a | egrep -i -q "mingw|msys|win32|windows") ; then
     typeset vscode_dotfiles_dir="$(cygpath -w "${DEV}/dotfiles/code" | sed -e 's#\\#\\\\#g')"
