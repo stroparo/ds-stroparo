@@ -12,7 +12,7 @@ PROGNAME=stsetupmintty.sh
 # Checks
 
 if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  echo "${PROGNAME:+$PROGNAME: }SKIP: No Daily Shells loaded." 1>&2
+  echo "${PROGNAME:+$PROGNAME: }SKIP: Not in Windows." 1>&2
   exit
 fi
 
