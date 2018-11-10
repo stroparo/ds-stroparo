@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 PROGNAME=stsetupmintty.sh
+if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
+  echo "${PROGNAME:+$PROGNAME: }SKIP: Not in Windows." 1>&2
+  exit
+fi
 
 # #############################################################################
 # Globals
@@ -10,11 +14,6 @@ PROGNAME=stsetupmintty.sh
 
 # #############################################################################
 # Checks
-
-if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  echo "${PROGNAME:+$PROGNAME: }SKIP: Not in Windows." 1>&2
-  exit
-fi
 
 # GIT_ROOT fallback
 if [ ! -d "${GIT_ROOT}/bin" ] ; then
