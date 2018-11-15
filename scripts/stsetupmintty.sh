@@ -34,8 +34,8 @@ _setup_mintty_at_git_root () {
   typeset git_root="${1:-$(cygpath "C:")/opt/git}"
   [ -d "${git_root}/bin" ] || return
 
-  cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/base16defmodlt-minttyrc.txt "${git_root}"/usr/share/mintty/themes/base16modlt
-  cp -f -v ~/workspace/dotfiles/misc/ui-term-colors/hybrid-minttyrc.txt "${git_root}"/usr/share/mintty/themes/hybrid
+  cp -f -v ~/workspace/dotfiles/assets/ui-term-colors/base16defmodlt-minttyrc.txt "${git_root}"/usr/share/mintty/themes/base16modlt
+  cp -f -v ~/workspace/dotfiles/assets/ui-term-colors/hybrid-minttyrc.txt "${git_root}"/usr/share/mintty/themes/hybrid
 }
 
 _setup_minttyrc () {
