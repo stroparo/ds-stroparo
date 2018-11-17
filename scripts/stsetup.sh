@@ -4,6 +4,6 @@
 # More instructions and licensing at:
 # https://bitbucket.org/stroparo/ds-private
 
-for stsetup_script in "$DS_HOME"/scripts/stsetup[a-z]*.sh ; do
+for stsetup_script in "$DS_HOME"/scripts/stsetup[a-z0-9_]*.sh ; do
   "${stsetup_script}"
 done
