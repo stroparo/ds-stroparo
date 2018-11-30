@@ -4,7 +4,7 @@
 
 TOOLS2="${DS_CONF}/packages/piplist-tools2"
 TOOLS3="${DS_CONF}/packages/piplist-tools3"
-TOOLS36="${DS_CONF}/packages/piplist3.6-tools3"
+TOOLSGLOBAL="${DS_CONF}/packages/piplist-global"
 
 
 _print_header () {
@@ -14,8 +14,8 @@ _print_header () {
 }
 
 
-_print_header "Python custom package selects - '$TOOLS36'"
-pipinstall.sh "$TOOLS36"
+_print_header "Python custom package selects - '$TOOLSGLOBAL'"
+pipinstall.sh "$TOOLSGLOBAL"
 
 _print_header "Python custom package selects - '$TOOLS3'"
 pipinstall.sh -e tools3 "$TOOLS3"
