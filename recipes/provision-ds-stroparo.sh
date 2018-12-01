@@ -12,11 +12,10 @@ _step_base_system () {
 
   mkdir ~/workspace >/dev/null 2>&1 ; ls -d -l ~/workspace || exit $?
 
-  bash -c "$(curl -LSf "https://bitbucket.org/stroparo/runr/raw/master/entry.sh" \
-    || curl -LSf "https://raw.githubusercontent.com/stroparo/runr/master/entry.sh")" \
-    entry.sh apps shell
-
+  bash -c "$(curl -LSf "https://raw.githubusercontent.com/stroparo/ds/master/setup.sh" \
+    || curl -LSf "https://bitbucket.org/stroparo/ds/raw/master/setup.sh")"
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
+  runr apps shell
   export STEP_BASE_SYSTEM_DONE=true
 }
 

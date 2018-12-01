@@ -1,3 +1,4 @@
+pipenv
 datefinder
 asyncpg
 django-micro
