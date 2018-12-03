@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROGNAME="provision-ds-stroparo.sh"
+PROGNAME="provision-stroparo.sh"
 
 
 _step_base_system () {
@@ -15,7 +15,7 @@ _step_base_system () {
   bash -c "$(curl -LSf "https://raw.githubusercontent.com/stroparo/ds/master/setup.sh" \
     || curl -LSf "https://bitbucket.org/stroparo/ds/raw/master/setup.sh")"
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
-  runr apps shell
+  runr apps shell dotfiles git
   export STEP_BASE_SYSTEM_DONE=true
 }
 
