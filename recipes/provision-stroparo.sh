@@ -15,7 +15,7 @@ _step_base_system () {
   bash -c "$(curl -LSf "https://raw.githubusercontent.com/stroparo/ds/master/setup.sh" \
     || curl -LSf "https://bitbucket.org/stroparo/ds/raw/master/setup.sh")"
   dsload || . "${DS_HOME:-$HOME/.ds}/ds.sh" || exit $?
-  runr apps shell dotfiles git
+  runr apps shell
   export STEP_BASE_SYSTEM_DONE=true
 }
 
@@ -27,16 +27,23 @@ _step_self_provision () {
 }
 
 
-_step_own_stuff () {
-  [ -e "${DS_HOME}/envst.sh" ] || return $?
-  st-conf-git.sh
+_step_setup () {
+  if [ -e "${DS_HOME}/envst.sh" ] ; then
+    runr dotfiles git
+    st-conf-git.sh
+    stsetup.sh
+  fi
+
+  if ! ${NODESKTOP:-false} ; then
+    runr provision
+  fi
 }
 
 
 _main () {
   _step_base_system
   _step_self_provision
-  _step_own_stuff
+  _step_setup
 }
 
 
