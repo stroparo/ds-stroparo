@@ -28,15 +28,13 @@ _step_self_provision () {
 
 
 _step_setup () {
+  runr dotfiles
+  runr git
   if [ -e "${DS_HOME}/envst.sh" ] ; then
-    runr dotfiles git
     st-conf-git.sh
     stsetup.sh
   fi
-
-  if ! ${NODESKTOP:-false} ; then
-    runr provision
-  fi
+  runr provision
 }
 
 
