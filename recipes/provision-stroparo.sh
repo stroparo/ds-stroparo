@@ -23,11 +23,11 @@ _step_self_provision () {
 _step_setup () {
   runr dotfiles
   runr git
+  runr provision
   if [ -e "${DS_HOME}/envst.sh" ] ; then
     st-conf-git.sh
     stsetup.sh
   fi
-  runr provision
 }
 
 
