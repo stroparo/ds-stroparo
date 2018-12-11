@@ -1,13 +1,7 @@
 # Workspace deployment/rehashing functions
 
-hashall () {
-  hashdotfiles alias && . ~/.aliases-cs
-  hashdotfiles dotfiles
-  dshash -r # Hash DS and reload it
-}
 
 hashdotfiles () {
-  typeset runr_dir="$DEV"/runr
   if [ ! -d ~/.runr ] && [ -d "$DEV"/runr ] ; then
     cp -a "$DEV"/runr ~/.runr
     chmod 755 ~/.runr/entry.sh
@@ -20,7 +14,7 @@ hashdotfiles () {
   else
     bash -c "$(curl -LSf "https://bitbucket.org/stroparo/runr/raw/master/entry.sh" \
       || curl -LSf "https://raw.githubusercontent.com/stroparo/runr/master/entry.sh")" \
-      entry.sh shell alias apps dotfiles
+      entry.sh apps shell dotfiles git
   fi
 }
 
