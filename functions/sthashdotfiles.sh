@@ -4,12 +4,12 @@
 hashdotfiles () {
   if [ ! -d ~/.runr ] && [ -d "$DEV"/runr ] ; then
     cp -a "$DEV"/runr ~/.runr
-    chmod 755 ~/.runr/entry.sh
   fi
   if [ -d ~/.runr ] ; then
+    chmod 755 ~/.runr/entry.sh
     (cd ~/.runr \
       && [[ $PWD = *.runr ]] \
-      && ./entry.sh -p "$@" \
+      && bash -c "$(cat ./entry.sh)" entry.sh "$@"
     )
   else
     bash -c "$(curl -LSf "https://bitbucket.org/stroparo/runr/raw/master/entry.sh" \
