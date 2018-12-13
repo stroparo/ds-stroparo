@@ -4,9 +4,11 @@ if (uname -a | grep -i -q linux) ; then
 elif (uname -a | egrep -i -q "cygwin") ; then
   dl    () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
   h     () { d "${HOME}" "$@" ; }
+  wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 elif (uname -a | egrep -i -q "mingw|msys|win32|windows") ; then
   dl    () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
   h     () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
+  wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 fi
 
 dx () { d "${DROPBOXHOME}" "$@" ; }
