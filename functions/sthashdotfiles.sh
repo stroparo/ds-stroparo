@@ -2,7 +2,11 @@
 
 
 hashdotfiles () {
-  if [ ! -d ~/.runr ] && [ -d "$DEV"/runr ] ; then
+  if [ -d ~/.runr ] && ! mv ~/.runr ~/.runr.$(date '+%Y%m%d-%OH%OM%OS') ; then
+    echo "${PROGNAME:+$PROGNAME: }FATAL: Could not backup '${HOME}/.runr'." 1>&2
+    return 1
+  fi
+  if [ -d "$DEV"/runr ] ; then
     cp -a "$DEV"/runr ~/.runr
   fi
   if [ -d ~/.runr ] ; then
