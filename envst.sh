@@ -81,7 +81,7 @@ if [[ $- = *i* ]] \
   && [ -d "$DEV" ] \
   && ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}"
 then
-  appendto DS_POST_CALLS '[[ \$PWD = \$HOME ]] && cd \"\${DEV}\" || true'
+  appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV}\" || true'
 fi
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
