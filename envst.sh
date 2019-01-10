@@ -41,8 +41,8 @@ fi
 
 # Path
 if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
-if [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
-pathmunge -x "${HOME}/bin"
+if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
+if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
