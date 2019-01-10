@@ -15,7 +15,7 @@ fi
 # Custom dirs
 handy () { v handy "$@" ; }
 conf () { v handy conf "$@" ; }
-lnk () { v handy conf win-lnk "$@" ; }
+lnk () { v handy/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
 
 # Dropbox
 dx () { d "${DROPBOXHOME}" "$@" ; }
