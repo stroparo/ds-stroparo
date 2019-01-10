@@ -1,3 +1,4 @@
+# Home dirs
 if (uname -a | grep -i -q linux) ; then
   dl    () { d "${HOME}"/Downloads "$@" ; }
   h     () { d "${HOME}" "$@" ; }
@@ -11,6 +12,12 @@ elif (uname -a | egrep -i -q "mingw|msys|win32|windows") ; then
   wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 fi
 
+# Custom dirs
+handy () { v handy "$@" ; }
+conf () { v handy conf "$@" ; }
+lnk () { v handy conf win-lnk "$@" ; }
+
+# Dropbox
 dx () { d "${DROPBOXHOME}" "$@" ; }
 dx2 () {
   d "${DROPBOXHOME}" "$@"
@@ -19,5 +26,11 @@ dx2 () {
       | egrep -v "backups|bak|dropbox[.]cache"
   fi
 }
+
+# My dirs
 myopt () { d "${MYOPT}" "$@" ; }
 mysw  () { d "${MYSW}" "$@" ; }
+
+# Programming editor in the current dir
+cod () { "${VISUAL}" . ; }
+

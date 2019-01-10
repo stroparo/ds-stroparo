@@ -21,7 +21,7 @@ https://stroparo@gitlab.com/stroparo/python-notes.git
 
 : ${DEV:=${HOME}/workspace} ; export DEV
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
-: ${MYOPT:=${HOME}/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
+: ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 : ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
@@ -32,20 +32,16 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   export DEV="$(cygpath "${DEV}")"
   export DROPBOXHOME="$(cygpath "${DROPBOXHOME}")"
   export MYOPT="${MOUNTS_PREFIX}/c/opt"
-  export MYOPTATHOME="${HOME}/opt"
   export ONEDRIVEHOME="$(cygpath "${ONEDRIVEHOME}")"
 
-  alias explorerhere='explorer "$(cygpath -w "$PWD")"'
+  alias exp='explorer "$(cygpath -w "$PWD")"'
 
-  mungemagic -a "${MYOPT}"
-  if [ -d "${MYOPTATHOME}" ] ; then
-    mungemagic -a "${MYOPTATHOME}"
-  fi
   pathmunge -x "/c/Program Files (x86)/Google/Chrome/Application"
 fi
 
-# PATH
-mungemagic -a "${HOME}/opt"
+# Path
+if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
+if [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 pathmunge -x "${HOME}/bin"
 
 # Terminal
