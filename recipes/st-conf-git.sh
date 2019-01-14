@@ -15,7 +15,6 @@ clonemygits "$STGITS"
   MYEMAIL="stroparo@outlook.com" confgits \
     dotfiles \
     ds \
-    ds-extras \
     ds-stroparo \
     runr \
     links \
@@ -23,7 +22,7 @@ clonemygits "$STGITS"
 )
 
 # Mirrors:
-for repo in dotfiles ds{,-extras,-stroparo} runr; do
+for repo in dotfiles ds ds-stroparo runr; do
   (
     cd "${DEV}/${repo}"
     git remote remove mirror 2>/dev/null
