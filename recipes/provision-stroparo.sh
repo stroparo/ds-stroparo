@@ -26,7 +26,6 @@ _step_setup () {
   runr provision
   if [ -e "${DS_HOME}/envst.sh" ] ; then
     st-conf-git.sh
-    stsetup.sh
   fi
 }
 
