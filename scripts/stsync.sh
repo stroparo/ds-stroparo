@@ -4,7 +4,6 @@ PROGNAME="stsync.sh"
 
 
 _git () {
-  runr git
   gitenforcemyuser
   st-conf-git.sh
 }
@@ -13,13 +12,8 @@ _git () {
 _main () {
   . "${DS_HOME:-$HOME/.ds}/ds.sh"
 
-  runr alias
-  runr dotfiles
-  runr sshmodes
-
+  runr alias dotfiles git sshmodes conf-subl
   _git
-
-  runr conf-subl
   syncvscode.sh
 }
 
