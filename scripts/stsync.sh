@@ -12,7 +12,7 @@ _git () {
 _main () {
   . "${DS_HOME:-$HOME/.ds}/ds.sh"
 
-  runr alias dotfiles git sshmodes conf-subl
+  runr alias dotfiles git sshmodes vim conf-subl
   _git
   syncvscode.sh
 }
