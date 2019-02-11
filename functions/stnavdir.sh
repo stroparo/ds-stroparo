@@ -14,8 +14,10 @@ fi
 
 # Custom dirs
 handy () { v handy "$@" ; }
+comp () { d "${MY_LIBCOMP_REPO}" ; }
 conf () { v handy conf "$@" ; }
 lnk () { v handy/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
+todo () { d "${MY_TODO_REPO}" ; }
 
 # Dropbox
 dx () { d "${DROPBOXHOME}" "$@" ; }
