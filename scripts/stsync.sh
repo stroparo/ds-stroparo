@@ -14,6 +14,12 @@ _git () {
 }
 
 
+_sync_repos () {
+  (cd "${MY_TODO_REPO}"; git pull)
+  (cd "${MY_LIBCOMP_REPO}"; git pull)
+}
+
+
 _main () {
   . "${DS_HOME:-$HOME/.ds}/ds.sh"
 
@@ -29,6 +35,7 @@ _main () {
   syncvscode.sh
 
   _git
+  _sync_repos
 }
 
 
