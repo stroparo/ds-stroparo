@@ -32,7 +32,3 @@ dx2 () {
 # My dirs
 myopt () { d "${MYOPT}" "$@" ; }
 mysw  () { d "${MYSW}" "$@" ; }
-
-# Programming editor in the current dir
-cod () { "${VISUAL}" . ; }
-
