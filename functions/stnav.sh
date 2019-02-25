@@ -12,12 +12,11 @@ elif (uname -a | egrep -i -q "mingw|msys|win32|windows") ; then
   wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 fi
 
-# Custom dirs
+# Workspace
+v () { d "${DEV:-$HOME/workspace}" "$@" ; }
 handy () { v handy "$@" ; }
-comp () { d "${MY_LIBCOMP_REPO}" ; }
 conf () { v handy conf "$@" ; }
 lnk () { v handy/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
-todo () { d "${MY_TODO_REPO}" ; }
 
 # Dropbox
 dx () { d "${DROPBOXHOME}" "$@" ; }
@@ -30,5 +29,7 @@ dx2 () {
 }
 
 # My dirs
+comp () { d "${MY_LIBCOMP_REPO}" "$@" ; }
 myopt () { d "${MYOPT}" "$@" ; }
 mysw  () { d "${MYSW}" "$@" ; }
+todo () { d "${MY_TODO_REPO}" "$@" ; }
