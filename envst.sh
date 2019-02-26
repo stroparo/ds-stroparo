@@ -70,6 +70,11 @@ elif (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
 fi
 
 # #############################################################################
+# DS gitr parallel
+
+if (uname -a | grep -i -q linux) ; then export GITR_PARALLEL=true ; fi
+
+# #############################################################################
 # DS post calls
 
 if [[ $- = *i* ]] \
