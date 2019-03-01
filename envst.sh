@@ -3,10 +3,13 @@
 # #############################################################################
 # Custom
 
-stshopt # routine defined in ds-stroparo/functions
+stshopt # shell custom options routine defined in ds-stroparo/functions
 
 # #############################################################################
 # Globals
+
+: ${DEV:=${HOME}/workspace} ; export DEV
+: ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 
 export STGITS="
 https://stroparo@bitbucket.org/stroparo/dotfiles.git
@@ -18,11 +21,9 @@ https://stroparo@gitlab.com/stroparo/links.git
 https://stroparo@gitlab.com/stroparo/python-notes.git
 "
 
-: ${DEV:=${HOME}/workspace} ; export DEV
+# Cloud
 : ${DROPBOXHOME:=${HOME}/Dropbox} ; export DROPBOXHOME
-: ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 : ${ONEDRIVEHOME:=${HOME}/OneDrive} ; export ONEDRIVEHOME
-: ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Cygwin
 if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
@@ -38,10 +39,13 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   pathmunge -x "/c/Program Files (x86)/Google/Chrome/Application"
 fi
 
-# Path
+# PATH
 if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
+
+# Python
+: ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
@@ -52,7 +56,7 @@ export LS_COLORS="ow=01;95:di=01;94"
 
 export EDITOR=vim
 export GIT_EDITOR=vim
-export VISUAL=code
+export VISUAL=subl
 
 # Custom DIFFPROG global:
 if which meld >/dev/null 2>&1 ; then
@@ -81,7 +85,7 @@ if [[ $- = *i* ]] \
   && [ -d "$DEV" ] \
   && ! echogrep -q 'cd "\$\{DEV\}"' "${DS_POST_CALLS}"
 then
-  appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV}\" || true'
+  appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
 fi
 
 if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
