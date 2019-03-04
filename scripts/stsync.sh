@@ -3,13 +3,30 @@
 PROGNAME="stsync.sh"
 
 
-_git () {
+_git_conf () {
 
   gitenforcemyuser
 
   # Execute all installed Daily Shells plugins' *conf-git.sh scripts:
   for git_script in "${DS_HOME:-$HOME/.ds}"/*/*conf-git.sh ; do
     bash "${git_script}"
+  done
+}
+
+
+_git_sync () {
+  for repo in "$@" ; do
+    if [ -d "$repo" ] ; then
+      (
+        cd "$repo"
+        pwd
+        git pull origin master
+        git push origin master
+        echo "git status:"
+        git status -s
+        echo
+      )
+    fi
   done
 }
 
@@ -28,7 +45,11 @@ _main () {
 
   syncvscode.sh
 
-  _git
+  _git_conf
+  _git_sync \
+    "${MY_LIBCOMP_REPO}" \
+    "${MY_TODO_REPO}"
+
 }
 
 
