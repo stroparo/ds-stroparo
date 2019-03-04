@@ -3,7 +3,7 @@
 PROGNAME="stsync.sh"
 
 
-_git_conf () {
+_conf_git () {
 
   gitenforcemyuser
 
@@ -14,7 +14,22 @@ _git_conf () {
 }
 
 
-_git_sync () {
+_conf () {
+  . "${DS_HOME:-$HOME/.ds}/ds.sh"
+  runr \
+    alias \
+    dotfiles \
+    git \
+    sshmodes \
+    vim \
+    conf-subl \
+    conf-vscode
+
+  _conf_git
+
+}
+
+_sync_git () {
   for repo in "$@" ; do
     if [ -d "$repo" ] ; then
       (
@@ -31,26 +46,15 @@ _git_sync () {
 }
 
 
-_main () {
-  . "${DS_HOME:-$HOME/.ds}/ds.sh"
+_sync () {
 
-  runr \
-    alias \
-    dotfiles \
-    git \
-    sshmodes \
-    vim \
-    conf-subl \
-    conf-vscode
-
-  syncvscode.sh
-
-  _git_conf
-  _git_sync \
+  _sync_git \
     "${MY_LIBCOMP_REPO}" \
     "${MY_TODO_REPO}"
 
+  syncvscode.sh
 }
 
 
-_main
+_conf
+_sync
