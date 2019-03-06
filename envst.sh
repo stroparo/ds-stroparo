@@ -92,8 +92,16 @@ if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
   # Keep interactivity check (test on $- variable) as gitr.sh
   #  itself loads DS and thus this can cause an infinite recursion:
   if [[ $- = *i* ]] && ! echogrep -q 'gitr.sh ss' "${DS_POST_CALLS}" ; then
-    appendto DS_POST_CALLS '[ -d ds ] && gitr.sh ss || true'
+    appendto DS_POST_CALLS '[ -d ./ds ] && gitr.sh ss || true'
   fi
+fi
+
+# #############################################################################
+# Vim
+
+if which ag >/dev/null 2>&1 ; then
+  export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
+  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
 
 # #############################################################################
