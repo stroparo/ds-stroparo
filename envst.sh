@@ -97,7 +97,7 @@ if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
 fi
 
 # #############################################################################
-# Vim
+# Search tool fzf
 
 if which ag >/dev/null 2>&1 ; then
   export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
