@@ -6,7 +6,7 @@ PROGNAME="syncvscode.sh"
 # * ds (Daily Shells) at https://stroparo.github.io/ds - MOUNTS_PREFIX global etc.
 # * ds-stroparo plugin
 
-DIFFPROG="meld"
+: ${DIFFPROG:=meld}
 if ! which ${DIFFPROG} >/dev/null 2>&1 ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: the diff program '${DIFFPROG}' is not available." 1>&2
   exit

@@ -2,7 +2,7 @@
 
 PROGNAME="syncsubl.sh"
 
-DIFFPROG="meld"
+: ${DIFFPROG:=meld}
 if ! which ${DIFFPROG} >/dev/null 2>&1 ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: the diff program '${DIFFPROG}' is not available." 1>&2
   exit
