@@ -2,6 +2,7 @@
 
 PROGNAME="syncsubl.sh"
 
+SRC_CONFIG_DIR="${DEV}/dotfiles/config/subl"
 : ${DIFFPROG:=meld}
 if ! which ${DIFFPROG} >/dev/null 2>&1 ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: the diff program '${DIFFPROG}' is not available." 1>&2
@@ -39,13 +40,12 @@ fi
 
 
 _sync_subl () {
-  typeset dotfiles_dir="${DEV}/dotfiles/subl3"
   typeset user_dir="${SUBL_USER}"
 
   if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-    typeset dotfiles_dir="$(cygpath -w "${dotfiles_dir}" | sed -e 's#\\#\\\\#g')"
+    typeset SRC_CONFIG_DIR="$(cygpath -w "${SRC_CONFIG_DIR}" | sed -e 's#\\#\\\\#g')"
   fi
-  "${DIFFPROG}" "${dotfiles_dir}" "${user_dir}" &
+  "${DIFFPROG}" "${SRC_CONFIG_DIR}" "${user_dir}" &
   disown
 }
 
