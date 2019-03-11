@@ -22,8 +22,8 @@ _conf () {
     git \
     sshmodes \
     vim \
-    conf-subl \
-    conf-vscode
+    syncsubl.sh \
+    syncvscode.sh
 
   _conf_git
 
