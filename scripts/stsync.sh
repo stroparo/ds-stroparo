@@ -21,9 +21,7 @@ _conf () {
     dotfiles \
     git \
     sshmodes \
-    vim \
-    syncsubl.sh \
-    syncvscode.sh
+    vim
 
   _conf_git
 
@@ -51,8 +49,6 @@ _sync () {
   _sync_git \
     "${MY_LIBCOMP_REPO}" \
     "${MY_TODO_REPO}"
-
-  syncvscode.sh
 }
 
 
