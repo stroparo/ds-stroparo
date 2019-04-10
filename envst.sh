@@ -76,7 +76,9 @@ fi
 # #############################################################################
 # DS gitr parallel
 
-if (uname -a | grep -i -q linux) ; then export GITR_PARALLEL=true ; fi
+if (uname -a | grep -i -q linux) ; then
+  export GITR_PARALLEL=true
+fi
 
 # #############################################################################
 # DS post calls
@@ -103,6 +105,11 @@ if which ag >/dev/null 2>&1 ; then
   export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
+
+# #############################################################################
+# Aliases
+
+alias gdox='v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa)'
 
 # #############################################################################
 
