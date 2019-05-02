@@ -77,7 +77,8 @@ fi
 # DS gitr parallel
 
 if (uname -a | grep -i -q linux) \
-  && ((git config --global -l | grep -q 'cred.*store') || ssh-add -l >/dev/null 2>&1)
+  && ((git config --global -l | grep -q 'cred.*store') \
+      || (ssh-add -l >/dev/null 2>&1 | grep -i -q git))
 then
   export GITR_PARALLEL=true
 fi
