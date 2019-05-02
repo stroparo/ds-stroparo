@@ -81,6 +81,8 @@ if (uname -a | grep -i -q linux) \
       || (ssh-add -l >/dev/null 2>&1 | grep -i -q git))
 then
   export GITR_PARALLEL=true
+else
+  export GITR_PARALLEL=false
 fi
 
 # #############################################################################
