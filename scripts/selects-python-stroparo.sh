@@ -24,9 +24,7 @@ _print_header () {
 # #############################################################################
 # Main
 
-echo
-echo "################################################################################"
-echo "Setup Go (golang); \$0='$0'; \$PWD='$PWD'"
+_print_header "Python selects by Stroparo - starting..."
 
 # Check Linux:
 if !(uname -a | grep -i -q linux) ; then
