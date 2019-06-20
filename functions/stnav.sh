@@ -14,9 +14,9 @@ fi
 
 # Workspace
 v () { d "${DEV:-$HOME/workspace}" "$@" ; }
-handy () { v handy "$@" ; }
-conf () { v handy conf "$@" ; }
-lnk () { v handy/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
+handy () { d "${MOUNTS_PREFIX}"/z/handy "$@" ; }
+conf () { d "${MOUNTS_PREFIX}"/z/handy conf "$@" ; }
+lnk () { d "${MOUNTS_PREFIX}"/z/handy/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
 
 # Dropbox
 dx () { d "${DROPBOXHOME}" "$@" ; }
