@@ -6,6 +6,7 @@ _update_git_repos () {
         pwd
         git pull origin master
         git push origin master
+        # TODO add push to mirror remote (when it exists)
         echo "git status:"
         git status -s
         echo
