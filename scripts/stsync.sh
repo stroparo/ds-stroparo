@@ -3,7 +3,7 @@
 PROGNAME="stsync.sh"
 
 # Conf
-stsyncdotfiles.sh
+runrhashst.sh
 dsconfsgit.sh
 
 # Other

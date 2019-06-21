@@ -12,6 +12,14 @@ stshopt # shell custom options routine defined in ds-stroparo/functions
 : ${HANDY_REPO_DIR:=${MOUNTS_PREFIX}/z/handy} ; export HANDY_REPO_DIR
 : ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 
+export DOTFILES_SELECTS_ST="
+alias
+dotfiles
+git
+sshmodes
+vim
+"
+
 export STGITS="
 https://stroparo@bitbucket.org/stroparo/dotfiles.git
 https://stroparo@bitbucket.org/stroparo/ds.git
