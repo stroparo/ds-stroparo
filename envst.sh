@@ -87,7 +87,7 @@ fi
 
 if (uname -a | grep -i -q linux) \
   && ((cd ; git config -l | grep -q 'cred.*store') \
-      || (ssh-add -l >/dev/null 2>&1 | egrep -i -q -w 'cs|panther|user|git|stroparo'))
+      || (ssh-add -l 2>/dev/null | egrep -i -q -w 'cs|panther|user|git|stroparo'))
 then
   export GITR_PARALLEL=true
 else
