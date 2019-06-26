@@ -31,5 +31,6 @@ dx2 () {
 # My dirs
 comp () { d "${MY_LIBCOMP_REPO}" "$@" ; }
 myopt () { d "${MYOPT}" "$@" ; }
-mysw  () { d "${MYSW}" "$@" ; }
+sp () { d "${MOUNTS_PREFIX}/p/cs-nosync" "$@" ; }
+sw  () { d "${DROPBOXHOME}/sw" "$@" ; }
 todo () { d "${MY_TODO_REPO}" "$@" ; }

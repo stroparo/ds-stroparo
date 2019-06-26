@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-PROGNAME="stdotfiles.sh"
+PROGNAME="runrhashst.sh"
 
 echo
 echo "${PROGNAME:+$PROGNAME: }INFO: Applying ds-stroparo's dotfiles configurations:" 1>&2

@@ -1,32 +1,31 @@
-#!/usr/bin/env bash
-
-PROGNAME="stsyncrepos.sh"
+#!/bin/bash
 
 
-# TODO later on dismember this generyc git sync function into maybe a Daily Shells routine, for example..
-_sync_git () {
-  typeset repo="$1"
-  if [ -d "$repo" ] ; then
-    (
-      echo
-      cd "$repo"
-      echo "${PROGNAME:+$PROGNAME: }INFO: Now syncing git repo '${repo}'"
-      echo "${PROGNAME:+$PROGNAME: }INFO: Working dir is '$(pwd)'"
-      git pull origin master
-      echo "${PROGNAME:+$PROGNAME: }INFO: git status before push, in '${repo}':"
-      git push origin master
-      echo "${PROGNAME:+$PROGNAME: }INFO: git status after push, in '${repo}':"
-      git status -s
-      echo
-    )
-  fi
+_update_git_repos () {
+  for repo in "$@" ; do
+    if [ -d "$repo" ] ; then
+      (
+        cd "$repo"
+        pwd
+        git pull origin master
+        # TODO add push to mirror remote (when it exists)
+        echo "git status at '${PWD}':"
+        git status -s
+        git branch -vv
+        echo
+      )
+    fi
+  done
 }
 
 
-echo
-echo "${PROGNAME:+$PROGNAME: }INFO: Repository syncing routine" 1>&2
-echo
+_main () {
+  _update_git_repos \
+      "${MY_LIBCOMP_REPO}" \
+      "${MY_TODO_REPO}"
+  v
+  rpull
+}
 
-_sync_git \
-  "${MY_LIBCOMP_REPO}" \
-  "${MY_TODO_REPO}"
+
+_main "$@"
