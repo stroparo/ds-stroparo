@@ -19,8 +19,8 @@ conf () { d "${HANDY_REPO_DIR}" conf "$@" ; }
 lnk () { d "${HANDY_REPO_DIR}"/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
 
 # Dropbox
-dx () { d "${DROPBOXHOME}" "$@" ; }
-dx2 () {
+n2dx () { d "${DROPBOXHOME}" "$@" ; }
+n2dxfind2 () {
   d "${DROPBOXHOME}" "$@"
   if echo "$PWD" | fgrep -q "${DROPBOXHOME##*/}" ; then
     find . -type d -maxdepth 2 \
@@ -29,8 +29,5 @@ dx2 () {
 }
 
 # My dirs
-comp () { d "${MY_LIBCOMP_REPO}" "$@" ; }
-myopt () { d "${MYOPT}" "$@" ; }
-sp () { d "${MOUNTS_PREFIX}/p/cs-nosync" "$@" ; }
-sw  () { d "${DROPBOXHOME}/sw" "$@" ; }
-todo () { d "${MY_TODO_REPO}" "$@" ; }
+n2opt () { d "${MYOPT}" "$@" ; }
+n2sw  () { d "${DROPBOXHOME}/sw" "$@" ; }
