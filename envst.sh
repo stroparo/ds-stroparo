@@ -9,7 +9,7 @@ stshopt # shell custom options routine defined in ds-stroparo/functions
 # Globals
 
 : ${DEV:=${HOME}/workspace} ; export DEV
-: ${HANDY_REPO_DIR:=${MOUNTS_PREFIX:-/mnt}/z/handy} ; export HANDY_REPO_DIR
+: ${HANDY_REPO_DIR:=${MOUNTS_PREFIX}/z/handy} ; export HANDY_REPO_DIR
 : ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 
 export DOTFILES_SELECTS_ST="
