@@ -1,15 +1,5 @@
 # Daily Shells Stroparo
 
-## Clone this & provision environment
-
-```bash
-mv -f ~/.ds-stroparo ~/.ds-stroparo.$(date '+%Y-%m-%d-%OH-%OM-%OS')
-git clone --depth=1 "https://stroparo@bitbucket.org/stroparo/ds-stroparo.git" ~/.ds-stroparo \
-  || git clone --depth=1 "https://stroparo@github.com/stroparo/ds-stroparo.git" ~/.ds-stroparo \
-  && bash ~/.ds-stroparo/recipes/provision-stroparo.sh
-
-```
-
 ## Install Daily Shells and this plugin
 
 ```bash
