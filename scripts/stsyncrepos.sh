@@ -23,8 +23,13 @@ _main () {
   _update_git_repos \
       "${MY_LIBCOMP_REPO}" \
       "${MY_TODO_REPO}"
-  v
-  rpull
+
+  # Recursively pull in the devel workspace:
+  cd "${DEV:-${HOME}/workspace}"
+  if (pwd | fgrep -q "${DEV:-${HOME}/workspace}") ; then
+    . "${DS_HOME:-${HOME}/.ds}/functions/gitrecursive.sh"
+    rpull
+  fi
 }
 
 
