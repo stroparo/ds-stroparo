@@ -46,7 +46,7 @@ _print_header "${PROGNAME:+$PROGNAME: }Calling pipinstall.sh (ds) with list '${T
 _end_bar
 
 # _print_header "${PROGNAME:+$PROGNAME: }Pipsi isolated venvs for each installed script"
-# curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+# curl --tlsv1.3 https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
 # _end_bar
 
 echo "${PROGNAME:+$PROGNAME: }COMPLETE"
