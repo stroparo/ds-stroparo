@@ -22,7 +22,8 @@ _update_git_repos () {
 _main () {
   _update_git_repos \
       "${MY_LIBCOMP_REPO}" \
-      "${MY_TODO_REPO}"
+      "${MY_TODO_REPO}" \
+      "${MOUNTS_PREFIX}/p/cs-nosync/repos"/*
 
   # Recursively pull in the devel workspace:
   cd "${DEV:-${HOME}/workspace}"
