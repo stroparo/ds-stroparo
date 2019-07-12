@@ -15,12 +15,12 @@ fi
 # Workspace
 v () { d "${DEV:-$HOME/workspace}" "$@" ; }
 handy () { d "${HANDY_REPO_DIR}" "$@" ; }
-conf () { d "${HANDY_REPO_DIR}" conf "$@" ; }
+conf () { d "${HANDY_REPO_DIR}"/conf "$@" ; }
 lnk () { d "${HANDY_REPO_DIR}"/conf/win-lnk "$@" ; explorer "$(cygpath -w "$PWD")" ; }
 
 # Dropbox
-n2dx () { d "${DROPBOXHOME}" "$@" ; }
-n2dxfind2 () {
+mydx () { d "${DROPBOXHOME}" "$@" ; }
+mydxfind2 () {
   d "${DROPBOXHOME}" "$@"
   if echo "$PWD" | fgrep -q "${DROPBOXHOME##*/}" ; then
     find . -type d -maxdepth 2 \
@@ -29,5 +29,5 @@ n2dxfind2 () {
 }
 
 # My dirs
-n2opt () { d "${MYOPT}" "$@" ; }
-n2sw  () { d "${DROPBOXHOME}/sw" "$@" ; }
+myopt () { d "${MYOPT}" "$@" ; }
+mysw  () { d "${DROPBOXHOME}/sw" "$@" ; }
