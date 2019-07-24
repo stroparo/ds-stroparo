@@ -14,7 +14,10 @@ stshopt # shell custom options routine defined in ds-stroparo/functions
 : ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   export DEV="$(cygpath "${DEV}")"
-  export MYOPT="$(cygpath "$USERPROFILE")/opt"
+  export MYOPT="${MOUNTS_PREFIX}/c/opt"
+  if [ -d "$(cygpath "$USERPROFILE")/opt" ] ; then
+    export MYOPT="$(cygpath "$USERPROFILE")/opt"
+  fi
 fi
 
 # Cygwin
