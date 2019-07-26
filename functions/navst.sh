@@ -1,3 +1,6 @@
+# Disk plus dirs to nav:
+dsk () { typeset disk="$1" ; shift ; d "${MOUNTS_PREFIX%/}/${disk}" "$@" ; }
+
 # Home dirs
 if (uname -a | grep -i -q linux) ; then
   dl    () { d "${HOME}"/Downloads "$@" ; }
