@@ -10,7 +10,6 @@ stshopt # shell custom options routine defined in ds-stroparo/functions
 
 # Basic
 : ${DEV:=${HOME}/workspace} ; export DEV
-: ${HANDY_REPO_DIR:=${MOUNTS_PREFIX}/z/handy} ; export HANDY_REPO_DIR
 : ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   export DEV="$(cygpath "${DEV}")"
