@@ -113,6 +113,47 @@ if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 
 # #############################################################################
+# PATH for Android Studio development environment
+
+if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
+
+  if [ -e "${MNT_EXTRA:-/mnt/extra}"/Android ] ; then
+    pathmunge -a -x "${MNT_EXTRA:-/mnt/extra}"/Android/Sdk/platform-tools
+  fi
+
+  if [ -e /opt/android-studio ] ; then
+    pathmunge -a -x /opt/android-studio/bin
+  fi
+
+  if ! which studio >/dev/null 2>&1 \
+    && [ -e /opt/android-studio/bin/studio.sh ]
+  then
+    sudo ln -s "studio.sh" "/opt/android-studio/bin/studio"
+  fi
+fi
+
+# #############################################################################
+# PATH for Windows applications
+
+if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
+  # Crypto
+  pathmunge -x "$(cygpath 'C:\Program Files')/TrueCrypt"
+  pathmunge -x "$(cygpath 'C:\Program Files')/VeraCrypt"
+
+  # Dev
+  pathmunge -x "${MYOPT}/opt/subl"
+
+  # Dev infra
+  pathmunge -x "$(cygpath 'C:')/HashiCorp/Vagrant/bin"
+  pathmunge -x "$(cygpath 'C:\Program Files')/Docker Toolbox/docker"
+  pathmunge -x "$(cygpath 'C:\Program Files')/Oracle/VirtualBox"
+
+  # Web
+  pathmunge -x "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application"
+  pathmunge -x "$(cygpath 'C:\Program Files')/Mozilla Firefox"
+fi
+
+# #############################################################################
 # Platform - Python
 
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
@@ -130,6 +171,15 @@ fi
 
 alias exp='explorer "$(cygpath -w "$PWD")"'
 alias gdox='v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa)'
+
+# DS sync:
+alias zsdotfiles='dsconfdotfiles.sh'
+alias zsgit='dsconfgit.sh'
+
+# Windows applications:
+if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
+  alias sp='sumatrapdf'
+fi
 
 # #############################################################################
 
