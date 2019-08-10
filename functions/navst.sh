@@ -30,4 +30,4 @@ zdxfind2 () {
 
 # My dirs
 zdopt () { d "${MYOPT}" "$@" ; }
-zdsw () { d "${DROPBOXHOME}/sw" "$@" ; }
+zdswdropbox () { d "${DROPBOXHOME}/sw" "$@" ; }

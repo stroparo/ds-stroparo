@@ -1,9 +1,19 @@
 # Daily Shells Stroparo extensions
 
 # #############################################################################
-# Custom
+# Aliases & other handy stuff
 
-stshopt # shell custom options routine defined in ds-stroparo/functions
+# Custom shell options:
+stshopt
+
+# Synchronization:
+gdox () { v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa) ; }
+
+# Windows applications:
+if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
+  alias exp='explorer "$(cygpath -w "$PWD")"'
+  alias sp='sumatrapdf'
+fi
 
 # #############################################################################
 # Globals
@@ -132,6 +142,13 @@ if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
 fi
 
 # #############################################################################
+# PATH for Linux
+
+if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
+  pathmunge -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu'
+fi
+
+# #############################################################################
 # PATH for Windows applications
 
 if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
@@ -163,21 +180,6 @@ fi
 if which ag >/dev/null 2>&1 ; then
   export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
-fi
-
-# #############################################################################
-# Aliases
-
-alias exp='explorer "$(cygpath -w "$PWD")"'
-alias gdox='v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa)'
-
-# DS sync:
-alias zsdotfiles='dsconfdotfiles.sh'
-alias zsgit='dsconfgit.sh'
-
-# Windows applications:
-if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  alias sp='sumatrapdf'
 fi
 
 # #############################################################################
