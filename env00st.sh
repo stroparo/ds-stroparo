@@ -9,12 +9,6 @@ stshopt
 # Synchronization:
 gdox () { v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa) ; }
 
-# Windows applications:
-if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  alias exp='explorer "$(cygpath -w "$PWD")"'
-  alias sp='sumatrapdf'
-fi
-
 # #############################################################################
 # Globals
 
@@ -29,10 +23,10 @@ if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
   fi
 fi
 
-# Cygwin
-if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  export CYGWIN="$CYGWIN winsymlinks:nativestrict"
-fi
+# Editor
+export EDITOR=vim
+export GIT_EDITOR=vim
+export VISUAL=subl
 
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
@@ -60,40 +54,6 @@ https://stroparo@gitlab.com/stroparo/python-notes.git
 "
 
 # #############################################################################
-# Globals - Default editors
-
-export EDITOR=vim
-export GIT_EDITOR=vim
-export VISUAL=subl
-
-# Custom DIFFPROG global:
-if which meld >/dev/null 2>&1 ; then
-  export DIFFPROG="meld"
-elif which kdiff3 >/dev/null 2>&1 ; then
-  export DIFFPROG="kdiff3"
-elif (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  if [ -x "${MYOPT}/meld/meld" ] ; then
-    export DIFFPROG="${MYOPT}/meld/meld"
-  elif [ -x "${MYOPT}/kdiff3/kdiff3" ] ; then
-    export DIFFPROG="${MYOPT}/kdiff3/kdiff3"
-  elif [ -f "${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ] ; then
-    export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
-  fi
-fi
-
-# #############################################################################
-# Globals - Daily Shells - gitr parallel / concurrent jobs
-
-if (uname -a | grep -i -q linux) \
-  && ((cd ; git config -l | grep -q 'cred.*store') \
-      || (ssh-add -l 2>/dev/null | egrep -i -q -w 'dsa|rsa|ssh'))
-then
-  export GITR_PARALLEL=true
-else
-  export GITR_PARALLEL=false
-fi
-
-# #############################################################################
 # Globals - Daily Shells - post calls
 
 if [[ $- = *i* ]] \
@@ -112,7 +72,7 @@ if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
 fi
 
 # #############################################################################
-# PATH
+# Globals - PATH
 
 # Basic
 if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
@@ -120,67 +80,6 @@ if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
 # opt dirs, avoiding a ~/opt duplicate:
 if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
-
-# #############################################################################
-# PATH for Android Studio development environment
-
-if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
-
-  if [ -e "${MNT_EXTRA:-/mnt/extra}"/Android ] ; then
-    pathmunge -a -x "${MNT_EXTRA:-/mnt/extra}"/Android/Sdk/platform-tools
-  fi
-
-  if [ -e /opt/android-studio ] ; then
-    pathmunge -a -x /opt/android-studio/bin
-  fi
-
-  if ! which studio >/dev/null 2>&1 \
-    && [ -e /opt/android-studio/bin/studio.sh ]
-  then
-    sudo ln -s "studio.sh" "/opt/android-studio/bin/studio"
-  fi
-fi
-
-# #############################################################################
-# PATH for Linux
-
-if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
-  pathmunge -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu'
-fi
-
-# #############################################################################
-# PATH for Windows applications
-
-if (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then
-  # Crypto
-  pathmunge -x "$(cygpath 'C:\Program Files')/TrueCrypt"
-  pathmunge -x "$(cygpath 'C:\Program Files')/VeraCrypt"
-
-  # Dev
-  pathmunge -x "${MYOPT}/opt/subl"
-
-  # Dev infra
-  pathmunge -x "$(cygpath 'C:')/HashiCorp/Vagrant/bin"
-  pathmunge -x "$(cygpath 'C:\Program Files')/Docker Toolbox/docker"
-  pathmunge -x "$(cygpath 'C:\Program Files')/Oracle/VirtualBox"
-
-  # Web
-  pathmunge -x "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application"
-  pathmunge -x "$(cygpath 'C:\Program Files')/Mozilla Firefox"
-fi
-
-# #############################################################################
-# Platform - Python
-
-: ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
-
-# #############################################################################
-# Tool - fzf - for fuzzy search support
-
-if which ag >/dev/null 2>&1 ; then
-  export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
-  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
-fi
 
 # #############################################################################
 
