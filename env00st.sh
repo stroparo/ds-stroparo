@@ -49,8 +49,8 @@ https://stroparo@bitbucket.org/stroparo/ds.git
 https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
 https://stroparo@bitbucket.org/stroparo/runr.git
 
-https://stroparo@gitlab.com/stroparo/links.git
-https://stroparo@gitlab.com/stroparo/python-notes.git
+https://stroparo@bitbucket.org/stroparo/links.git
+https://stroparo@bitbucket.org/stroparo/python-notes.git
 "
 
 # #############################################################################
