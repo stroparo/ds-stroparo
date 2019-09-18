@@ -22,11 +22,13 @@ clonemygits "$STGITS"
 )
 
 # Mirrors:
-for repo in dotfiles ds ds-stroparo runr; do
-  (
-    cd "${DEV}/${repo}"
-    git remote remove mirror 2>/dev/null
-    git remote add mirror "https://stroparo@github.com/stroparo/${repo}.git" \
-      && (git remote -v | grep ^mirror)
-  )
-done
+if ! ${STGITS_NOMIRRORS:-false} ; then
+  for repo in dotfiles ds ds-stroparo runr; do
+    (
+      cd "${DEV}/${repo}"
+      git remote remove mirror 2>/dev/null
+      git remote add mirror "https://stroparo@github.com/stroparo/${repo}.git" \
+        && (git remote -v | grep ^mirror)
+    )
+  done
+fi
