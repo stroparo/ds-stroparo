@@ -13,7 +13,7 @@ _st_bash_ps1 () {
     ST1_BRANCH_COLOR="1;31m"
   fi
   ST1_BRANCH="$(git branch 2>/dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')"
-  ST1_BRANCH=" {${ST1_BRANCH}} "
+  ST1_BRANCH="${ST1_BRANCH:+ {${ST1_BRANCH}\} }"
   ST1_BRANCH="\\033[${ST1_BRANCH_COLOR}${ST1_BRANCH}"
 
   ST1_DIR="\\033[${ST1_DIR_COLOR}\\w"
