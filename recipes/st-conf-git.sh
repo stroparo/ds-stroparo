@@ -57,7 +57,7 @@ _clone_custom_repos () {
     repo_basename="$(echo "${repo}" | tr '[[:upper:]]' '[[:lower:]]' | eval "sed -e \"\${CZ_REPO_${repo}_RXPR}\"")"
 
     if eval "test ! -d \"\${CZ_REPO_${repo}}\"" ; then
-      eval "git clone \"${CZ_REPOS_DIRNAME_URL}/${repo_basename}.git\" \"\${CZ_REPO_${repo}}\""
+      eval "git clone \"${CZ_REPOS_DIRNAME_URL%/}/${repo_basename#/}.git\" \"\${CZ_REPO_${repo}}\""
     fi
   done
 }
