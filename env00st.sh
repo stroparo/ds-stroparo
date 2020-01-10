@@ -6,8 +6,8 @@
 # Custom shell options:
 stshopt
 
-# Synchronization:
-gdox () { v dotfiles ; (gdd | grep -qv ergodox) || (gdd && gciup ergodox && gpa) ; }
+# Synchronization routines:
+gdox () { v dotfiles ; (gdd $(gss | grep -qv ergodox)) || (gdd && gciup ergodox && gpa) ; }
 
 # #############################################################################
 # Globals
