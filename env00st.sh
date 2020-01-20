@@ -7,7 +7,7 @@
 stshopt
 
 # Synchronization routines:
-gdox () { v dotfiles ; (gdd $(gss | grep -qv ergodox)) || (gdd && gciup ergodox && gpa) ; }
+gdox () { v dotfiles ; (gss | grep -qv ergodox) || (gdd && gciup ergodox && gpa) ; }
 
 # #############################################################################
 # Globals
