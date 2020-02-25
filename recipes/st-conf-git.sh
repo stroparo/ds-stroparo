@@ -6,9 +6,18 @@ echo
 echo "################################################################################"
 echo "Git config (ds-stroparo) \$0='$0'"
 
+# #############################################################################
+# Requirements
+
 . "${DS_HOME:-$HOME/.ds}/ds.sh"
 
+# #############################################################################
+# Base repos
+
 clonemygits "$STGITS"
+
+# #############################################################################
+# Author
 
 (
   cd "$DEV"
@@ -21,7 +30,9 @@ clonemygits "$STGITS"
     python-notes
 )
 
-# Mirrors:
+# #############################################################################
+# Mirrors
+
 if ${STGITS_MIRRORS:-false} ; then
   for repo in devlinks dotfiles ds ds-stroparo links python-notes runr; do
     (
