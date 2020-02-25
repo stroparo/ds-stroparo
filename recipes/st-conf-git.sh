@@ -36,13 +36,13 @@ fi
 # #############################################################################
 # Other custom repos
 
-_clone_custom_repos () {
+_clone_custom_cz_repos () {
   if [ ! -e "${CZ_REPOS_PROFILE}" ] ; then
-    echo "${PROGNAME:+$PROGNAME: }_clone_custom_repos: SKIP: no file pointed to by CZ_REPOS_PROFILE (${CZ_REPOS_PROFILE})."
+    echo "${PROGNAME:+$PROGNAME: }_clone_custom_cz_repos: SKIP: no file pointed to by CZ_REPOS_PROFILE (${CZ_REPOS_PROFILE})."
     return
   fi
   if [ -z "${CZ_REPOS_DIRNAME_URL}" ] ; then
-    echo "${PROGNAME:+$PROGNAME: }_clone_custom_repos: SKIP: Empty global variable 'CZ_REPOS_DIRNAME_URL'."
+    echo "${PROGNAME:+$PROGNAME: }_clone_custom_cz_repos: SKIP: Empty global variable 'CZ_REPOS_DIRNAME_URL'."
     return
   fi
 
@@ -62,6 +62,6 @@ _clone_custom_repos () {
   done
 }
 
-_clone_custom_repos
+_clone_custom_cz_repos
 
 # #############################################################################
