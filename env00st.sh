@@ -44,13 +44,14 @@ vim
 "
 
 export STGITS="
-https://stroparo@bitbucket.org/stroparo/dotfiles.git
-https://stroparo@bitbucket.org/stroparo/ds.git
-https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
-https://stroparo@bitbucket.org/stroparo/runr.git
+https://stroparo@github.com/stroparo/dotfiles.git
+https://stroparo@github.com/stroparo/ds.git
+https://stroparo@github.com/stroparo/ds-stroparo.git
+https://stroparo@github.com/stroparo/runr.git
 
-https://stroparo@bitbucket.org/stroparo/links.git
-https://stroparo@bitbucket.org/stroparo/python-notes.git
+https://stroparo@github.com/stroparo/devlinks.git
+https://stroparo@github.com/stroparo/links.git
+https://stroparo@github.com/stroparo/python-notes.git
 "
 
 # #############################################################################

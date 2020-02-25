@@ -23,11 +23,11 @@ clonemygits "$STGITS"
 
 # Mirrors:
 if ${STGITS_MIRRORS:-false} ; then
-  for repo in dotfiles ds ds-stroparo runr; do
+  for repo in devlinks dotfiles ds ds-stroparo links python-notes runr; do
     (
       cd "${DEV}/${repo}"
       git remote remove mirror 2>/dev/null
-      git remote add mirror "https://stroparo@github.com/stroparo/${repo}.git" \
+      git remote add mirror "https://stroparo@bitbucket.org/stroparo/${repo}.git" \
         && (git remote -v | grep ^mirror)
     )
   done
