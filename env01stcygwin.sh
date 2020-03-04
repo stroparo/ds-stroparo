@@ -2,7 +2,9 @@ if ! (uname -a | egrep -i -q "cygwin|mingw|msys|win32|windows") ; then return ; 
 
 export CYGWIN="$CYGWIN winsymlinks:nativestrict"
 
-alias exp='explorer "$(cygpath -w "$PWD")"'
+unalias fm >/dev/null 2>&1
+alias fm='explorer "$(cygpath -w "$PWD")"'
+
 alias sp='sumatrapdf'
 
 # #############################################################################
