@@ -1,18 +1,14 @@
 # Disk plus dirs to nav:
-dsk () { typeset disk="$1" ; shift ; d "${MOUNTS_PREFIX%/}/${disk}" "$@" ; }
+mnt () { d "${MOUNTS_PREFIX}" "$@" ; }
 
 # Home dirs
-if (uname -a | grep -i -q linux) ; then
-  dl    () { d "${HOME}"/Downloads "$@" ; }
-  h     () { d "${HOME}" "$@" ; }
-elif (uname -a | egrep -i -q "cygwin") ; then
-  dl    () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
-  h     () { d "${HOME}" "$@" ; }
-  wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
-elif (uname -a | egrep -i -q "mingw|msys|win32|windows") ; then
-  dl    () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
-  h     () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
-  wh    () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
+if [ -f /usr/bin/cygpath ] ; then
+  dl () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
+  h  () { d "${HOME}" "$@" ; }
+  wh () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
+else
+  dl () { d "${HOME}"/Downloads "$@" ; }
+  h  () { d "${HOME}" "$@" ; }
 fi
 
 # Workspace
