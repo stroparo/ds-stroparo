@@ -1,5 +1,3 @@
-# Daily Shells Stroparo extensions
-
 stshopt () {
 
   if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
