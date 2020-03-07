@@ -44,7 +44,8 @@ fi
 
 if [ -f /usr/bin/cygpath ] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
-  pathmunge -x "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
+  pathmunge -x \
+    "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
     "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
     "$(cygpath 'C:\Program Files')/TrueCrypt" \
     # "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application" \
