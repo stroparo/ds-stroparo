@@ -2,27 +2,18 @@ stshopt
 
 # Custom
 export DOTFILES_SELECTS="${DOTFILES_SELECTS} alias dotfiles git sshmodes vim"
-: ${DEV:=${HOME}/workspace} ; export DEV
-: ${MYOPT:=/opt} ; export MYOPT ; mkdir -p "${MYOPT}/log" 2>/dev/null
 if [ -f /usr/bin/cygpath ] ; then
-  export DEV="$(cygpath "${DEV}")"
-  export MYOPT="${MOUNTS_PREFIX}/c/opt"
-  if [ -d "$(cygpath "$USERPROFILE")/opt" ] ; then
-    export MYOPT="$(cygpath "$USERPROFILE")/opt"
-  fi
-fi
-
-# Custom diff program global DIFFPROG:
-if [ -f /usr/bin/cygpath ] ; then
+  if [ -z "$DEV" ] ; then export DEV="$(cygpath "$USERPROFILE")/workspace"; fi
+  if [ -z "$MYOPT" ] ; then export MYOPT="$(cygpath "$USERPROFILE")/opt"; fi
   if [ -x "${MYOPT}/meld/meld" ] ; then
     export DIFFPROG="${MYOPT}/meld/meld"
   elif [ -f "${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ] ; then
     export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
   fi
-elif which meld >/dev/null 2>&1 ; then
+else
+  if [ -z "$DEV" ] ; then export DEV="${HOME}/workspace"; fi
+  if [ -z "$MYOPT" ] ; then export MYOPT="${HOME}/opt"; fi
   export DIFFPROG="meld"
-elif which kdiff3 >/dev/null 2>&1 ; then
-  export DIFFPROG="kdiff3"
 fi
 
 # Editor
@@ -53,13 +44,12 @@ fi
 
 if [ -f /usr/bin/cygpath ] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
-  pathmunge -x "$(cygpath 'C:')/HashiCorp/Vagrant/bin"
-  # pathmunge -x "$(cygpath 'C:\Program Files')/Mozilla Firefox"
-  pathmunge -x "$(cygpath 'C:\Program Files')/Oracle/VirtualBox"
-  pathmunge -x "$(cygpath 'C:\Program Files')/TrueCrypt"
-  # pathmunge -x "$(cygpath 'C:\Program Files')/VeraCrypt"
-  # pathmunge -x "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application"
-  pathmunge -x "${MYOPT}/opt/subl"
+  pathmunge -x "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
+    "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
+    "$(cygpath 'C:\Program Files')/TrueCrypt" \
+    # "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application" \
+    # "$(cygpath 'C:\Program Files')/Mozilla Firefox" \
+    # "$(cygpath 'C:\Program Files')/VeraCrypt"
 fi
 
 # #############################################################################
