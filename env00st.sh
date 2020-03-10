@@ -4,12 +4,12 @@ stshopt
 export DOTFILES_SELECTS="${DOTFILES_SELECTS} alias dotfiles git sshmodes vim"
 if [ -f /usr/bin/cygpath ] ; then
   if [ -z "$DEV" ] ; then export DEV="$(cygpath "$USERPROFILE")/workspace"; fi
-  if [ -z "$MYOPT" ] ; then export MYOPT="$(cygpath "$USERPROFILE")/opt"; fi
-  if [ -x "${MYOPT}/meld/meld" ] ; then
-    export DIFFPROG="${MYOPT}/meld/meld"
-  elif [ -f "${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ] ; then
-    export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
-  fi
+  # MYOPT
+  if [[ $MYOPT = [Cc]:* ]] ; then export MYOPT="$(cygpath "$MYOPT")"
+  elif [ -z "$MYOPT" ] ; then export MYOPT="$(cygpath "$USERPROFILE")/opt" ; fi
+  # DIFFPROG
+  if [ -x "${MYOPT}/meld/meld" ] ; then export DIFFPROG="${MYOPT}/meld/meld"
+  else export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ; fi
 else
   if [ -z "$DEV" ] ; then export DEV="${HOME}/workspace"; fi
   if [ -z "$MYOPT" ] ; then export MYOPT="${HOME}/opt"; fi
