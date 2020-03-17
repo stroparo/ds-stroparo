@@ -1,4 +1,4 @@
-stshopt () {
+shelloptions () {
 
   if [ -n "$BASH_VERSION" ]; then
     set +o noclobber -o vi -o braceexpand -o histexpand -o notify

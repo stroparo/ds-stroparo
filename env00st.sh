@@ -1,4 +1,4 @@
-stshopt
+shelloptions
 
 # Custom
 export DOTFILES_SELECTS="${DOTFILES_SELECTS} alias dotfiles git sshmodes vim"
