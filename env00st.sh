@@ -1,15 +1,24 @@
 shelloptions
 
 # Custom
-export DOTFILES_SELECTS="${DOTFILES_SELECTS} alias dotfiles git sshmodes vim"
 if [ -f /usr/bin/cygpath ] ; then
-  if [ -z "$DEV" ] ; then export DEV="$(cygpath "$USERPROFILE")/workspace"; fi
+  if [ -z "$DEV" ] ; then
+    export DEV="$(cygpath "$USERPROFILE")/workspace"
+  fi
+
   # MYOPT
-  if [[ $MYOPT = [Cc]:* ]] ; then export MYOPT="$(cygpath "$MYOPT")"
-  elif [ -z "$MYOPT" ] ; then export MYOPT="$(cygpath "$USERPROFILE")/opt" ; fi
+  if [[ $MYOPT = [Cc]:* ]] ; then
+    export MYOPT="$(cygpath "$MYOPT")"
+  elif [ -z "$MYOPT" ] ; then
+    export MYOPT="$(cygpath "$USERPROFILE")/opt"
+  fi
+
   # DIFFPROG
-  if [ -x "${MYOPT}/meld/meld" ] ; then export DIFFPROG="${MYOPT}/meld/meld"
-  else export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe" ; fi
+  if [ -f "${MYOPT}/meld/meld" ] ; then
+    export DIFFPROG="${MYOPT}/meld/meld"
+  else
+    export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
+  fi
 else
   if [ -z "$DEV" ] ; then export DEV="${HOME}/workspace"; fi
   if [ -z "$MYOPT" ] ; then export MYOPT="${HOME}/opt"; fi
@@ -21,7 +30,7 @@ export EDITOR=vim
 export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export GIT_EDITOR=vim
-export VISUAL=subl
+export VISUAL="subl"
 
 # Path
 if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
