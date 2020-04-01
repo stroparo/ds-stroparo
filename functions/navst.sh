@@ -1,5 +1,5 @@
 # Disk plus dirs to nav:
-mnt () { d "${MOUNTS_PREFIX}" "$@" ; }
+mnt () { d "${MOUNTS_PREFIX:-/}" "$@" ; }
 
 # Home dirs
 if [ -f /usr/bin/cygpath ] ; then
