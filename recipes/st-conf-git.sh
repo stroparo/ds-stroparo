@@ -10,7 +10,6 @@ echo "Git config (ds-stroparo) \$0='$0'"
 # Requirements
 
 . "${DS_HOME:-$HOME/.ds}/ds.sh"
-STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
 
 # #############################################################################
 # Base repos
@@ -22,14 +21,14 @@ clonemygits "$STGITS"
 
 (
   cd "$DEV"
-  MYEMAIL="stroparo@outlook.com" confgits $(echo "${STGITS_BASENAMES}")
+  MYEMAIL="stroparo@outlook.com" confgits $(echo ${STGITS_BASENAMES})
 )
 
 # #############################################################################
 # Mirrors
 
-if ${STGITS_MIRRORS:-false} ; then
-  for repo in $(echo "${STGITS_BASENAMES}"); do
+if ${CZ_DO_GIT_MIRRORING:-false} ; then
+  for repo in $(echo ${STGITS_BASENAMES}); do
     (
       cd "${DEV}/${repo}"
       git remote remove mirror 2>/dev/null

@@ -56,7 +56,11 @@ fi
 # #############################################################################
 # Daily Shells - Git
 
-GITR_PARALLEL="false"; if [ $(hostname) = rambo ] ; then GITR_PARALLEL=true ; fi ; export GITR_PARALLEL
+GITR_PARALLEL="false"
+if [ $(hostname) = rambo ] ; then
+  GITR_PARALLEL=true
+fi
+export GITR_PARALLEL
 
 export STGITS="
 https://stroparo@bitbucket.org/stroparo/dotfiles.git
@@ -68,6 +72,7 @@ https://stroparo@bitbucket.org/stroparo/devlinks.git
 https://stroparo@bitbucket.org/stroparo/links.git
 https://stroparo@bitbucket.org/stroparo/python-notes.git
 "
+STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
 
 # #############################################################################
 # Daily Shells - post calls
