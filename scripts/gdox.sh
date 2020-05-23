@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 gdox () {
   cd "${DEV}/dotfiles"
