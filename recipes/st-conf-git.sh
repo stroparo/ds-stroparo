@@ -15,46 +15,18 @@ echo "Git config (ds-stroparo) \$0='$0'"
 # Base repos
 
 clonemygits "$STGITS"
-
-# #############################################################################
-# Author
-
-(
-  cd "$DEV"
-  MYEMAIL="stroparo@outlook.com" confgits $(echo ${STGITS_BASENAMES})
+(cd "$DEV" ; MYEMAIL="stroparo@outlook.com" confgits $(echo ${STGITS_BASENAMES})
 )
-
-# #############################################################################
-# Mirrors
-
-if ${ST_DO_GIT_MIRRORING:-false} ; then
-  for repo in $(echo ${STGITS_BASENAMES}); do
-    (
-      cd "${DEV}/${repo}"
-      git remote remove mirror 2>/dev/null
-      git remote add mirror "https://stroparo@github.com/stroparo/${repo}.git" \
-        && (git remote -v | grep ^mirror)
-    )
-  done
-fi
 
 # #############################################################################
 # Other custom repos
 
 _clone_custom_cz_repos () {
-  if [ ! -e "${CZ_REPOS_PROFILE}" ] ; then
-    echo "${PROGNAME:+$PROGNAME: }_clone_custom_cz_repos: SKIP: no file pointed to by CZ_REPOS_PROFILE (${CZ_REPOS_PROFILE})."
-    return
-  fi
-  if [ -z "${CZ_REPOS_DIRNAME_URL}" ] ; then
-    echo "${PROGNAME:+$PROGNAME: }_clone_custom_cz_repos: SKIP: Empty global variable 'CZ_REPOS_DIRNAME_URL'."
-    return
-  fi
+  : ${CZ_REPOS_DIRNAME_URL:=https://stroparo@bitbucket.org/stroparo/}; export CZ_REPOS_DIRNAME_URL
 
-  # Fetch for-loop elements from the (@@@) suffixes of variable names of the form 'CZ_REPO_@@@',
-  # ... which are assigned in the file pointed by the CZ_REPOS_PROFILE global variable:
+  # Fetch for-loop elements from the (@@@) suffixes of variable names of the form 'CZ_REPO_@@@':
   for repo in \
-    $(grep -w 'CZ_REPO_[^=]*=' "${CZ_REPOS_PROFILE}" | grep -v '_RXPR=' | sed -e 's/^export CZ_REPO_//' -e 's/=.*$//')
+    $(declare -x | grep -w 'CZ_REPO_[^=]*=' | grep -v '_RXPR' | sed -e 's/^declare -x CZ_REPO_//' -e 's/=.*$//')
   do
     # Map the 'CZ_REPO_@@@' variable name's suffix i.e. @@@ to the final basename
     # ... in the URL to be cloned, such mappings being sed expressions in the
@@ -69,4 +41,27 @@ _clone_custom_cz_repos () {
 
 _clone_custom_cz_repos
 
+
 # #############################################################################
+echo "${PROGNAME}: INFO: Adding mirrors..."
+
+if ${ST_DO_GIT_MIRRORING:-false} ; then
+  stgitmirrorgithub $(echo ${STGITS_BASENAMES})
+  stgitmirrorgithub $(declare -x | grep -w 'CZ_REPO_[^=]*=' | grep -v '_RXPR' | sed -e 's/[^=]*=//' | tr -d '"')
+fi
+
+echo
+
+
+# #############################################################################
+echo "${PROGNAME}: INFO: Converting all from HTTPS to SSH..."
+
+gitremotepatternreplace -v -r "mirror" "https://stroparo@\([^/]*\)/stroparo/" "git@\\1:stroparo/" "${DEV}"/*/
+gitremotepatternreplace -v -r "origin" "https://stroparo@\([^/]*\)/stroparo/" "git@\\1:stroparo/" "${DEV}"/*/
+
+for repo in \
+  "${DEV}"/*/ \
+  $(ls -1d "${CZ_REPOS_HOME}"/*/ 2>/dev/null)
+do
+  gittrackremotebranches -r "origin" "${repo}" "master" "develop"
+done
