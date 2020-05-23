@@ -61,7 +61,7 @@ gitremotepatternreplace -v -r "origin" "https://stroparo@\([^/]*\)/stroparo/" "g
 
 for repo in \
   "${DEV}"/*/ \
-  $(ls -1d "${CZ_REPOS_HOME}"/*/ 2>/dev/null)
+  $(declare -x | grep -w 'CZ_REPO_[^=]*=' | grep -v '_RXPR' | sed -e 's/[^=]*=//' | tr -d '"')
 do
   gittrackremotebranches -r "origin" "${repo}" "master" "develop"
 done
