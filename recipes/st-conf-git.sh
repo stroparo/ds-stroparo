@@ -27,7 +27,7 @@ clonemygits "$STGITS"
 # #############################################################################
 # Mirrors
 
-if ${CZ_DO_GIT_MIRRORING:-false} ; then
+if ${ST_DO_GIT_MIRRORING:-false} ; then
   for repo in $(echo ${STGITS_BASENAMES}); do
     (
       cd "${DEV}/${repo}"
