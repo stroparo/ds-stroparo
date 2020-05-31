@@ -2,7 +2,8 @@ coala-bears
 csvtotable
 fabric
 legit
-pipenv
+luigi[toml]
+poetry
 rows
 spellbook
 youtube-dl
