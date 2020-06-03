@@ -25,7 +25,7 @@ if which cygwin >/dev/null 2>&1 ; then
   SRC_CONFIG_DIR="$(cygpath -w "${SRC_CONFIG_DIR}" | sed -e 's#\\#\\\\#g')"
   CODE_USER_DIR="$(cygpath -w "${CODE_USER_DIR}" | sed -e 's#\\#\\\\#g')"
 fi
-"${DIFFPROG}" "${SRC_CONFIG_DIR}" "${user_dir}" &
+"${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}" &
 disown
 
 # Other diff scripts
