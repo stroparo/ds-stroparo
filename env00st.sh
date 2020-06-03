@@ -16,6 +16,8 @@ if [ -f /usr/bin/cygpath ] ; then
   # DIFFPROG
   if [ -f "${MYOPT}/meld/meld" ] ; then
     export DIFFPROG="${MYOPT}/meld/meld"
+  elif [ -f "$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')" ] ; then
+    export DIFFPROG="$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')"
   else
     export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
   fi
