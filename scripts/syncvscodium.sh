@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-PROGNAME="syncvscode.sh"
+PROGNAME="syncvscodium.sh"
 _exit () { echo ; echo ; echo ; exit 0 ; }
 _exiterr () { echo "$2" 1>&2 ; echo 1>&2 ; echo 1>&2 ; exit "$1" ; }
 
-SRC_CONFIG_DIR="${DEV}/dotfiles/config/vscode"
+SRC_CONFIG_DIR="${DEV}/dotfiles/config/vscodium"
 if [ ! -d "$SRC_CONFIG_DIR" ] ; then _exiterr 1 "${PROGNAME}: FATAL: No dir '${SRC_CONFIG_DIR}'." ; fi
 
 export EDITOR_COMMAND="code"
@@ -14,8 +14,8 @@ if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: ${
 if ! which ${DIFFPROG} >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: missing diff program '${DIFFPROG}' in PATH." ; fi
 
 # Global CODE_USER_DIR:
-if which cygpath >/dev/null 2>&1 ; then CODE_USER_DIR="$(cygpath "${USERPROFILE}" 2>/dev/null)/AppData/Roaming/Code/User" ; fi
-if [[ "$(uname -a)" = *[Ll]inux* ]] ; then CODE_USER_DIR="${HOME}/.config/code/User" ; fi
+if which cygpath >/dev/null 2>&1 ; then CODE_USER_DIR="$(cygpath "${USERPROFILE}" 2>/dev/null)/AppData/Roaming/VSCodium/User" ; fi
+if [[ "$(uname -a)" = *[Ll]inux* ]] ; then CODE_USER_DIR="${HOME}/.config/VSCodium/User" ; fi
 mkdir -p "${CODE_USER_DIR}"
 if [ ! -d "${CODE_USER_DIR}" ] ; then _exit "${PROGNAME}: SKIP: no dir '$CODE_USER_DIR'." ; fi
 
@@ -29,7 +29,7 @@ fi
 disown
 
 # Other diff scripts
-for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvscode*sh ; do
+for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvscodium*sh ; do
   if [[ ${script} = *${PROGNAME} ]] ; then continue ; fi
   "${script}"
 done
