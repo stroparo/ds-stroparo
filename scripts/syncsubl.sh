@@ -11,7 +11,7 @@ export EDITOR_COMMAND="subl"
 if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: ${EDITOR_COMMAND} not available." ; fi
 
 : ${DIFFPROG:=meld}
-if ! which ${DIFFPROG} >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: missing diff program '${DIFFPROG}' in PATH." ; fi
+if ! which "${DIFFPROG}" >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: missing diff program '${DIFFPROG}' in PATH." ; fi
 
 # Global SUBL_USER:
 SUBL_USER="$HOME/.config/sublime-text-3/Packages/User"
