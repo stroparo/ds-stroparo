@@ -7,7 +7,7 @@ _exiterr () { echo "$2" 1>&2 ; echo 1>&2 ; echo 1>&2 ; exit "$1" ; }
 SRC_CONFIG_DIR="${DEV}/dotfiles/config/vscodium"
 if [ ! -d "$SRC_CONFIG_DIR" ] ; then _exiterr 1 "${PROGNAME}: FATAL: No dir '${SRC_CONFIG_DIR}'." ; fi
 
-export EDITOR_COMMAND="code"
+export EDITOR_COMMAND="codium"
 if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: ${EDITOR_COMMAND} not available." ; fi
 
 : ${DIFFPROG:=meld}
