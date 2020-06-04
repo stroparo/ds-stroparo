@@ -6,7 +6,7 @@ for repo in "$@"
 do
   (
     cd "${repo}"
-    repo_basename="$(basename "${repo}")"
+    repo_basename="$(basename "${repo%.git}")"
     mirror_url="$(git remote get-url mirror 2>/dev/null)"
     if [ -z "${mirror_url}" ] ; then
       if git remote add mirror "https://stroparo@github.com/stroparo/${repo_basename}.git" ; then
