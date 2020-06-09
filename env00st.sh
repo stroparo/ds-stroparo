@@ -40,7 +40,9 @@ if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 
 # Path to libraries
-if [ -e /boot ] ; then pathmunge -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu' ; fi
+if (uname -a | grep -i -q linux) ; then
+  pathmunge -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu' "${MYOPT:-$HOME/opt}"/qt/[1-9]*.[0-9]*.*[0-9]/gcc_64/lib
+fi
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
 
 # Terminal
