@@ -46,7 +46,7 @@ _clone_custom_cz_repos
 echo "${PROGNAME}: INFO: Adding mirrors..."
 
 if ${ST_DO_GIT_MIRRORING:-false} ; then
-  stgitmirrorgithub.sh $(echo ${STGITS_BASENAMES} | sed "s#^#${DEV:-${HOME}/workspace}/#")
+  stgitmirrorgithub.sh $(echo "${STGITS_BASENAMES}" | sed "s#^#${DEV:-${HOME}/workspace}/#")
   stgitmirrorgithub.sh $(declare -x | grep -w 'CZ_REPO_[^=]*=' | grep -v '_RXPR' | sed -e 's/[^=]*=//' | tr -d '"')
 fi
 
