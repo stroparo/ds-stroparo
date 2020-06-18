@@ -28,6 +28,7 @@ stbootdesktop () {
     chromedark.sh
   fi
   _start_app codium
+  _start_app insomnia
   _start_app keepassxc
 }
 
