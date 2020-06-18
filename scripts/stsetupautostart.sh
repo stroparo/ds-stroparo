@@ -6,6 +6,8 @@ PROGNAME='stsetupautostart.sh'
 # Checks
 
 if ! (uname -a | grep -i -q linux) ; then
+  echo
+  echo
   echo "${PROGNAME:+$PROGNAME: }SKIP: Only Linux is supported."
   exit
 fi
