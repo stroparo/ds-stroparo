@@ -1,5 +1,10 @@
 shelloptions
 
+
+alias hs=haltsafe
+alias rs=rebootsafe
+
+
 # Base custom globals:
 export DIFFPROG="meld"
 : ${DEV:=${HOME}/workspace}; export DEV
@@ -85,5 +90,3 @@ fi
 if [[ $- = *i* ]] && [[ "$(uname -a)" = *[Ll]inux* ]] ; then
   appendto DS_POST_CALLS 'if [[ \$PWD = \$DEV ]] ; then rss ; fi'
 fi
-
-# #############################################################################
