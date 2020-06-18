@@ -1,30 +1,19 @@
 shelloptions
 
-# Custom
-if [ -f /usr/bin/cygpath ] ; then
-  if [ -z "$DEV" ] ; then
-    export DEV="$(cygpath "$USERPROFILE")/workspace"
-  fi
+# Base custom globals:
+export DIFFPROG="meld"
+: ${DEV:=${HOME}/workspace}; export DEV
+: ${MYOPT:=${HOME}/opt}; export MYOPT
 
-  # MYOPT
-  if [[ $MYOPT = [Cc]:* ]] ; then
-    export MYOPT="$(cygpath "$MYOPT")"
-  elif [ -z "$MYOPT" ] ; then
-    export MYOPT="$(cygpath "$USERPROFILE")/opt"
-  fi
+# Base custom globals - Windows environment:
+if type cygpath >/dev/null 2>&1 ; then
+  export DEV="$(cygpath "$USERPROFILE")/workspace"
+  export MYOPT="$(cygpath "$USERPROFILE")/opt"
 
-  # DIFFPROG
-  if [ -f "${MYOPT}/meld/meld" ] ; then
-    export DIFFPROG="${MYOPT}/meld/meld"
-  elif [ -f "$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')" ] ; then
-    export DIFFPROG="$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')"
-  else
+  export DIFFPROG="$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')"
+  if [ ! -e "${DIFFPROG}" ] ; then
     export DIFFPROG="${MOUNTS_PREFIX}/c/Program Files (x86)/WinMerge/WinMergeU.exe"
   fi
-else
-  if [ -z "$DEV" ] ; then export DEV="${HOME}/workspace"; fi
-  if [ -z "$MYOPT" ] ; then export MYOPT="${HOME}/opt"; fi
-  export DIFFPROG="meld"
 fi
 
 # Editor
