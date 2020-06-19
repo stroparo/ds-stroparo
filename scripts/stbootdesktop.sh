@@ -20,21 +20,22 @@ _start_app () {
 }
 
 
-stbootdesktop () {
-  # Screen blue light filter for Curitiba's latitude/longitude
-  _start_app flux -l -25 -g -49 -k 4700 & disown
+_start_guake () {
+  # Open up terminal emulator only after ssh key has been loaded into an ssh-agent:
+  while [ -z "$(ssh-add -l 2>/dev/null)" ] ; do sleep 3 ; done
+  _start_app guake
+}
 
-  if _load_daily_shells ; then
-    chromedark.sh
-  fi
+
+stbootdesktop () {
+  _load_daily_shells
+  _start_app chromedark.sh
   _start_app codium
+  _start_app discord
+  _start_app flux -l -25 -g -49 -k 4700  # Warm light for Curitiba's location
   _start_app insomnia
   _start_app keepassxc
-
-  # Open up terminal emulator only after the key has been added by ssh-agent:
-  _load_daily_shells
-  while [ -z ssh-add -l 2>/dev/null ] ; do sleep 3 ; done
-  _start_app guake
+  _start_guake
 }
 
 
