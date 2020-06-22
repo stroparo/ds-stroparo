@@ -33,6 +33,7 @@ stbootdesktop () {
   _start_app codium
   _start_app discord
   _start_app flux -l -25 -g -49 -k 4700  # Warm light for Curitiba's location
+  _start_app fsearch
   _start_app insomnia
   _start_app keepassxc
   _start_guake
