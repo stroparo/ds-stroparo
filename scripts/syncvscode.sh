@@ -28,7 +28,7 @@ fi
 "${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}" &
 disown
 
-# Other diff scripts
+# Other sync/diff scripts
 for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvscode*sh ; do
   if [[ ${script} = *${PROGNAME} ]] ; then continue ; fi
   "${script}"
