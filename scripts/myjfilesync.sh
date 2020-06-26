@@ -6,7 +6,7 @@
 
 myjfilesync () {
 
-  chmod u+x "${MYOPT}/jfilesync/JFileSync.sh" 2>/dev/null
+  chmod -v u+x "${MYOPT}/jfilesync/JFileSync.sh" 2>/dev/null
 
   if [[ "$(uname -a)" = *[Ll]inux* ]] ; then
     (cd "${MYOPT:-$HOME/opt}"/jfilesync \
