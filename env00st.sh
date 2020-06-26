@@ -88,6 +88,6 @@ STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$/
 if [[ $- = *i* ]] && ! echogrep -q 'cd.*{DEV' "${DS_POST_CALLS}" ; then
   appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
 fi
-if [[ $- = *i* ]] && [[ "$(uname -a)" = *[Ll]inux* ]] ; then
+if [[ "$(uname -a)" = *[Ll]inux* ]] && [[ $- = *i* ]] && ! echogrep -q 'then rss' "${DS_POST_CALLS}" ; then
   appendto DS_POST_CALLS 'if [[ \$PWD = \$DEV ]] ; then rss ; fi'
 fi
