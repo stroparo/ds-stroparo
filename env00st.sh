@@ -72,6 +72,7 @@ export GITR_PARALLEL
 export STGITS="
 https://stroparo@bitbucket.org/stroparo/dotfiles.git
 https://stroparo@bitbucket.org/stroparo/ds.git
+https://stroparo@bitbucket.org/stroparo/ds-js.git
 https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
 https://stroparo@bitbucket.org/stroparo/runr.git
 
