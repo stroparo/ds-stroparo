@@ -55,9 +55,8 @@ if [ -f /usr/bin/cygpath ] ; then
     "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
     "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
     "$(cygpath 'C:\Program Files')/TrueCrypt" \
-    # "$(cygpath 'C:\Program Files (x86)')/Google/Chrome/Application" \
-    # "$(cygpath 'C:\Program Files')/Mozilla Firefox" \
-    # "$(cygpath 'C:\Program Files')/VeraCrypt"
+    "$(cygpath 'C:\Program Files')/VSCodium/bin" \
+    "$(cygpath 'C:\Program Files')/VSCodium"
 fi
 
 # #############################################################################
