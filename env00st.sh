@@ -1,8 +1,6 @@
 shelloptions
 
 
-alias cs=clamscan
-
 # Aliases for functions in ds/functions/umountcrypt.sh
 alias hs=haltsafe
 alias rs=rebootsafe
