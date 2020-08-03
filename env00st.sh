@@ -1,6 +1,9 @@
 shelloptions
 
 
+alias cs=clamscan
+
+# Aliases for functions in ds/functions/umountcrypt.sh
 alias hs=haltsafe
 alias rs=rebootsafe
 
@@ -56,6 +59,7 @@ if [ -f /usr/bin/cygpath ] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
   pathmunge -x \
     "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
+    "$(cygpath 'C:\Program Files')/ClamAV" \
     "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
     "$(cygpath 'C:\Program Files')/TrueCrypt" \
     "$(cygpath 'C:\Program Files')/VSCodium/bin" \
