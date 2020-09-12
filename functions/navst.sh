@@ -14,7 +14,8 @@ fi
 # Workspace
 v () { d "${DEV:-$HOME/workspace}" "$@" ; }
 
-# Dropbox
+# Cloud
+zdg () { d "${GDRIVEHOME}" "$@" ; }
 zdx () { d "${DROPBOXHOME}" "$@" ; }
 zdxfind2 () {
   d "${DROPBOXHOME}" "$@"
@@ -25,5 +26,4 @@ zdxfind2 () {
 }
 
 # My dirs
-zdopt () { d "${MYOPT}" "$@" ; }
-zdswdropbox () { d "${DROPBOXHOME}/sw" "$@" ; }
+zdo () { d "${MYOPT}" "$@" ; }
