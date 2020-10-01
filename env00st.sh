@@ -58,6 +58,7 @@ if [ -f /usr/bin/cygpath ] ; then
   pathmunge -x \
     "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
     "$(cygpath 'C:\Program Files')/ClamAV" \
+    "$(cygpath 'C:\Program Files')/Google/Chrome/Application" \
     "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
     "$(cygpath 'C:\Program Files')/TrueCrypt" \
     "$(cygpath 'C:\Program Files')/VSCodium/bin" \
