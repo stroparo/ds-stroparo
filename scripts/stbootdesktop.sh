@@ -29,7 +29,7 @@ _start_guake () {
 
 stbootdesktop () {
   _load_daily_shells
-  _start_app brave
+  _start_app brave-browser-beta
   _start_app codium
   _start_app discord
   _start_app flux -l -25 -g -49 -k 4700  # Warm light for Curitiba's location
