@@ -39,7 +39,7 @@ stbootdesktop () {
 
   # Web
   _start_app discord
-  _start_app mychrome.sh
+  # _start_app mychrome.sh
 }
 
 
