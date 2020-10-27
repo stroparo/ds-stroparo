@@ -30,7 +30,8 @@ export GIT_EDITOR=vim
 export VISUAL="codium"
 
 # Path
-if [ -d "${HOME}/bin" ] ; then pathmunge -x "${HOME}/bin" ; fi
+pathmunge -x "${HOME}/bin"
+pathmunge -x "${HOME}/workspace/move-to-next-monitor"
 if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 
