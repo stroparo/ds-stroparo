@@ -83,6 +83,7 @@ https://stroparo@bitbucket.org/stroparo/runr.git
 
 https://stroparo@bitbucket.org/stroparo/devlinks.git
 https://stroparo@bitbucket.org/stroparo/handy.git
+https://stroparo@bitbucket.org/stroparo/move-to-next-monitor.git
 https://stroparo@bitbucket.org/stroparo/python-notes.git
 "
 STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
