@@ -27,6 +27,13 @@ _start_guake () {
 }
 
 
+_start_keepassxc () {
+  if type keepassxc >/dev/null 2>&1 && ! (ps -ef | grep "keepassxc" | grep -v grep | grep -v 'extension://' | grep -q -v 'keepassxc-proxy') ; then
+    keepassxc & disown
+  fi
+}
+
+
 stbootdesktop () {
   _load_daily_shells
 
@@ -34,8 +41,10 @@ stbootdesktop () {
   _start_guake
   _start_app flux -l -25 -g -49 -k 4700  # Warm light for Curitiba's location
   _start_app fsearch
-  _start_app keepassxc
   _start_app ulauncher
+
+  # Sec
+  _start_keepassxc
 
   # Web
   _start_app discord
