@@ -39,6 +39,7 @@ stbootdesktop () {
 
   # Basic apps
   _start_guake
+  _start_app flameshot
   _start_app flux -l -25 -g -49 -k 4700  # Warm light for Curitiba's location
   _start_app fsearch
   _start_app ulauncher
