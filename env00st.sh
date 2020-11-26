@@ -27,7 +27,7 @@ export EDITOR=vim
 export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export GIT_EDITOR=vim
-export VISUAL="codium"
+export VISUAL="code" ; if ! which "${VISUAL}" ; then export VISUAL="subl" ; fi
 
 # Path
 pathmunge -x "${HOME}/bin"
