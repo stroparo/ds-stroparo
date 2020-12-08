@@ -13,7 +13,11 @@ export DIFFPROG="meld"
 
 # Base custom globals - Windows environment:
 if type cygpath >/dev/null 2>&1 ; then
-  export DEV="$(cygpath "$USERPROFILE")/workspace"
+  if [ -z "$DEV" ] && [ -d "$(cygpath "$USERPROFILE")/workspace" ] ; then
+    DEV="$(cygpath "$USERPROFILE")/workspace"
+  fi
+  export DEV
+
   export MYOPT="$(cygpath "$USERPROFILE")/opt"
 
   export DIFFPROG="$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')"
