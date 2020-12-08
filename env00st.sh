@@ -18,7 +18,10 @@ if type cygpath >/dev/null 2>&1 ; then
   fi
   export DEV
 
-  export MYOPT="$(cygpath "$USERPROFILE")/opt"
+  if [ -z "$MYOPT" ] && [ -d "$(cygpath "$USERPROFILE")/opt" ] ; then
+    MYOPT="$(cygpath "$USERPROFILE")/opt"
+  fi
+  export MYOPT
 
   export DIFFPROG="$(cygpath 'C:\Program Files (x86)\Meld\Meld.exe')"
   if [ ! -e "${DIFFPROG}" ] ; then
