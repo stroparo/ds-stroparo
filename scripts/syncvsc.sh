@@ -11,18 +11,18 @@ _exiterr () { echo "$2" 1>&2 ; echo 1>&2 ; echo 1>&2 ; exit "$1" ; }
 : ${DIFFPROG:=meld}
 if ! which "${DIFFPROG}" >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: missing diff program '${DIFFPROG}' in PATH." ; fi
 
-export EDITOR_COMMAND="codium"
-export CONF_DIR_BASENAME="VSCodium"
-SRC_CONFIG_DIR="${DEV}/dotfiles/config/vs${EDITOR_COMMAND}"
-if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 && which code >/dev/null 2>&1 ; then
-  export EDITOR_COMMAND="code"
-  export CONF_DIR_BASENAME="Code"
+export EDITOR_COMMAND="code"
+export CONF_DIR_BASENAME="Code"
+SRC_CONFIG_DIR="${DEV}/dotfiles/config/vsc"
+if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 && which codium >/dev/null 2>&1 ; then
+  export EDITOR_COMMAND="codium"
+  export CONF_DIR_BASENAME="VSCodium"
 fi
 if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 ; then
   _exit "${PROGNAME}: SKIP: ${EDITOR_COMMAND} not available."
 fi
 
-if [ ! -d "$SRC_CONFIG_DIR" ] ; then _exiterr 1 "${PROGNAME}: FATAL: No dir '${SRC_CONFIG_DIR}'." ; fi
+if [ ! -d "${SRC_CONFIG_DIR}" ] ; then _exiterr 1 "${PROGNAME}: FATAL: No dir '${SRC_CONFIG_DIR}'." ; fi
 
 # CODE_USER_DIR global:
 if which cygpath >/dev/null 2>&1 ; then CODE_USER_DIR="$(cygpath "${USERPROFILE}" 2>/dev/null)/AppData/Roaming/${CONF_DIR_BASENAME}/User" ; fi
@@ -42,13 +42,5 @@ echo "${SRC_CONFIG_DIR}"
 echo "${CODE_USER_DIR}"
 "${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}" &
 disown
-
-# #############################################################################
-# Other sync/diff scripts, if any...
-
-for script in ${DS_HOME:-${HOME}/.ds}/scripts/syncvsc*sh ; do
-  if [[ ${script} = */${PROGNAME} ]] ; then continue ; fi
-  "${script}"
-done
 
 # #############################################################################
