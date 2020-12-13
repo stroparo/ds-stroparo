@@ -2,8 +2,8 @@ shelloptions
 
 
 # Aliases for functions in ds/functions/umountcrypt.sh
-alias hs=haltsafe
-alias rs=rebootsafe
+alias hs=haltst
+alias rs=rebootst
 
 
 # Base custom globals:
