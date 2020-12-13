@@ -3,6 +3,8 @@ csvtotable
 fabric
 legit
 pre-commit
+py-rename
 rows
+s3cmd
 spellbook
 youtube-dl

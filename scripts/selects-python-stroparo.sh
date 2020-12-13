@@ -11,10 +11,8 @@ fi
 
 
 # Globals
-TOOLS2="${DS_CONF:-${HOME}/.ds/conf}/packages/piplist-tools2"
 TOOLS3="${DS_CONF:-${HOME}/.ds/conf}/packages/piplist-tools3"
-VENVTOOLS2="tools27"
-VENVTOOLS3="tools38"
+VENVTOOLS3="tools39"
 
 
 _pyenv_load () {
@@ -33,9 +31,6 @@ echo "${PROGNAME:+$PROGNAME: }INFO: Python selects installations ('stroparo' set
 
 echo "${PROGNAME:+$PROGNAME: }INFO: Calling pipinstall.sh (ds) with list '${TOOLS3}'..."
 "${DS_HOME:-${HOME}/.ds}/scripts/pipinstall.sh" -v "$VENVTOOLS3" "${TOOLS3}"
-
-echo "${PROGNAME:+$PROGNAME: }INFO: Calling pipinstall.sh (ds) with list '${TOOLS2}'..."
-"${DS_HOME:-${HOME}/.ds}/scripts/pipinstall.sh" -v "$VENVTOOLS2" "${TOOLS2}"
 
 
 # #############################################################################
