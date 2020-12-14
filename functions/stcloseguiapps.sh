@@ -13,13 +13,13 @@ xterm
   typeset killpids="$(pgrep "${killpidsnamesregex}")"
   typeset killpidsregex="$(echo ${killpids} | tr '\n' ' ' | tr -s ' ' '|' | sed -e 's/  *//')"
 
-  if which code >/dev/null 2>&1 ; then windowclose code 'Visual Studio Code' ; fi
-  if which firefox >/dev/null 2>&1 ; then firefoxclose ; fi
-  if which fsearch >/dev/null 2>&1 ; then windowclose fsearch ; fi
+  if pgr '/usr/bin/code' >/dev/null 2>&1 ; then windowclose code 'Visual Studio Code' ; fi
+  if pgr firefox >/dev/null 2>&1 ; then firefoxclose ; fi
+  if pgr fsearch >/dev/null 2>&1 ; then windowclose fsearch ; fi
 
   # Terminal emulators
   guake -q
-  if which xfce4-terminal; then windowclose xfce4-terminal 'Linux Lite Terminal' 'ctrl+shift+q' ; fi
+  if pgr xfce4-terminal; then windowclose xfce4-terminal 'Linux Lite Terminal' 'ctrl+shift+q' ; fi
 
   killall -HUP $(echo ${killnames}) >/dev/null 2>&1
   kill $(echo ${killpids}) >/dev/null 2>&1
