@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROGNAME="syncsubl.sh"
+PROGNAME="syncdiffsubl.sh"
 
 _exit () { echo "$1" ; echo ; echo ; exit 0 ; }
 _exiterr () { echo "$2" 1>&2 ; echo 1>&2 ; echo 1>&2 ; exit "$1" ; }
