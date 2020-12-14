@@ -14,6 +14,7 @@ if ! which "${DIFFPROG}" >/dev/null 2>&1 ; then _exit "${PROGNAME}: SKIP: missin
 export EDITOR_COMMAND="code"
 export CONF_DIR_BASENAME="Code"
 SRC_CONFIG_DIR="${DEV}/dotfiles/config/vsc"
+
 if ! which ${EDITOR_COMMAND} >/dev/null 2>&1 && which codium >/dev/null 2>&1 ; then
   export EDITOR_COMMAND="codium"
   export CONF_DIR_BASENAME="VSCodium"
