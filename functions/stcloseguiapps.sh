@@ -9,7 +9,7 @@ sublime_text plugin_host
   typeset killnamescheck="${killnames} code firefox guake xfce4-terminal"
 
   # List of processes names which are not the command name (e.g. runs like <shell-filename> <file>):
-  typeset killpidsnamesregex="keepassxc ulauncher"
+  typeset killpidsnamesregex="keepassxc|ulauncher"
   typeset killpids="$(pgrep "${killpidsnamesregex}")"
   typeset killpidsregex="$(echo ${killpids} | tr '\n' ' ' | sed -e 's/  *//' | tr -s ' ' '|')"
 
