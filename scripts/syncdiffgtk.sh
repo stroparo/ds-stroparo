@@ -19,8 +19,6 @@ echo "${HOME}/.config/gtk-3.0/bookmarks"
 echo "${DEV}/dotfiles/dotfiles/config/gtk-3.0/bookmarks"
 "${DIFFPROG}" \
   "${HOME}/.config/gtk-3.0/bookmarks" \
-  "${DEV}/dotfiles/dotfiles/config/gtk-3.0/bookmarks" \
-  &
-disown
+  "${DEV}/dotfiles/dotfiles/config/gtk-3.0/bookmarks"
 
 # #############################################################################

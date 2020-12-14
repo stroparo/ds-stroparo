@@ -41,7 +41,6 @@ fi
 echo "Diffing:"
 echo "${SRC_CONFIG_DIR}"
 echo "${CODE_USER_DIR}"
-"${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}" &
-disown
+"${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}"
 
 # #############################################################################
