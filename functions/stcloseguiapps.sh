@@ -1,6 +1,7 @@
 stcloseguiapps () {
   typeset timeout=4
   typeset killnames="
+chrome
 flameshot
 fsearch
 keepassxc keepassxc-proxy
@@ -11,7 +12,7 @@ sublime_text plugin_host
   # List of processes names which are not the command name (e.g. runs like <shell-filename> <file>):
   typeset killpidsnamesregex="ulauncher"
   typeset killpids="$(pgrep "${killpidsnamesregex}")"
-  typeset killpidsregex="$(echo ${killpids} | tr '\n' ' ' | tr -s ' ' '|' | sed -e 's/  *//')"
+  typeset killpidsregex="$(echo ${killpids} | tr '\n' ' ' | sed -e 's/  *//' | tr -s ' ' '|')"
 
   if pgr '/usr/bin/code' >/dev/null 2>&1 ; then windowclose code 'Visual Studio Code' ; fi
   if pgr firefox >/dev/null 2>&1 ; then firefoxclose ; fi
@@ -26,7 +27,7 @@ sublime_text plugin_host
   sleep ${timeout}
 
   # Return value based on all apps having been closed:
-  ! pidof $(echo ${killnames}) >/dev/null 2>&1 \
+  ! pidof $(echo ${killnamescheck}) >/dev/null 2>&1 \
   && [ -z "$(ps -ef | awk "$2 ~ /${killpidsregex}/")" ]
   return $?
 }
