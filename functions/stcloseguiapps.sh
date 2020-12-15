@@ -13,7 +13,7 @@ sublime_text plugin_host
   killall -HUP $(echo ${killnames}) >/dev/null 2>&1
   kill $(echo ${killpids}) >/dev/null 2>&1
 
-  if pgr firefox >/dev/null 2>&1 ; then firefoxclose ; fi
+  if pgr guake ; then guake -q ; fi
 
   sleep ${timeout}
 }
