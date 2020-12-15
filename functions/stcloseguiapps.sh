@@ -1,7 +1,6 @@
 stcloseguiapps () {
   typeset timeout=4
   typeset killnames="
-chrome
 flameshot
 fsearch
 sublime_text plugin_host
