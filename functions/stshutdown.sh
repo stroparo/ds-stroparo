@@ -1,2 +1,2 @@
-haltst () { if stcloseguiapps ; then cd ~ ; haltsafe ; fi ; }
-rebootst () { if stcloseguiapps ; then cd ~ ; rebootsafe ; fi ; }
+haltst () { stcloseguiapps ; cd ~ ; haltsafe ; }
+rebootst () { stcloseguiapps ; cd ~ ; rebootsafe ; }
