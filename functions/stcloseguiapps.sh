@@ -25,6 +25,6 @@ sublime_text plugin_host
 
   # Return value based on all apps having been closed:
   ! pidof $(echo ${killnamescheck}) \
-    && [ -z "$(ps -ef | awk "$2 ~ /${killpidsregex}/")" ]
+    && [ -z "$(ps -ef | awk "\$2 ~ /${killpidsregex}/")" ]
   return $?
 }
