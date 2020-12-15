@@ -12,11 +12,10 @@ sublime_text plugin_host
   typeset killpids="$(pgrep "${killpidsnamesregex}")"
   typeset killpidsregex="$(echo ${killpids} | tr '\n' ' ' | sed -e 's/  *//' | tr -s ' ' '|')"
 
-  if pgr '/usr/bin/code' >/dev/null 2>&1 ; then windowclose code 'Visual Studio Code' ; fi
   if pgr firefox >/dev/null 2>&1 ; then firefoxclose ; fi
 
   # Terminal emulators
-  guake -q
+  if pgr guake ; then guake -q ; fi
   if pgr xfce4-terminal ; then windowclose xfce4-terminal 'Linux Lite Terminal' 'ctrl+shift+q' ; fi
 
   killall -HUP $(echo ${killnames}) >/dev/null 2>&1
