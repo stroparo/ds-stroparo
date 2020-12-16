@@ -10,6 +10,7 @@ sublime_text plugin_host
   typeset killpidsnamesregex="keepassxc|ulauncher"
   typeset killpids="$(pgrep "${killpidsnamesregex}")"
 
+  timeout 10s bash -ic "windowclose code '//vscode'"
   timeout 10s bash -ic "windowclose firefox 'Mozilla Firefox'"
 
   killall -HUP $(echo ${killnames}) >/dev/null 2>&1
