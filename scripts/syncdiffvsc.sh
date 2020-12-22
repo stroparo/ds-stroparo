@@ -38,9 +38,11 @@ if which cygwin >/dev/null 2>&1 ; then
   SRC_CONFIG_DIR="$(cygpath -w "${SRC_CONFIG_DIR}" | sed -e 's#\\#\\\\#g')"
   CODE_USER_DIR="$(cygpath -w "${CODE_USER_DIR}" | sed -e 's#\\#\\\\#g')"
 fi
-echo "Diffing:"
-echo "${SRC_CONFIG_DIR}"
-echo "${CODE_USER_DIR}"
+echo "${PROGNAME}: INFO: Diffing:"
+echo "${PROGNAME}: INFO: ${SRC_CONFIG_DIR}"
+echo "${PROGNAME}: INFO: ${CODE_USER_DIR}"
 "${DIFFPROG}" "${SRC_CONFIG_DIR}" "${CODE_USER_DIR}"
 
-# #############################################################################
+echo "${PROGNAME}: COMPLETE"
+echo
+echo
