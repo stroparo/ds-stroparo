@@ -11,8 +11,8 @@ fi
 
 
 # Globals
-TOOLS3="${DS_CONF:-${HOME}/.ds/conf}/packages/piplist-tools3"
-VENVTOOLS3="tools39"
+PIPLIST_TOOLS3_FILE="${DS_CONF:-${HOME}/.ds/conf}/packages/piplist-tools3"
+VENVTOOLS3="tools$(python3 --version | egrep -o '[0-9]+[.][0-9]+' | tr -d .)"
 
 
 _pyenv_load () {
@@ -29,8 +29,8 @@ _pyenv_load () {
 
 echo "${PROGNAME:+$PROGNAME: }INFO: Python selects installations ('stroparo' set) started..."
 
-echo "${PROGNAME:+$PROGNAME: }INFO: Calling pipinstall.sh (ds) with list '${TOOLS3}'..."
-"${DS_HOME:-${HOME}/.ds}/scripts/pipinstall.sh" -v "$VENVTOOLS3" "${TOOLS3}"
+echo "${PROGNAME:+$PROGNAME: }INFO: Calling pipinstall.sh (ds) with list '${PIPLIST_TOOLS3_FILE}'..."
+"${DS_HOME:-${HOME}/.ds}/scripts/pipinstall.sh" -v "$VENVTOOLS3" "${PIPLIST_TOOLS3_FILE}"
 
 
 # #############################################################################
