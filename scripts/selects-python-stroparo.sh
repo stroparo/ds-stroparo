@@ -50,3 +50,4 @@ fi
 echo "${PROGNAME:+$PROGNAME: }COMPLETE"
 echo
 echo
+exit
