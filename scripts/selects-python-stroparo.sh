@@ -40,6 +40,7 @@ _pyenv_load
 
 # Command completion for zsh:
 if which zsh >/dev/null 2>&1 ; then
+  mkdir -p ~/.zfunc >/dev/null 2>&1
   if which poetry >/dev/null 2>&1 ; then
     poetry completions zsh > ~/.zfunc/_poetry
   fi
