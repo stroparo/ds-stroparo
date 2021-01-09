@@ -1,6 +1,8 @@
 beancount
 csvtotable
 fabric
+fava
+fava[excel]
 legit
 pre-commit
 py-rename
