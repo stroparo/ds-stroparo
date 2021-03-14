@@ -30,10 +30,10 @@ if type cygpath >/dev/null 2>&1 ; then
 fi
 
 # Editor
-export EDITOR=vim
+export EDITOR="vim"
 export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
-export GIT_EDITOR=vim
+export GIT_EDITOR="vim"
 export VISUAL="code" ; if ! which "${VISUAL}" >/dev/null 2>&1 ; then export VISUAL="subl" ; fi
 
 # Path
