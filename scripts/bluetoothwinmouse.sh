@@ -2,8 +2,8 @@
 
 PROGNAME="bluetoothwinmouse.sh"
 
-BT_DELL_MOUSE_MAC_ADDR="CA:16:1D:C2:FC:8B"
-BT_DELL_MOUSE_MAC_ADDR_CHNTPW="ca161dc2fc8b"
+BT_DELL_MOUSE_MAC_ADDR="CA:16:1D:C2:FC:8E"
+BT_DELL_MOUSE_MAC_ADDR_CHNTPW="ca161dc2fc8e"
 
 WINDIR="$1"
 
@@ -11,6 +11,15 @@ cd "${WINDIR:=/mnt/c/Windows}/System32/config"
 if [ "$PWD" != "${WINDIR}/System32/config" ] ; then
   echo "${PROGNAME:+$PROGNAME: }FATAL: Could not cd to '${WINDIR}/System32/config'." 1>&2
   exit 1
+fi
+
+if ! which chntpw >/dev/null 2>&1 ; then
+  sudo apt-get update
+  sudo apt-get install chntpw
+  if ! which chntpw >/dev/null 2>&1 ; then
+    echo "${PROGNAME:+$PROGNAME: }FATAL: No 'chntpw' program found in PATH." 1>&2
+    exit 1
+  fi
 fi
 
 # Try CurrentControlSet or ControlSet001
