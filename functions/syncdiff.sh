@@ -1,6 +1,6 @@
 syncdiff () {
   syncdifffsearch.sh
   syncdiffgtk.sh
-  syncdiffsubl.sh
+  # syncdiffsubl.sh
   syncdiffvsc.sh
 }
