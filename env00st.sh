@@ -65,6 +65,7 @@ fi
 if [ -f /usr/bin/cygpath ] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
   pathmunge -x \
+    /mingw64/bin
     "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
     "$(cygpath 'C:\Program Files')/ClamAV" \
     "$(cygpath 'C:\Program Files')/Google/Chrome/Application" \
