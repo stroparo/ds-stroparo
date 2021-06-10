@@ -24,7 +24,7 @@ stbootdesktop () {
   _load_daily_shells
 
   # Open up terminal emulator only after ssh key has been loaded into an ssh-agent:
-  startonfalse "\$(ssh-add -l 2>/dev/null)" guake
+  startoncommandoutput "\$(ssh-add -l 2>/dev/null)" guake
 
   # Basic apps
   startifnone flameshot
