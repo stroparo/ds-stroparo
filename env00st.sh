@@ -38,16 +38,16 @@ export PAGER="less"
 export VISUAL="code" ; if ! which "${VISUAL}" >/dev/null 2>&1 ; then export VISUAL="subl" ; fi
 
 # Path
-pathmunge -x "${HOME}/bin"
-pathmunge -x "${HOME}/workspace/move-to-next-monitor"
+pathmunge -i -x "${HOME}/bin"
+pathmunge -i -x "${HOME}/workspace/move-to-next-monitor"
 if [ -d "${HOME}/opt" ] ; then mungemagic -a "${HOME}/opt" ; fi
 if [ "${MYOPT}" != "${HOME}/opt" ] && [ -d "${MYOPT}" ] ; then mungemagic -a "${MYOPT}" ; fi
 
 # Path to libraries
 if (uname -a | grep -i -q linux) ; then
-  pathmunge -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu'
+  pathmunge -i -x -v 'LD_LIBRARY_PATH' '/usr/lib/x86_64-linux-gnu'
   if bash -c "ls -d \"${MYOPT:-$HOME/opt}\"/qt/[1-9]*.[0-9]*.*[0-9]/gcc_64/lib >/dev/null 2>&1" ; then
-    pathmunge -x -v "${MYOPT:-$HOME/opt}"/qt/[1-9]*.[0-9]*.*[0-9]/gcc_64/lib
+    pathmunge -i -x -v "${MYOPT:-$HOME/opt}"/qt/[1-9]*.[0-9]*.*[0-9]/gcc_64/lib
   fi
 fi
 : ${PYTHONSTARTUP:=${HOME}/.pystartup} ; export PYTHONSTARTUP
@@ -64,15 +64,16 @@ fi
 
 if [ -f /usr/bin/cygpath ] ; then
   export CYGWIN="$CYGWIN winsymlinks:nativestrict"
-  pathmunge -x \
-    /mingw64/bin
-    "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
-    "$(cygpath 'C:\Program Files')/ClamAV" \
-    "$(cygpath 'C:\Program Files')/Google/Chrome/Application" \
-    "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
-    "$(cygpath 'C:\Program Files')/TrueCrypt" \
+  pathmunge -i -x \
+    "$(cygpath 'C:\Program Files')/VSCodium" \
     "$(cygpath 'C:\Program Files')/VSCodium/bin" \
-    "$(cygpath 'C:\Program Files')/VSCodium"
+    "$(cygpath 'C:\Program Files')/TrueCrypt" \
+    "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
+    "$(cygpath 'C:\Program Files')/Google/Chrome/Application" \
+    "$(cygpath 'C:\Program Files')/ClamAV" \
+    "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
+    "$(cygpath 'C:')/winbuilds" \
+    /mingw64/bin
 fi
 
 # #############################################################################
