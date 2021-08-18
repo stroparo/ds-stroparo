@@ -29,6 +29,15 @@ if type cygpath >/dev/null 2>&1 ; then
   fi
 fi
 
+# Downloads HOME
+if [ -z "${DOWNLOADS_HOME}" ] && [ -e "${HOME}/Downloads" ] ; then
+  if [ -f /usr/bin/cygpath ] ; then
+    export DOWNLOADS_HOME="$(cygpath "${USERPROFILE}")/Downloads"
+  else
+    export DOWNLOADS_HOME="${HOME}/Downloads"
+  fi
+fi
+
 # Editor
 export EDITOR="vim"
 export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore "*.pyc" -g ""'
@@ -70,6 +79,7 @@ if [ -f /usr/bin/cygpath ] ; then
     "$(cygpath 'C:\Program Files')/TrueCrypt" \
     "$(cygpath 'C:\Program Files')/Oracle/VirtualBox" \
     "$(cygpath 'C:\Program Files')/Google/Chrome/Application" \
+    "$(cygpath 'C:\Program Files')/Mozilla Firefox" \
     "$(cygpath 'C:\Program Files')/ClamAV" \
     "$(cygpath 'C:')/HashiCorp/Vagrant/bin" \
     "$(cygpath 'C:')/winbuilds" \

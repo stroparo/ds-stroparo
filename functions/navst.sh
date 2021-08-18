@@ -3,11 +3,9 @@ mnt () { d "${MOUNTS_PREFIX:-/}" "$@" ; }
 
 # Home dirs
 if [ -f /usr/bin/cygpath ] ; then
-  dl () { d "$(cygpath "${USERPROFILE}")"/Downloads "$@" ; }
   h  () { d "${HOME}" "$@" ; }
   wh () { d "$(cygpath "${USERPROFILE}")" "$@" ; }
 else
-  dl () { d "${HOME}"/Downloads "$@" ; }
   h  () { d "${HOME}" "$@" ; }
 fi
 
