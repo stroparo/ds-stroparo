@@ -23,7 +23,7 @@ clonemygits "$STGITS"
 echo "${PROGNAME}: INFO: Adding mirrors..."
 
 if ${ST_DO_GIT_MIRRORING:-false} ; then
-  stgitmirrorgithub.sh $(echo "${STGITS_BASENAMES}" | sed "s#^#${DEV:-${HOME}/workspace}/#")
+  dsgitremoteaddmirror.sh 'https://https://stroparo@bitbucket.org/stroparo' $(echo "${STGITS_BASENAMES}" | sed "s#^#${DEV:-${HOME}/workspace}/#")
 fi
 
 echo
