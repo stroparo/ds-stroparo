@@ -95,17 +95,18 @@ if [ $(hostname) = rambo ] ; then
 fi
 export GITR_PARALLEL
 
+export STGITS_ORIGIN_DOMAIN="github.com"
 export STGITS="
-https://stroparo@bitbucket.org/stroparo/dotfiles.git
-https://stroparo@bitbucket.org/stroparo/ds.git
-https://stroparo@bitbucket.org/stroparo/ds-js.git
-https://stroparo@bitbucket.org/stroparo/ds-stroparo.git
-https://stroparo@bitbucket.org/stroparo/runr.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/dotfiles.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds-js.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds-stroparo.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/runr.git
 
-https://stroparo@bitbucket.org/stroparo/devlinks.git
-https://stroparo@bitbucket.org/stroparo/handy.git
-https://stroparo@bitbucket.org/stroparo/move-to-next-monitor.git
-https://stroparo@bitbucket.org/stroparo/python-notes.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/devlinks.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/handy.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/move-to-next-monitor.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/python-notes.git
 "
 STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
 
