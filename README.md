@@ -1,6 +1,7 @@
 # Daily Shells Stroparo
 
-## Install Daily Shells and this plugin
+
+## Install scripting library and this plugin
 
 ```bash
 {
@@ -14,3 +15,6 @@ dsload
 
 ```
 
+
+
+Follow [the DRYSL installation as well as the plugin installation section in its readme instructions](https://github.com/stroparo/ds/blob/master/README.md).
