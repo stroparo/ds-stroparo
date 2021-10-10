@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# Daily Shells Stroparo extensions
-
 # Purpose: jdiskreport wrapper
 
 myjdisk () {

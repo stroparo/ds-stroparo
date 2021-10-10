@@ -1,7 +1,10 @@
 # Daily Shells Stroparo
 
-
 ## Install scripting library and this plugin
+
+Follow [the DRYSL installation as well as the plugin installation section in its readme instructions](https://github.com/stroparo/ds/blob/master/README.md).
+
+Commands in such sections are also here for convenience but might be outdated (resort to the document linked to above, in this case):
 
 ```bash
 {
@@ -17,4 +20,3 @@ dsload
 
 
 
-Follow [the DRYSL installation as well as the plugin installation section in its readme instructions](https://github.com/stroparo/ds/blob/master/README.md).

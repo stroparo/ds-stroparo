@@ -2,7 +2,7 @@
 
 PROGNAME="selects-python-stroparo.sh"
 
-# Pre-reqs: pipinstall.sh from Daily Shells at https://stroparo.github.io/ds
+# Pre-reqs: pipinstall.sh from https://stroparo.github.io/ds
 
 if !(uname -a | grep -i -q linux) ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: Only Linux is supported." 1>&2
