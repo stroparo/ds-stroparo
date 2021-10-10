@@ -1,4 +1,4 @@
-# Daily Shells Stroparo
+# DRYSL plugin - Stroparo
 
 ## Install scripting library and this plugin
 

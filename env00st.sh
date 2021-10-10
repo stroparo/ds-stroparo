@@ -87,7 +87,7 @@ if [ -f /usr/bin/cygpath ] ; then
 fi
 
 # #############################################################################
-# Daily Shells - Git
+# Env - Git
 
 GITR_PARALLEL="false"
 if [ $(hostname) = rambo ] ; then
@@ -111,7 +111,7 @@ https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/python-notes.git
 STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
 
 # #############################################################################
-# Daily Shells - post calls
+# Env DS (DRYSL) post calls
 
 if [[ $- = *i* ]] && ! echogrep -q 'cd.*{DEV' "${DS_POST_CALLS}" ; then
   appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
