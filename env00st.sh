@@ -111,7 +111,7 @@ https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/python-notes.git
 STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$//')"
 
 # #############################################################################
-# Env DS (DRYSL) post calls
+# Scripting Library global for post calls
 
 if [[ $- = *i* ]] && ! echogrep -q 'cd.*{DEV' "${DS_POST_CALLS}" ; then
   appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
