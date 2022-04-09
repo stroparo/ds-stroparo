@@ -2,7 +2,7 @@
 
 PROGNAME="selects-python-stroparo.sh"
 
-# Pre-reqs: pipinstall.sh from https://stroparo.github.io/ds
+# Pre-reqs: pipinstall.sh from https://stroparo.github.io/sidra
 
 if !(uname -a | grep -i -q linux) ; then
   echo "${PROGNAME:+$PROGNAME: }SKIP: Only Linux is supported." 1>&2
@@ -11,7 +11,7 @@ fi
 
 
 # Globals
-PIPLIST_TOOLS3_FILE="${DS_CONF:-${HOME}/.ds/conf}/packages/piplist-tools3"
+PIPLIST_TOOLS3_FILE="${ZDRA_CONF:-${HOME}/.zdra/conf}/packages/piplist-tools3"
 VENVTOOLS3="tools$(python3 --version | egrep -o '[0-9]+[.][0-9]+' | tr -d .)"
 
 
@@ -30,7 +30,7 @@ _pyenv_load () {
 echo "${PROGNAME:+$PROGNAME: }INFO: Python selects installations ('stroparo' set) started..."
 
 echo "${PROGNAME:+$PROGNAME: }INFO: Calling pipinstall.sh (ds) with list '${PIPLIST_TOOLS3_FILE}'..."
-"${DS_HOME:-${HOME}/.ds}/scripts/pipinstall.sh" -v "$VENVTOOLS3" "${PIPLIST_TOOLS3_FILE}"
+"${ZDRA_HOME:-${HOME}/.zdra}/scripts/pipinstall.sh" -v "$VENVTOOLS3" "${PIPLIST_TOOLS3_FILE}"
 
 
 # #############################################################################

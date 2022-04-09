@@ -2,7 +2,7 @@
 
 myums () {
   nohup "${MYOPT:-$HOME/opt}/ums/UMS.sh" \
-    > "${DS_ENV_LOG:-$HOME/log}/ums.log" \
+    > "${ZDRA_ENV_LOG:-$HOME/log}/ums.log" \
     2>&1 \
     &
 }

@@ -3,7 +3,7 @@
 # Purpose: inadyn wrapper
 
 mydns () {
-  sudo nohup inadyn > "${DS_ENV_LOG:-$HOME/log}"/inadyn.log 2>&1 &
+  sudo nohup inadyn > "${ZDRA_ENV_LOG:-$HOME/log}"/inadyn.log 2>&1 &
 }
 
 mydns "$@"

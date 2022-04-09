@@ -3,13 +3,13 @@
 # Purpose: Boot desktop applications
 
 _load_daily_shells () {
-  if type dsversion >/dev/null 2>&1 ; then
+  if type zdraversion >/dev/null 2>&1 ; then
     return 0
   fi
-  if [ ! -e "${DS_HOME:-$HOME/.ds}"/ds.sh ] ; then
+  if [ ! -e "${ZDRA_HOME:-$HOME/.zdra}"/zdra.sh ] ; then
     return 1
   fi
-  . "${DS_HOME:-$HOME/.ds}"/ds.sh
+  . "${ZDRA_HOME:-$HOME/.zdra}"/zdra.sh
 }
 
 

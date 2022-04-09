@@ -64,8 +64,8 @@ fi
 # Terminal
 export LS_COLORS="ow=01;95:di=01;94"
 [ -z "${TMUX}" ] && export TERM="xterm-256color"
-if [ -n "$ZSH_VERSION" ] && [[ $- = *i* ]] && ! echogrep -q 'search-backward$' "$DS_POST_CALLS" ; then
-  appendto DS_POST_CALLS 'bindkey \"^R\" history-incremental-search-backward'
+if [ -n "$ZSH_VERSION" ] && [[ $- = *i* ]] && ! echogrep -q 'search-backward$' "$ZDRA_POST_CALLS" ; then
+  appendto ZDRA_POST_CALLS 'bindkey \"^R\" history-incremental-search-backward'
 fi
 
 # #############################################################################
@@ -98,7 +98,7 @@ export GITR_PARALLEL
 export STGITS_ORIGIN_DOMAIN="github.com"
 export STGITS="
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/dotfiles.git
-https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds.git
+https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/sidra.git
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds-js.git
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/ds-stroparo.git
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/runr.git
@@ -113,9 +113,9 @@ STGITS_BASENAMES="$(echo "${STGITS}" | grep . | sed -e 's#^.*/##' -e 's/[.]git$/
 # #############################################################################
 # Scripting Library global for post calls
 
-if [[ $- = *i* ]] && ! echogrep -q 'cd.*{DEV' "${DS_POST_CALLS}" ; then
-  appendto DS_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
+if [[ $- = *i* ]] && ! echogrep -q 'cd.*{DEV' "${ZDRA_POST_CALLS}" ; then
+  appendto ZDRA_POST_CALLS '([[ \$PWD = \$HOME ]] || [[ \$PWD = / ]]) && cd \"\${DEV:-\$HOME/workspace}\" || true'
 fi
-if [[ "$(uname -a)" = *[Ll]inux* ]] && [[ $- = *i* ]] && ! echogrep -q 'then rss' "${DS_POST_CALLS}" ; then
-  appendto DS_POST_CALLS 'if [[ \$PWD = \$DEV ]] ; then rss ; fi'
+if [[ "$(uname -a)" = *[Ll]inux* ]] && [[ $- = *i* ]] && ! echogrep -q 'then rss' "${ZDRA_POST_CALLS}" ; then
+  appendto ZDRA_POST_CALLS 'if [[ \$PWD = \$DEV ]] ; then rss ; fi'
 fi

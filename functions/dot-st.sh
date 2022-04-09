@@ -6,6 +6,6 @@ dot () {
     if [ -d "${DEV:-${HOME}/workspace}/dotfiles" ] ; then
       export RUNR_ASSETS_REPOS="${DEV:-${HOME}/workspace}/dotfiles"
     fi
-    "${DS_HOME:-$HOME/.ds}"/scripts/runr.sh "$@"
+    "${ZDRA_HOME:-$HOME/.zdra}"/scripts/runr.sh "$@"
   )
 }
