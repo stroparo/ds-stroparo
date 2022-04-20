@@ -96,6 +96,7 @@ fi
 export GITR_PARALLEL
 
 export STGITS_ORIGIN_DOMAIN="github.com"
+export STGITS_MIRROR_DOMAIN="bitbucket.org"
 export STGITS="
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/dotfiles.git
 https://stroparo@${STGITS_ORIGIN_DOMAIN}/stroparo/sidra.git
